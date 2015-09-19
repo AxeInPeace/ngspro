@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+.YMaps {
+  height: 608px;
+  width: 100%; }
+
+/**************************************MENU***************************************/
+.navbar {
+  background-color: black;
+  height: 50px;
+  width: 100%; }
+  .navbar .navbar__logo {
+    color: white;
+    font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+    font-size: xx-large;
+    font-weight: bolder;
+    padding: 5px; }
+
+/*# sourceMappingURL=style.css.map */
