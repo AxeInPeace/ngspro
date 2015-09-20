@@ -13,7 +13,6 @@ YMaps.jQuery(function () {
             */
 
             var placemark = new YMaps.Placemark(new YMaps.GeoPoint(37.7,55.7));
-            placemark.description = "Добро пожаловать на Яндекс.Карты!";
             placemark.setBalloonContent(
                 "<div class=\"boldtext coordinates\">55°45.35'N, 37°37.06'E</div>" +
                 "<div class=\"nowrap\"> " +
