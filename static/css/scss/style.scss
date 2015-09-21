@@ -4,10 +4,21 @@
   padding: 0;
 }
 
-.YMaps
+html, body
 {
   height: 100%;
   width: 100%;
+}
+
+.YMaps
+{
+  height: calc(100% - 50px);
+  width: 100%;
+}
+
+.leftfloat
+{
+  float: left;
 }
 
 /**************************************MENU BEGIN***************************************/
