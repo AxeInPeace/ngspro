@@ -1,3 +1,5 @@
+/******************************************HELP STYLES BEGIN***************************/
+
 *
 {
   margin: 0;
@@ -10,17 +12,37 @@ html, body
   width: 100%;
 }
 
-.YMaps
-{
-  height: calc(100% - 50px);
-  position: absolute;
-  width: 100%;
-}
-
 .rightfloat
 {
   float: right;
 }
+
+.nowrap
+{
+  white-space: nowrap;
+}
+
+.inlineblock
+{
+  display: inline-block;
+}
+
+/****************************************HELP STYLES END**********************************/
+
+/****************************************MAPS BEGIN**************************************/
+
+.YMaps
+{
+  height: calc(100% - 50px);
+  width: 100%;
+
+  img
+  {
+      max-width: none !important;
+  }
+}
+
+/***************************************MAPS END*****************************************/
 
 /**************************************MENU BEGIN***************************************/
 
@@ -53,6 +75,7 @@ html, body
 .menu__img
 {
   height: 50px;
+  vertical-align: -12px;
 }
 
 .navbar__item
@@ -74,12 +97,12 @@ html, body
 
 .navbar__profile-short
 {
-  background-color: black;
-  border-bottom-color: white;
+  background-color: #ffffff;
+  border-bottom-color: black;
   border-bottom-left-radius: 10px;
-  border-left-color: white;
+  border-left-color: black;
   border-style: groove;
-  color: white;
+  color: black;
   display: none;
   height: 100px;
   right: 0;
@@ -97,16 +120,6 @@ html, body
   font-weight: bold;
 }
 
-.nowrap
-{
-  white-space: nowrap;
-}
-
-.inlineblock
-{
-  display: inline-block;
-}
-
 .bluetext
 {
   color: blue;
@@ -114,7 +127,7 @@ html, body
 
 /*************************************BALLOON END****************************************/
 
-/***************************************Test*******************************************/
+/***************************************TEST BEGIN*******************************************/
 
 .btn-test
 {
@@ -122,3 +135,5 @@ html, body
   position: absolute;
   z-index: 50;
 }
+
+/****************************************TEST END********************************************/

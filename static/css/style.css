@@ -1,3 +1,4 @@
+/******************************************HELP STYLES BEGIN***************************/
 * {
   margin: 0;
   padding: 0; }
@@ -6,14 +7,24 @@ html, body {
   height: 100%;
   width: 100%; }
 
-.YMaps {
-  height: calc(100% - 50px);
-  position: absolute;
-  width: 100%; }
-
 .rightfloat {
   float: right; }
 
+.nowrap {
+  white-space: nowrap; }
+
+.inlineblock {
+  display: inline-block; }
+
+/****************************************HELP STYLES END**********************************/
+/****************************************MAPS BEGIN**************************************/
+.YMaps {
+  height: calc(100% - 50px);
+  width: 100%; }
+  .YMaps img {
+    max-width: none !important; }
+
+/***************************************MAPS END*****************************************/
 /**************************************MENU BEGIN***************************************/
 .myNavbar {
   background-color: black;
@@ -32,7 +43,8 @@ html, body {
   font-weight: bolder; }
 
 .menu__img {
-  height: 50px; }
+  height: 50px;
+  vertical-align: -12px; }
 
 .navbar__item {
   color: white;
@@ -48,12 +60,12 @@ html, body {
   vertical-align: -12px; }
 
 .navbar__profile-short {
-  background-color: black;
-  border-bottom-color: white;
+  background-color: #ffffff;
+  border-bottom-color: black;
   border-bottom-left-radius: 10px;
-  border-left-color: white;
+  border-left-color: black;
   border-style: groove;
-  color: white;
+  color: black;
   display: none;
   height: 100px;
   right: 0;
@@ -66,20 +78,16 @@ html, body {
 .boldtext {
   font-weight: bold; }
 
-.nowrap {
-  white-space: nowrap; }
-
-.inlineblock {
-  display: inline-block; }
-
 .bluetext {
   color: blue; }
 
 /*************************************BALLOON END****************************************/
-/***************************************Test*******************************************/
+/***************************************TEST BEGIN*******************************************/
 .btn-test {
   bottom: 150px;
   position: absolute;
   z-index: 50; }
+
+/****************************************TEST END********************************************/
 
 /*# sourceMappingURL=style.css.map */
