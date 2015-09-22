@@ -8,19 +8,20 @@ html, body {
 
 .YMaps {
   height: calc(100% - 50px);
+  position: absolute;
   width: 100%; }
 
 .rightfloat {
   float: right; }
 
 /**************************************MENU BEGIN***************************************/
-.navbar {
+.myNavbar {
   background-color: black;
   height: 50px;
   width: 100%; }
-  .navbar .nowrap {
+  .myNavbar .nowrap {
     height: 50px; }
-    .navbar .nowrap .inlineblock {
+    .myNavbar .nowrap .inlineblock {
       cursor: pointer;
       height: inherit; }
 
@@ -75,5 +76,10 @@ html, body {
   color: blue; }
 
 /*************************************BALLOON END****************************************/
+/***************************************Test*******************************************/
+.btn-test {
+  bottom: 150px;
+  position: absolute;
+  z-index: 50; }
 
 /*# sourceMappingURL=style.css.map */
