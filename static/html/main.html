@@ -16,15 +16,59 @@
     <div class="navbar">
         <div class="nowrap">
             <div class="navbar__logo inlineblock">
-                ENGGEO
+                <img src="../pic/logo.png" class="menu__img" alt="ENGGEO">
             </div>
 
-            <div class="navbar__menu-btn inlineblock"></div>
+            <div class="navbar__menu-btn inlineblock menu-btn">
+                <img src="../pic/ic_dehaze_black_48dp_2x.png" class="menu__img">
+            </div>
 
-            <div class="navbar__profile-btn inlineblock leftfloat"></div>
+            <div class="navbar__profile-btn inlineblock rightfloat profile-btn">
+                <img src="../pic/ic_account_box_black_48dp_2x.png" class="menu__img">
+            </div>
+        </div>
+
+        <div class="navbar__profile-short rightfloat profile-short">
+            Мой счёт: 250
+        </div>
+
+        <div class="nowrap">
+            <div class="navbar__item inlineblock">
+                <div class="item-text">
+                    Пункт меню
+                </div>
+            </div>
+
+            <div class="navbar__item inlineblock">
+                <div class="item-text">
+                    Пункт меню
+                </div>
+            </div>
+
+            <div class="navbar__item inlineblock">
+                <div class="item-text">
+                    Пункт меню
+                </div>
+            </div>
         </div>
     </div>
 
     <div id="YMapsID" class="YMaps"></div>
 </body>
 </html>
+
+<script>
+    $(".menu-btn").click(function(){
+        if ($(".navbar").height() < 100)
+            $(".navbar").height(100);
+        else
+            $(".navbar").height(50);
+    });
+
+    $(".profile-btn").click(function(){
+        if ($(".profile-short").css("display") == "none")
+            $(".profile-short").css("display", "block");
+        else
+            $(".profile-short").css("display", "none");
+    })
+</script>

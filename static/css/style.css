@@ -10,20 +10,55 @@ html, body {
   height: calc(100% - 50px);
   width: 100%; }
 
-.leftfloat {
-  float: left; }
+.rightfloat {
+  float: right; }
 
 /**************************************MENU BEGIN***************************************/
 .navbar {
   background-color: black;
   height: 50px;
   width: 100%; }
-  .navbar .navbar__logo {
-    color: white;
-    font-family: "Lucida Grande", Verdana, Arial, sans-serif;
-    font-size: xx-large;
-    font-weight: bolder;
-    padding: 5px; }
+  .navbar .nowrap {
+    height: 50px; }
+    .navbar .nowrap .inlineblock {
+      cursor: pointer;
+      height: inherit; }
+
+.navbar__logo {
+  color: white;
+  font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+  font-size: xx-large;
+  font-weight: bolder; }
+
+.menu__img {
+  height: 50px; }
+
+.navbar__item {
+  color: white;
+  font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+  font-size: large;
+  font-weight: 100;
+  height: inherit;
+  padding-left: 5px;
+  padding-right: 5px; }
+
+.item-text {
+  display: inline-block;
+  vertical-align: -12px; }
+
+.navbar__profile-short {
+  background-color: black;
+  border-bottom-color: white;
+  border-bottom-left-radius: 10px;
+  border-left-color: white;
+  border-style: groove;
+  color: white;
+  display: none;
+  height: 100px;
+  right: 0;
+  padding: 5px;
+  position: absolute;
+  z-index: 100; }
 
 /***************************************MENU END*****************************************/
 /*************************************BALLOON BEGIN**************************************/
