@@ -11,47 +11,47 @@ YMaps.jQuery(function () {
                 new YMaps.Template("<div style=\"color:#0A0\">$[description]</div>")
             );
             */
-
-            var placemark = new YMaps.Placemark(new YMaps.GeoPoint(37.7,55.7));
-            placemark.setBalloonContent(
-                "<div class=\"boldtext coordinates\">55°45.35'N, 37°37.06'E</div>" +
+            var placemark = new YMaps.Placemark(new YMaps.GeoPoint(57.43, 31.41));
+            placemark{{ baloon.id }}.setBalloonContent(
+                "<div class=\"boldtext coordinates\">57.43N, 31.41E</div>" +
                 "<div class=\"nowrap\"> " +
                     "<div class=\"inlineblock boldtext\">Дата:</div> " +
-                    "<div class=\"inlineblock info-date\">15.03.2015</div>" +
+                    "<div class=\"inlineblock info-date\">01-01-2015</div>" +
                 "</div>" +
                 "<div class=\"nowrap\"> " +
                     "<div class=\"inlineblock boldtext\">Подземные коммуникации:</div> " +
-                    "<div class=\"inlineblock info-communicate\">да</div>" +
+                    "<div class=\"inlineblock info-communicate\">Yes</div>" +
                 "</div>" +
                 "<div class=\"nowrap\"> " +
                     "<div class=\"inlineblock boldtext\">Высотные отметки:</div> " +
-                    "<div class=\"inlineblock info-mark\">да</div>" +
+                    "<div class=\"inlineblock info-mark\">Yes</div>" +
                 "</div>" +
                 "<div class=\"nowrap\"> " +
                     "<div class=\"inlineblock boldtext\">Элементы рельефа:</div>" +
-                    "<div class=\"inlineblock info-element\">да</div>" +
+                    "<div class=\"inlineblock info-element\">No</div>" +
                 "</div>" +
                 "<div class=\"nowrap\"> " +
                     "<div class=\"inlineblock boldtext\">Система координат:</div>" +
-                    "<div class=\"inlineblock info-coorsystem\">WGS 84</div>" +
+                    "<div class=\"inlineblock info-coorsystem\">Geocentrical</div>" +
                 "</div>" +
                 "<div class=\"nowrap\"> " +
                     "<div class=\"inlineblock boldtext\">Система высот:</div>" +
-                    "<div class=\"inlineblock info-highsystem\">bla</div>" +
+                    "<div class=\"inlineblock info-highsystem\">Sea level</div>" +
                 "</div>" +
                 "<div class=\"nowrap\"> " +
                     "<div class=\"inlineblock boldtext\">Вид:</div>" +
                     "<div class=\"inlineblock info-view\">pdf</div>" +
                 "</div>" +
                 "<div class=\"nowrap\"> " +
-                    "<div class=\"inlineblock nickname bluetext\">Nick </div>" +
-                    "<div class=\"inlineblock info-instr\"> с помощью тахеометра</div>" +
+                    "<div class=\"inlineblock nickname bluetext\">Tool </div>" +
+                    "<div class=\"inlineblock info-instr\">GPS</div>" +
                 "</div>" +
                 "<div class=\"nowrap\"> " +
                     "<div class=\"inlineblock boldtext\">Kд =</div>" +
-                    "<div class=\"inlineblock info-kd\"> 1</div>" +
+                    "<div class=\"inlineblock info-kd\"> 921</div>" +
                 "</div>"
+
             );
             map.addOverlay(placemark);
-            placemark.openBalloon();
+            placemark1.openBalloon();
         })

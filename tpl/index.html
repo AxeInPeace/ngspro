@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>    
+    <title>ENGGEO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+    
+
+    <script>
+        ymaps.ready(init);
+        
+        function init () { 
+            var myMap = new ymaps.Map("map", {
+                    center: [54.75, 37.60],
+                    zoom: 9
+                }, {
+                    searchControlProvider: 'yandex#search'
+                }), 
+                
+                {% for baloon in baloons %}                        
+                    
+                    myPlacemark{{baloon.id}} = new ymaps.Placemark([{{ baloon.coord1 }}, {{ baloon.coord2 }}], {
+                            balloonContentHeader: "{{ baloon.header }}",
+                            balloonContentBody: "date: {{baloon.date}} <br>x = {{baloon.coord1}}<br>y = {{baloon.coord2}}<br>F = {{baloon.format.name}}<br>T = {{baloon.tool.name}}",
+                            balloonContentFooter: "",
+                            hintContent: ""
+                    });                 
+                {% endfor %}
+                
+                {% for baloon in baloons %}                        
+                    myMap.geoObjects.add(myPlacemark{{baloon.id}});
+                {% endfor %};
+            
+                myPolygon = new ymaps.Polygon([
+                    // Указываем координаты вершин многоугольника.
+                    // Координаты вершин внешнего контура.
+                    [
+                        [54.75, 37.50],
+                        [54.80, 37.60],
+                        [54.75, 37.70],
+                        [54.70, 37.70],
+                        [54.70, 37.50]
+                    ],
+                
+                    [
+                    ]
+                ], {
+                    // Описываем свойства геообъекта.
+                    // Содержимое балуна.
+                    hintContent: "Многоугольник"
+                }, {
+                    // Задаем опции геообъекта.
+                    // Цвет заливки.
+                    fillColor: '#00FF0088',
+                    // Ширина обводки.
+                    strokeWidth: 5
+                });
+
+                // Добавляем многоугольник на карту.
+                myMap.geoObjects.add(myPolygon);
+                       
+        }
+    </script>
+
+    <style>
+        html, body, #map {
+            width: 100%; height: 80%; padding: 0; margin: 0;
+        }
+    </style>
+</head>
+<body>
+ 
+<div id="map"></div>
+<a href="registration">registration</a>
+<a href="design">design</a>
+
+	{% if user.is_authenticated %}
+	    <p>Welcome {{ user.username }}</p>
+	    <p>Your rating is {{ my_rating }}</p>
+	    <a href="logout">Logout</a>
+	{% else %}
+	{{ signin_error }}
+	<form method="post" >
+	    {% csrf_token %}
+	    {{ signin_form }}
+	<button type="submit">Sign in</button>
+	</form>
+	{% endif %}
+
+
+
+</body>
+</html>
+
