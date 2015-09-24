@@ -5,18 +5,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import User, UserManager
 
-class custom_user(models.Model):
-	rating = models.IntegerField()
-	user = models.OneToOneField(User, primary_key=True)
-
-	def __unicode__(self):
-		return self.user.get_username()
-
-	def __str__(self):
-		return self.user.get_username()
-
-	def getRating(self):
-		return self.rating
 
 class formats(models.Model):
 	name = models.CharField(max_length=15)
@@ -44,7 +32,7 @@ class baloon(models.Model):
 	isaltmark = models.BooleanField() #having altitude mark
 	isrelelems = models.BooleanField() #having relief elements
 
-	publisher = models.ForeignKey(custom_user)
+	publisher = models.ForeignKey(User)
 	format = models.ForeignKey(formats)
 
 	syscoord = models.CharField(max_length=255)
@@ -58,7 +46,7 @@ class polygon(models.Model):
 	isaltmark = models.BooleanField(default=False, blank=True) #having altitude mark
 	isrelelems = models.BooleanField(default=False, blank=True) #having relief elements
 
-	publisher = models.ForeignKey(custom_user)
+	publisher = models.ForeignKey(User)
 	format = models.ForeignKey(formats)
 
 	syscoord = models.CharField(max_length=255,default='None', blank=True)
@@ -70,8 +58,4 @@ class polygon_coords(models.Model):
 	pgowner = models.ForeignKey(polygon)
 	coord1 = models.FloatField()
 	coord2 = models.FloatField()
-
-		
-
-
 
