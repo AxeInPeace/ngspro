@@ -1,91 +1,213 @@
 <!DOCTYPE html>
 <html>
-<head>    
+<head lang="en">
+    <meta charset="UTF-8">
+
     <title>ENGGEO</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-
-    
-
-    <script>
-        ymaps.ready(init);
-        
-        function init () { 
-            var myMap = new ymaps.Map("map", {
-                    center: [54.75, 37.60],
-                    zoom: 9
-                }, {
-                    searchControlProvider: 'yandex#search'
-                }), 
-                
-                {% for baloon in baloons %}                        
-                    
-                    myPlacemark{{baloon.id}} = new ymaps.Placemark([{{ baloon.coord1 }}, {{ baloon.coord2 }}], {
-                            balloonContentHeader: "123{{ baloon.header }}",
-                            balloonContentBody: "date: {{baloon.date}} <br>x = {{baloon.coord1}}<br>y = {{baloon.coord2}}<br>F = {{baloon.format.name}}<br>T = {{baloon.tool.name}}",
-                            balloonContentFooter: "123",
-                            hintContent: "123"
-                    });                 
-                    myMap.geoObjects.add(myPlacemark{{baloon.id}});
-                {% endfor %};
-            
-                myPolygon = new ymaps.Polygon([
-                    // Указываем координаты вершин многоугольника.
-                    // Координаты вершин внешнего контура.
-                    [
-                        [54.75, 37.50],
-                        [54.80, 37.60],
-                        [54.75, 37.70],
-                        [54.70, 37.70],
-                        [54.70, 37.50]
-                    ],
-                
-                    [
-                    ]
-                ], {
-                    // Описываем свойства геообъекта.
-                    // Содержимое балуна.
-                    hintContent: "Многоугольник"
-                }, {
-                    // Задаем опции геообъекта.
-                    // Цвет заливки.
-                    fillColor: '#00FF0088',
-                    // Ширина обводки.
-                    strokeWidth: 5
-                });
-
-                // Добавляем многоугольник на карту.
-                myMap.geoObjects.add(myPolygon);
-                       
-        }
-    </script>
-
-    <style>
-        html, body, #map {
-            width: 100%; height: 80%; padding: 0; margin: 0;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../bootstrap2/css/bootstrap.min.css">
+    <script src="/jquery/jquery-1.11.2.js"></script>
+    <script src="/bootstrap2/js/bootstrap.min.js"></script>
+    {% include "inc/add_placemarks.html" %}
 </head>
-<body>
- 
-<div id="map"></div>
-<!-- <a href="registration">registration</a>
-<a href="design">design</a>
+<script>
+</script>
+<body> 
+    <div class="myNavbar">
+            <div class="navbar__logo inlineblock">
+                <a href="/"><img src="../pic/logo.png" class="menu__img" alt="ENGGEO"></a>
+            </div>
 
-	{% if user.is_authenticated %}
-	    <p>Welcome {{ user.username }}</p>
-	    <p>Your rating is {{ my_rating }}</p>
-	    <a href="logout">Logout</a>
-	{% else %}
-	{{ signin_error }}
-	<form method="post" >
-	    {% csrf_token %}
-	    {{ signin_form }}
-	<button type="submit">Sign in</button>
-	</form>
-	{% endif %}
--->
+            <div class="navbar__menu-btn inlineblock menu-btn">
+                <img src="../pic/ic_dehaze_black_48dp_2x.png" class="menu__img">
+            </div>
 
+            {% if user.is_autheticated %}
+             <div class="navbar__profile-btn inlineblock rightfloat profile-btn">                
+                 <img src="../pic/ic_account_box_black_48dp_2x.png" class="menu__img">
+             </div>
+            {% else %}
+              {% include "inc/reg_form.html" %}
+              {% include "inc/auth_form.html" %}
+              <button type="button" class="btn btn-success" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#reg_form">Sign Up</button>
+              <button type="button" class="btn btn-default" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#auth_form">Sign In</button>
+            {% endif %}
+    </div>
+
+    <div id="YMapsID" class="YMaps"></div>
+
+    <a href="#myModal" role="button" class="btn btn-test" data-toggle="modal">Жми</a>
+
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+            <h3 id="myModalLabel">Введите данные:</h3>
+        </div>
+
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Координаты</label>
+
+                    <div class="controls">
+                        <input type="text" id="inputEmail" placeholder="55°45.35'N, 37°37.06'E">
+                    </div>
+
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Подземные коммуникации</label>
+
+                    <div class="controls">
+                        <label class="radio inline">
+                            <input type="radio"> Да
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio"> Нет
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Высотные отметки</label>
+
+                    <div class="controls">
+                        <label class="radio inline">
+                            <input type="radio"> Да
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio"> Нет
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Элементы рельефа</label>
+
+                    <div class="controls">
+                        <label class="radio inline">
+                            <input type="radio"> Да
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio"> Нет
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Система координат</label>
+
+                    <div class="controls">
+                        <label class="radio inline">
+                            <input type="radio"> 1
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio"> 2
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio"> 3
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Система высот</label>
+
+                    <div class="controls">
+                        <label class="radio inline">
+                            <input type="radio"> 1
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio"> 2
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio"> 3
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Вид</label>
+
+                    <div class="controls">
+                        <label class="radio inline">
+                            <input type="radio">pdf
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio">dwg
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio">mapinfo
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio">jpeg
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Инструмент</label>
+
+                    <div class="controls">
+                        <label class="radio inline">
+                            <input type="radio">тахеометр
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio">gps-приемник
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio">наземное лазерное сканирование
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio">воздушное лазерное сканирование
+                        </label>
+
+                        <label class="radio inline">
+                            <input type="radio">аэрофотосъемка
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
+
+            <button class="btn btn-primary">Сохранить</button>
+        </div>
+    </div>
 </body>
 </html>
 
+<script>
+    $(".menu-btn").click(function(){
+        if ($(".myNavbar").height() < 100)
+            $(".myNavbar").height(100);
+        else
+            $(".myNavbar").height(50);
+    });
+
+    $(".profile-btn").click(function(){
+        if ($(".profile-short").css("display") == "none")
+            $(".profile-short").css("display", "block");
+        else
+            $(".profile-short").css("display", "none");
+    })
+</script>

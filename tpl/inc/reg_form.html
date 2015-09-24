@@ -1,9 +1,9 @@
-<form class="modal fade" method="post" action="/reg/" id="auth_form">
+<form class="modal fade" method="post" action="/reg/" id="reg_form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">Регистрация</h4>
       </div>
       <div class="modal-body">
         <input id="username" name="username" required="required" type="text" placeholder="myusername"/>
@@ -19,9 +19,22 @@
   </div><!-- /.modal-dialog -->
 </form><!-- /.modal -->
 <script>
-
-$( "#auth_form" ).submit( function( event ) {
+$( "#reg_form" ).on('submit', function( event ) {
   event.preventDefault();
-  // $.post('/login', $('#auth_form').serialize())
+  if ($("#reg_form").find(".alert")) {
+    $("#reg_form").find(".alert").remove();
+    var no_timer = true;
+  }
+  $.post('/reg/', $('#reg_form').serialize(), function(event) {
+    $("#reg_form").find(".modal-header").append("<div class=\"alert alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Еще секундочку!</div>")
+  })
+  .fail(function () {
+    $("#reg_form").find(".modal-header").append("<div class=\"alert alert-danger\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Ой! Что-то пошло не так! :(</div>")
+  });
+  if (!no_timer) {
+    setTimeout(function() {
+      $("div.alert").remove();
+    }, 5000);
+  }
 });
 </script>
