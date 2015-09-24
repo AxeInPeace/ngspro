@@ -40,7 +40,8 @@ html, body {
   color: white;
   font-family: "Lucida Grande", Verdana, Arial, sans-serif;
   font-size: xx-large;
-  font-weight: bolder; }
+  font-weight: bolder;
+  margin-left: 100px; }
 
 .menu__img {
   height: 50px;
@@ -72,6 +73,12 @@ html, body {
   padding: 5px;
   position: absolute;
   z-index: 100; }
+
+.navbar__profile-btn {
+  margin-right: 100px; }
+
+.dropdown-menu {
+  min-width: 100px !important; }
 
 /***************************************MENU END*****************************************/
 /*************************************BALLOON BEGIN**************************************/

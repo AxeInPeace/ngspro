@@ -5,12 +5,12 @@
 
     <title>ENGGEO</title>
 
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
 
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="../bootstrap2/css/bootstrap.min.css">
-    <script src="/jquery/jquery-1.11.2.js"></script>
-    <script src="/bootstrap2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap2/css/bootstrap.min.css">
+    <script src="../static/jquery/jquery-1.11.2.js"></script>
+    <script src="../static/bootstrap2/js/bootstrap.min.js"></script>
     {% include "inc/add_placemarks.html" %}
 </head>
 
@@ -19,21 +19,33 @@
     <div class="myNavbar">
         <!--div class="nowrap"-->
             <div class="navbar__logo inlineblock">
-                <a href="/"><img src="../pic/logo.png" class="menu__img" alt="ENGGEO"></a>
+                <a href="/"><img src="../static/pic/logo.png" class="menu__img" alt="ENGGEO"></a>
             </div>
 
             <div class="navbar__menu-btn inlineblock menu-btn">
-                <img src="../pic/ic_dehaze_black_48dp_2x.png" class="menu__img">
+                <img src="../static/pic/ic_dehaze_black_48dp_2x.png" class="menu__img">
             </div>
 
-            <div class="navbar__profile-btn inlineblock rightfloat profile-btn" data-toggle="modal" data-target="#auth_form">>
-                <img src="../pic/ic_account_box_black_48dp_2x.png" class="menu__img">
+            <div class="navbar__profile-btn inlineblock rightfloat profile-btn btn-group">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <img src="../static/pic/ic_account_box_black_48dp_2x.png" class="menu__img">
+                </a>
+
+                <span class="caret"></span>
+
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="test-form" data-toggle="modal" data-target="#auth_form" href="#">
+                            Регистрация
+                        </a>
+                    </li>
+
+                    <li>
+                        Мой счёт: 250
+                    </li>
+                </ul>
             </div>
         <!--/div-->
-
-        <div class="navbar__profile-short rightfloat profile-short">
-            Мой счёт: 250
-        </div>
 
         <div class="nowrap">
             <div class="navbar__item inlineblock">
