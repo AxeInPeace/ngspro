@@ -5,10 +5,10 @@
 
     <title>ENGGEO</title>
 
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="../bootstrap2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap2/css/bootstrap.min.css">
     <script src="/jquery/jquery-1.11.2.js"></script>
     <script src="/bootstrap2/js/bootstrap.min.js"></script>
     {% include "inc/add_placemarks.html" %}
@@ -18,17 +18,15 @@
 <body> 
     <div class="myNavbar">
             <div class="navbar__logo inlineblock">
-                <a href="/"><img src="../pic/logo.png" class="menu__img" alt="ENGGEO"></a>
+                <a href="/"><img src="/pic/logo.png" class="menu__img" alt="ENGGEO"></a>
             </div>
 
             <div class="navbar__menu-btn inlineblock menu-btn">
-                <img src="../pic/ic_dehaze_black_48dp_2x.png" class="menu__img">
+                <img src="/pic/ic_dehaze_black_48dp_2x.png" class="menu__img">
             </div>
 
-            {% if user.is_autheticated %}
-             <div class="navbar__profile-btn inlineblock rightfloat profile-btn">                
-                 <img src="../pic/ic_account_box_black_48dp_2x.png" class="menu__img">
-             </div>
+            {% if user.is_authenticated %}
+              {% include "inc/profile.html" %}
             {% else %}
               {% include "inc/reg_form.html" %}
               {% include "inc/auth_form.html" %}

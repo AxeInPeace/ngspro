@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.contrib.auth import authenticate, login
 from django.views.decorators.http import require_http_methods
 from lib.core.views import JSONResponse
@@ -29,6 +30,9 @@ def ajax_registration(request):
     password = request.POST.get('password')
     email = request.POST.get('email')
     
+    if DUser.objects.filter(username=username) or DUser.objects.filter(email=email): 
+        return JSONResponse({"status": "201", "message": u"Имя уже существует"})
+
     if not username:
         return JSONResponse({"status": "400", "message": "No username"})
     if not password:
@@ -38,5 +42,5 @@ def ajax_registration(request):
 
     user = DUser.objects.create_user(username, email, password)
     User.objects.create(email=email, django_user=user, cache=0)
-    return JSONResponse({"status" : "200", , "user": {"username": user.username, "cache": User.objects.get(django_user=user).cache }})
+    return JSONResponse({"status" : "200", "user": {"username": user.username, "cache": User.objects.get(django_user=user).cache }})
 

@@ -13,7 +13,7 @@ def map(request):
         if request.user.is_authenticated():
             frmat = formats.objects.all()
             tools = instruments.objects.all()
-            my_rating = User.objects.get(django_user=request.user).getRating()
+            my_rating = User.objects.get(django_user=request.user).cache
             
             context = {		
                 "formats": frmat,
