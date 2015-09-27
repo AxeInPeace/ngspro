@@ -5,18 +5,18 @@
 
     <title>ENGGEO</title>
 
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="../static/bootstrap2/css/bootstrap.min.css">
-    <script src="../static/jquery/jquery-1.11.2.js"></script>
-    <script src="../static/bootstrap2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bootstrap2/css/bootstrap.min.css">
+    <script src="/jquery/jquery-1.11.2.js"></script>
+    <script src="/bootstrap2/js/bootstrap.min.js"></script>
 
-    <link rel="shortcut icon" type="image/png" href="../static/pic/logo_icon_16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="../static/pic/logo_icon_32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="../static/pic/logo_icon_48.png" sizes="48x48">
+    <link rel="shortcut icon" type="image/png" href="/pic/logo_icon_16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/pic/logo_icon_32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/pic/logo_icon_48.png" sizes="48x48">
 
-    <!--{% include "inc/add_placemarks.html" %}-->
+    {% include "inc/add_placemarks.html" %}
 </head>
 
 <body>
@@ -24,12 +24,12 @@
         <!-- если меню только у залогиненных, то раскомментируйте
         {% if user.is_authenticated %}-->
         <div class="navbar__menu-btn inlineblock menu-btn">
-            <img src="../static/pic/ic_dehaze_black_48dp_2x.png" class="navbar__img">
+            <img src="pic/ic_dehaze_black_48dp_2x.png" class="navbar__img">
         </div>
         <!--{% endif%}-->
 
         <div class="navbar__logo inlineblock">
-            <a href="/"><img src="../static/pic/logo.png" class="navbar__img" alt="ENGGEO"></a>
+            <a href="/"><img src="/pic/logo.png" class="navbar__img" alt="ENGGEO"></a>
         </div>
 
         {% if user.is_authenticated %}
@@ -38,7 +38,7 @@
           {% include "inc/reg_form.html" %}
           {% include "inc/auth_form.html" %}
           <button type="button" class="btn btn-success" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#reg_form">Регистрация</button>
-          <button type="button" class="btn btn-default" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#auth_form">Войти</button>
+          <button type="button" class="btn btn-warning" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#auth_form">Войти</button>
         {% endif %}
     </div>
 
