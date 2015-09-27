@@ -40,10 +40,9 @@ html, body {
   color: white;
   font-family: "Lucida Grande", Verdana, Arial, sans-serif;
   font-size: xx-large;
-  font-weight: bolder; 
-}
+  font-weight: bolder; }
 
-.menu__img {
+.navbar__img {
   height: 50px;
   vertical-align: -12px; }
 
@@ -74,15 +73,13 @@ html, body {
   position: absolute;
   z-index: 100; }
 
-.navbar__profile-btn
-{
-  margin-right: 0px;
-}
-
-.dropdown-menu
-{
-  min-width: 100px !important;
-}
+.menu {
+  background-color: #000000;
+  border-top: 1px solid #ffffff;
+  display: none;
+  height: calc(100% - 52px);
+  position: absolute;
+  width: 150px; }
 
 /***************************************MENU END*****************************************/
 /*************************************BALLOON BEGIN**************************************/
@@ -95,7 +92,8 @@ html, body {
 /*************************************BALLOON END****************************************/
 /***************************************TEST BEGIN*******************************************/
 .btn-test {
-  bottom: 150px;
+  bottom: 0px;
+  right: 0px;
   position: absolute;
   z-index: 50; }
 

@@ -1,43 +1,56 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en">
+<head>
     <meta charset="UTF-8">
 
     <title>ENGGEO</title>
 
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
 
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="/bootstrap2/css/bootstrap.min.css">
-    <script src="/jquery/jquery-1.11.2.js"></script>
-    <script src="/bootstrap2/js/bootstrap.min.js"></script>
-    {% include "inc/add_placemarks.html" %}
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap2/css/bootstrap.min.css">
+    <script src="../static/jquery/jquery-1.11.2.js"></script>
+    <script src="../static/bootstrap2/js/bootstrap.min.js"></script>
+
+    <link rel="shortcut icon" type="image/png" href="../static/pic/logo_icon_16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="../static/pic/logo_icon_32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../static/pic/logo_icon_48.png" sizes="48x48">
+
+    <!--{% include "inc/add_placemarks.html" %}-->
 </head>
-<script>
-</script>
-<body> 
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<body>
     <div class="myNavbar">
-            <div class="navbar__logo inlineblock">
-                <a href="/"><img src="/pic/logo.png" class="menu__img" alt="ENGGEO"></a>
-            </div>
+        <!-- если меню только у залогиненных, то раскомментируйте
+        {% if user.is_authenticated %}-->
+        <div class="navbar__menu-btn inlineblock menu-btn">
+            <img src="../static/pic/ic_dehaze_black_48dp_2x.png" class="navbar__img">
+        </div>
+        <!--{% endif%}-->
 
-            <div class="navbar__menu-btn inlineblock menu-btn">
-                <img src="/pic/ic_dehaze_black_48dp_2x.png" class="menu__img">
-            </div>
+        <div class="navbar__logo inlineblock">
+            <a href="/"><img src="../static/pic/logo.png" class="navbar__img" alt="ENGGEO"></a>
+        </div>
 
-            {% if user.is_authenticated %}
-              {% include "inc/profile.html" %}
-            {% else %}
-              {% include "inc/reg_form.html" %}
-              {% include "inc/auth_form.html" %}
-              <button type="button" class="btn btn-success" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#reg_form">Sign Up</button>
-              <button type="button" class="btn btn-default" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#auth_form">Sign In</button>
-            {% endif %}
+        {% if user.is_authenticated %}
+          {% include "inc/profile.html" %}
+        {% else %}
+          {% include "inc/reg_form.html" %}
+          {% include "inc/auth_form.html" %}
+          <button type="button" class="btn btn-success" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#reg_form">Регистрация</button>
+          <button type="button" class="btn btn-default" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#auth_form">Войти</button>
+        {% endif %}
+    </div>
+
+    <div class="menu">
+
     </div>
 
     <div id="YMapsID" class="YMaps"></div>
 
-    <a href="#myModal" role="button" class="btn btn-test" data-toggle="modal">Жми</a>
+    <a href="#myModal" role="button" class="btn btn-inverse btn-test" data-toggle="modal">Добавить материал</a>
 
     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-header">
@@ -165,19 +178,19 @@
                             <input type="radio">тахеометр
                         </label>
 
-                        <label class="radio inline">
+                        <label class="radio">
                             <input type="radio">gps-приемник
                         </label>
 
-                        <label class="radio inline">
+                        <label class="radio">
                             <input type="radio">наземное лазерное сканирование
                         </label>
 
-                        <label class="radio inline">
+                        <label class="radio">
                             <input type="radio">воздушное лазерное сканирование
                         </label>
 
-                        <label class="radio inline">
+                        <label class="radio">
                             <input type="radio">аэрофотосъемка
                         </label>
                     </div>
@@ -196,10 +209,7 @@
 
 <script>
     $(".menu-btn").click(function(){
-        if ($(".myNavbar").height() < 100)
-            $(".myNavbar").height(100);
-        else
-            $(".myNavbar").height(50);
+        $(".menu").animate({width: 'toggle'});
     });
 
     $(".profile-btn").click(function(){

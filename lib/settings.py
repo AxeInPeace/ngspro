@@ -3,6 +3,7 @@ Django settings for ngspro project.
 """
 
 import os
+from lib.settings_local import SettingsLocal
 #import DATABASES from /home/ngspro/var/etc/local_settings
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -39,6 +40,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -50,10 +52,14 @@ DATABASES = {
     }
 }
 
+
 TEMPLATE_DIRS = (
     '/home/ngspro/.www/tpl/',
 )
 
+#TEMPLATE_DIRS = (
+#    os.path.join(BASE_DIR,  'tpl'),  # ты еще t назови, чего так длинно-то?
+#)
 
 ROOT_URLCONF = 'lib.urls'
 
@@ -71,3 +77,8 @@ USE_TZ = True
 
 STATIC_URL = '/'
 STATIC_ROOT = '/home/ngspro/.www/static/'
+
+#распишите в settingslocal это, а?
+
+#STATIC_URL = SettingsLocal.STATIC_URL
+#STATICFILES_DIRS = SettingsLocal.STATICFILES_DIR
