@@ -25,6 +25,12 @@ class Instrument(models.Model):
 		return self.name
 
 class Balloon(models.Model):
+	def __unicode__(self):
+		return self.coord1 + ' ' + self.coord2
+	
+	def __str__(self):
+		return self.coord1 + ' ' + self.coord2
+
 	coord1 = models.FloatField()
 	coord2 = models.FloatField()
 	date = models.DateField()

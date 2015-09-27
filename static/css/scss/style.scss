@@ -72,7 +72,7 @@ html, body
   font-weight: bolder;
 }
 
-.menu__img
+.navbar__img
 {
   height: 50px;
   vertical-align: -12px;
@@ -95,6 +95,12 @@ html, body
   vertical-align: -12px;
 }
 
+.navbar__profile-name
+{
+  color: #ffffff;
+  font-size: large
+}
+
 .navbar__profile-short
 {
   background-color: #ffffff;
@@ -109,6 +115,16 @@ html, body
   padding: 5px;
   position: absolute;
   z-index: 100;
+}
+
+.menu
+{
+  background-color: #000000;
+  border-top: 1px solid #ffffff;
+  display: none;
+  height: calc(100% - 52px);
+  position: absolute;
+  width: 150px;
 }
 
 /***************************************MENU END*****************************************/
@@ -131,7 +147,8 @@ html, body
 
 .btn-test
 {
-  bottom: 150px;
+  bottom: 0px;
+  right: 0px;
   position: absolute;
   z-index: 50;
 }

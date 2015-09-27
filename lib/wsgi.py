@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 
 import os, sys
 sys.path.append('/home/ngspro/.www/')
+#sys.path.append('/home/cherry-girl/web/enggep/ngspro/')
 sys.path.append('/home/ngspro/var/etc/')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lib.settings")
 

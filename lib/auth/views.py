@@ -26,7 +26,7 @@ def ajax_login(request):
 @require_http_methods(["POST"])
 def ajax_registration(request):
     if request.user.is_authenticated():
-        return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": User.objects.get(userid=user).cash }})
+        return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
     
     username = request.POST.get('username')
     password = request.POST.get('password')
@@ -44,7 +44,7 @@ def ajax_registration(request):
 
     user = DUser.objects.create_user(username, email, password)
     CustomUser.objects.create(userid=user, cache=0,rating=0)
-    return JSONResponse({"status" : "200", "user": {"username": user.username, "cache": User.objects.get(django_user=user).cache }})
+    return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
 
 
 def setavatar(request):
@@ -52,6 +52,4 @@ def setavatar(request):
     curuser=CustomUser.objects.get(userid=request.user)
     curuser.avatar = request.FILES['avatar']
     curuser.save()
-    return HttpResponseRedirect('/')
-    
-    
+    return HttpResponseRedirect('/') 
