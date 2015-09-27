@@ -61,7 +61,8 @@ html, body {
 
 .navbar__profile-name {
   color: #ffffff;
-  font-size: large; }
+  font-size: large;
+  vertical-align: -12px; }
 
 .navbar__profile-short {
   background-color: #ffffff;
@@ -83,7 +84,8 @@ html, body {
   display: none;
   height: calc(100% - 52px);
   position: absolute;
-  width: 150px; }
+  width: 150px;
+  z-index: 101; }
 
 /***************************************MENU END*****************************************/
 /*************************************BALLOON BEGIN**************************************/
