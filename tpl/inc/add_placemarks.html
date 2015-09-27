@@ -11,13 +11,13 @@ function init () {
 
 	    {% for balloon in balloons %}
                 console.log(1); 
-                myPlacemark{{balloon.id}} = new ymaps.Placemark([{{ balloon.coord1 }}, {{ balloon.coord2 }}], {
+                myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.coord1 }}, {{ balloon.coord2 }}], {
                     balloonContentHeader: "{{ balloon.publisher.rating }}",
-                    balloonContentBody: "date: {{balloon.date}} <br>x = {{balloon.coord1}}<br>y = {{balloon.coord2}}<br>F = {{balloon.myFormat.name}}<br>T = {{balloon.instrument.name}}",
+                    balloonContentBody: "date: {{ balloon.date }} <br>x = {{ balloon.coord1 }}<br>y = {{ balloon.coord2 }}<br>F = {{ balloon.myFormat.name }}<br>T = {{ balloon.instrument.name }}",
                     balloonContentFooter: "",
                     hintContent: ""
 		});                 
-		myMap.geoObjects.add(myPlacemark{{balloon.id}});
+		myMap.geoObjects.add(myPlacemark{{ balloon.id }});
             {% endfor %}
         }
 </script>
