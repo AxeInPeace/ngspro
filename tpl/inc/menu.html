@@ -6,10 +6,10 @@
     <a href="/"><img src="/pic/logo.png" class="navbar__img" alt="ENGGEO"></a>
   </div>
   {% if user.is_authenticated %}
-    {% include "profile.html" %}
+    {% include "inc/profile.html" %}
   {% else %}
-    {% include "reg_form.html" %}
-    {% include "auth_form.html" %}
+    {% include "inc/reg_form.html" %}
+    {% include "inc/auth_form.html" %}
   <button type="button" class="btn btn-success" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#reg_form">Присоединиться</button>
   <button type="button" class="btn btn-default" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#auth_form">Войти</button>
   {% endif %}
