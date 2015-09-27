@@ -19,8 +19,6 @@
     <!--{% include "inc/add_placemarks.html" %}-->
 </head>
 
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
 <body>
     <div class="myNavbar">
         <!-- если меню только у залогиненных, то раскомментируйте
@@ -35,12 +33,30 @@
         </div>
 
         {% if user.is_authenticated %}
-          {% include "inc/profile.html" %}
+          <!--{% include "inc/profile.html" %}-->
+            <div class="navbar__profile-btn inlineblock rightfloat profile-btn btn-group">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+      <div class="navbar__profile-name inlineblock">
+            <p>Кот Бегемот</p>
+      </div>
+
+      <img src="../static/pic/ic_account_box_black_48dp_2x.png" class="navbar__img">
+  </a>
+
+  <span class="caret"></span>
+
+  <ul class="dropdown-menu" style="right: 5px; left: auto">
+    <li>
+      <a href="#">Мой счёт: {{ my_rating }}</a>
+    </li>
+  </ul>
+</div>
         {% else %}
           {% include "inc/reg_form.html" %}
           {% include "inc/auth_form.html" %}
-          <button type="button" class="btn btn-success" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#reg_form">Регистрация</button>
-          <button type="button" class="btn btn-default" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#auth_form">Войти</button>
+          <!--button type="button" class="btn btn-success" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#reg_form">Регистрация</button>
+          <button type="button" class="btn btn-default" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#auth_form">Войти</button-->
         {% endif %}
     </div>
 

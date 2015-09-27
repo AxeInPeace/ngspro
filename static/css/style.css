@@ -59,6 +59,10 @@ html, body {
   display: inline-block;
   vertical-align: -12px; }
 
+.navbar__profile-name {
+  color: #ffffff;
+  font-size: large; }
+
 .navbar__profile-short {
   background-color: #ffffff;
   border-bottom-color: black;
