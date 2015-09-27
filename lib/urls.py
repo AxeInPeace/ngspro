@@ -11,4 +11,6 @@ urlpatterns = patterns('',
     url(r'^logout/$', views.fun_logout),
     url(r'^login/$', auth_views.ajax_login),
     url(r'^reg/$', auth_views.ajax_registration),
+    url(r'^setavatar/$', auth_views.setavatar),
+    url(r'^send_balloon/$', views.addBalloon),
 )
