@@ -10,5 +10,6 @@ __pycache__/
 conf/
 logs/
 pids/
+media/
 settings_local.py
 settings.py
