@@ -11,3 +11,4 @@ conf/
 logs/
 pids/
 settings_local.py
+settings.py

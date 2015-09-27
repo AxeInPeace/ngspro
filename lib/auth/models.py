@@ -2,7 +2,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-class User(models.Model):
-    email = models.EmailField(u'Электронная почта', unique=True)
-    cache = models.PositiveIntegerField(u'Счет кошелька', default=0, blank=False)
-    django_user = models.OneToOneField(User)
+class CustomUser(models.Model):
+    rating = models.IntegerField(default=0)
+    cash = models.PositiveIntegerField(u'Счет кошелька', default=0, blank=False)
+    userid = models.OneToOneField(User)
+    avatar = models.ImageField(upload_to='avatar/')

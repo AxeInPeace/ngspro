@@ -1,10 +1,9 @@
 from django.contrib import admin
 
-from .models import baloon, polygon, formats, instruments
+from .models import Balloon, Polygon, Format, Instrument
 
 
-admin.site.register(baloon)
-admin.site.register(polygon)
-admin.site.register(formats)
-admin.site.register(instruments)
-
+admin.site.register(Balloon)
+admin.site.register(Polygon)
+admin.site.register(Format)
+admin.site.register(Instrument)
