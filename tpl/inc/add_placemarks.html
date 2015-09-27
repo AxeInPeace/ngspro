@@ -3,20 +3,21 @@ ymaps.ready(init);
 function init () {
             var myMap = new ymaps.Map("YMapsID", {
                 center: [54.75, 37.60],
-                zoom: 9
+                zoom: 9,
+                controls: ['zoomControl', 'rulerControl', 'geolocationControl', 'fullscreenControl', 'typeSelector']
             }, {
                 searchControlProvider: 'yandex#search'
             });
 
-	    {% for baloon in baloons %}
+	    {% for balloon in balloons %}
                 console.log(1); 
-                myPlacemark{{baloon.id}} = new ymaps.Placemark([{{ baloon.coord1 }}, {{ baloon.coord2 }}], {
-                    balloonContentHeader: "{{ baloon.header }}",
-                    balloonContentBody: "date: {{baloon.date}} <br>x = {{baloon.coord1}}<br>y = {{baloon.coord2}}<br>F = {{baloon.format.name}}<br>T = {{baloon.tool.name}}",
+                myPlacemark{{balloon.id}} = new ymaps.Placemark([{{ balloon.coord1 }}, {{ balloon.coord2 }}], {
+                    balloonContentHeader: "{{ balloon.publisher.rating }}",
+                    balloonContentBody: "date: {{balloon.date}} <br>x = {{balloon.coord1}}<br>y = {{balloon.coord2}}<br>F = {{balloon.myFormat.name}}<br>T = {{balloon.instrument.name}}",
                     balloonContentFooter: "",
                     hintContent: ""
 		});                 
-		myMap.geoObjects.add(myPlacemark{{baloon.id}});
+		myMap.geoObjects.add(myPlacemark{{balloon.id}});
             {% endfor %}
         }
 </script>
