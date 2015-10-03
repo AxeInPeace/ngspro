@@ -29,7 +29,9 @@ html, body {
 .myNavbar {
   background-color: black;
   height: 50px;
-  width: 100%; }
+  position: fixed;
+  width: 100%;
+  z-index: 600; }
   .myNavbar .nowrap {
     height: 50px; }
     .myNavbar .nowrap .inlineblock {
@@ -87,6 +89,21 @@ html, body {
   width: 150px;
   z-index: 506; }
 
+.btn-signup {
+  background-image: linear-gradient(to bottom, #16BA3F, #51a351) !important;
+  background-image: -webkit-linear-gradient(to bottom, #16BA3F, #51a351) !important;
+  background-image: -o-linear-gradient(to bottom, #16BA3F, #51a351) !important;
+  float: right;
+  font-weight: bold;
+  margin-top: 9px;
+  margin-right: 10px; }
+
+.btn-signin {
+  float: right;
+  font-weight: bold;
+  margin-top: 9px;
+  margin-right: 10px; }
+
 /***************************************MENU END*****************************************/
 /*************************************BALLOON BEGIN**************************************/
 .boldtext {
@@ -98,13 +115,30 @@ html, body {
 /*************************************BALLOON END****************************************/
 /*************************************LENDING BEGIN*******************************************/
 .body-background {
-  background: url("../../static/pic/background.png");
+  background: url("../pic/background.png");
   background-repeat: round;
-  height: calc(100% - 50px);
+  /*height: calc(100% - 50px);*/
   width: 100%; }
 
-.lend-wrapper {
-  background-color: #15ba3e;
+/*.back1
+{
+  background: url('../pic/background.png');
+  background-repeat: round;
+}
+
+.back2
+{
+  background: url('../pic/back2.png');
+  background-repeat: round;
+}
+
+.back3
+{
+  background: url('../pic/back3.png');
+  background-repeat: round;
+}*/
+.land-wrapper {
+  background-color: #16BA3F;
   border-radius: 30px;
   color: #ffffff;
   height: 500px;
@@ -114,14 +148,17 @@ html, body {
   top: 100px;
   width: 900px; }
 
-.lend-h2 {
+.land-h2 {
   font-style: italic;
   text-align: center; }
 
-.lend-h3 {
+.land-h3 {
   margin: 0; }
 
-.lend-logo {
+.land-h3-maxi {
+  font-size: 28px; }
+
+.land-logo {
   margin: 50px 0 30px 0; }
 
 .circles {
@@ -132,7 +169,7 @@ html, body {
 .circle {
   moz-border-radius: 10px;
   -webkit-border-radius: 10px;
-  background: rgba(0, 128, 0, 0.47);
+  background: #16BA3F;
   border-radius: 10px;
   height: 20px;
   margin: 10px 0 0 0;
@@ -143,24 +180,36 @@ html, body {
   height: 350px;
   width: 550px; }
 
-.lend-btn {
-  margin: 200px 0 0 0;
-  width: 300px; }
+.land-btn {
+  background: #F5B700 !important;
+  moz-border-radius: 20px !important;
+  border-radius: 20px !important;
+  color: #ffffff !important;
+  height: 80px !important;
+  margin: 150px 0 20px 0 !important;
+  padding-top: 25px !important;
+  width: 400px !important; }
 
-.lend-wrap-two {
-  display: none; }
+.land-btn-text {
+  font-size: 45px; }
 
-.lend-wrap-three {
-  display: none; }
+/*.land-wrap-two
+{
+  display: none;
+}
 
+.land-wrap-three
+{
+  display: none;
+}*/
 .circle-one {
-  background: green; }
+  background: #16BA3F; }
 
 .circle-two {
-  background: rgba(0, 128, 0, 0.47); }
+  background: rgba(0, 128, 0, 0.3); }
 
 .circle-three {
-  background: rgba(0, 128, 0, 0.47); }
+  background: rgba(0, 128, 0, 0.3); }
 
 /************************************LENGING END*********************************************/
 /***************************************TEST BEGIN*******************************************/
