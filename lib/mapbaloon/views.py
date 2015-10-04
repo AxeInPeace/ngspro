@@ -13,11 +13,11 @@ from django.views.decorators.http import require_http_methods
 
 @require_http_methods(["GET"])
 def map(request):
+    balloons = Balloon.objects.all()
+    
     if request.user.is_authenticated():
-        balloons = Balloon.objects.all()
         frmat = Format.objects.all()
         tools = Instrument.objects.all()
-        print tools
         custuser = CustomUser.objects.get(userid=request.user)
         my_cash = custuser.cash
         my_rating = custuser.rating            
@@ -40,10 +40,6 @@ def map(request):
     }
     return render(request, 'mapbaloon/index.html', context)
 
-
-def fun_logout(request):
-	logout(request)	
-	return HttpResponseRedirect("/")
 
 
 #TODO: превратить в ajax
@@ -68,3 +64,32 @@ def addBalloon(request):
         date=datetime.datetime.now().date(),
     )    
     return HttpResponseRedirect("/")
+
+@require_http_methods(["POST"])
+def filterForYears(request):
+    if request.POST['year']:
+        balloons = Balloon.objects.filter(date__year=request.POST['year'])
+        if request.user.is_authenticated():
+            frmat = Format.objects.all()
+            tools = Instrument.objects.all()
+            custuser = CustomUser.objects.get(userid=request.user)
+            my_cash = custuser.cash
+            my_rating = custuser.rating            
+            avatar = custuser.avatar
+            context = {		
+                "formats": frmat,
+                "tools": tools,
+                "balloons": balloons,
+                "signin_error": None,
+                "my_cash": my_cash,				
+                "my_rating": my_rating,
+                "user": request.user,			
+                "avatar": avatar,
+            }
+            return render(request, 'mapbaloon/index.html', context)		
+        context = {		
+            "balloons": balloons,
+            "signin_error": None,
+            "signin_form": SigninForm(),
+        }
+        return render(request, 'mapbaloon/index.html', context)

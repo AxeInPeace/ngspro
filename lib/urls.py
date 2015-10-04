@@ -2,15 +2,14 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from lib.mapbaloon import views
 from lib.auth import views as auth_views
+from django.conf import settings
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    url(r'^$', views.map), 
+urlpatterns = [
+    url(r'^', include('lib.mapbaloon.urls')),
+    url(r'^auth/', include('lib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^logout/$', views.fun_logout),
-    url(r'^login/$', auth_views.ajax_login),
-    url(r'^reg/$', auth_views.ajax_registration),
-    url(r'^setavatar/$', auth_views.setavatar),
-    url(r'^send_balloon/$', views.addBalloon),
-)
+]
+
+

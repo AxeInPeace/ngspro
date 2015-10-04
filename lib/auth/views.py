@@ -1,5 +1,5 @@
 # coding=utf-8
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_http_methods
 from lib.core.views import JSONResponse
 from django.contrib.auth.models import User as DUser
@@ -19,9 +19,9 @@ def ajax_login(request):
             login(request, user)
             return JSONResponse({"status" : "200", "message": "ok", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
         else:
-            return JSONResponse({"status" : "201", "message" : "You need to activate your account. Please check your email", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
+            return JSONResponse({"status" : "201", "message" : u"Ваш аккаунт не активирован. Чтобы активировать ваш аккаунт перейдите по ссылке, указанной в письме.", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
     else:
-        return JSONResponse({"status" : "403", "messga" : "Invalid username/password"})
+        return JSONResponse({"status" : "403", "messga" : u"Неправильный логин/пароль."})
 
 @require_http_methods(["POST"])
 def ajax_registration(request):
@@ -36,16 +36,19 @@ def ajax_registration(request):
         return JSONResponse({"status": "201", "message": u"Имя уже существует"})
 
     if not username:
-        return JSONResponse({"status": "400", "message": "No username"})
+        return JSONResponse({"status": "400", "message": u"Введите имя пользователя."})
     if not password:
-        return JSONResponse({"status": "400", "message": "No password"})
+        return JSONResponse({"status": "400", "message": u"Введите пароль."})
     if not email:
-        return JSONResponse({"status": "400", "message": "No email"})
+        return JSONResponse({"status": "400", "message": u"Введите адрес вашей электронной почты."})
 
     user = DUser.objects.create_user(username, email, password)
     CustomUser.objects.create(userid=user, cache=0,rating=0)
     return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
 
+def fun_logout(request):
+    logout(request)
+    return HttpResponseRedirect("/")
 
 def setavatar(request):
     avatar=ImageUploadForm(request.POST, request.FILES)
