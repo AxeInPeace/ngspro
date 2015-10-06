@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Sign Up!</title>
+    {% include "header.html" %}
+</head>
+
+<body>
+	{% if signup_error %}
+		<p>{{ signup_error }}</p>
+	{% endif %}
+	<form method="post" >
+		{{ signup_form.as_p }}
+		{% csrf_token %}
+		<p><button type="submit" >Sign up</button></p>
+	</form>
+</body>
+</html>

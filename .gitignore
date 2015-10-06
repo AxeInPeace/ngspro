@@ -11,4 +11,4 @@ conf/
 logs/
 pids/
 media/
-settings_local.py
+local_settings.py
