@@ -1,22 +1,29 @@
 <script>
 ymaps.ready(init);
 function init () {
-            var myMap = new ymaps.Map("YMapsID", {
-                center: [54.75, 37.60],
-                zoom: 9,
-                controls: ['zoomControl', 'rulerControl', 'geolocationControl', 'fullscreenControl', 'typeSelector']
-            }, {
+    var myMap = new ymaps.Map("YMapsID", {
+        center: [54.75, 37.60],
+        zoom: 9,
+        controls: ['zoomControl', 'rulerControl', 'geolocationControl', 'fullscreenControl', 'typeSelector']
+        }, {
                 searchControlProvider: 'yandex#search'
-            });
+        });
 
 	    {% for balloon in balloons %}
-                myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.coord1 }}, {{ balloon.coord2 }}], {
-                    balloonContentHeader: "{{ balloon.publisher.rating }}",
-                    balloonContentBody: "date: {{ balloon.date }} <br>x = {{ balloon.coord1 }}<br>y = {{ balloon.coord2 }}<br>F = {{ balloon.myFormat.name }}<br>T = {{ balloon.instrument.name }}",
-                    balloonContentFooter: "",
-                    hintContent: ""
-		});                 
-		myMap.geoObjects.add(myPlacemark{{ balloon.id }});
-            {% endfor %}
-        }
+            myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.coord1 }}, {{ balloon.coord2 }}], {
+                balloonContentHeader: "{{ balloon.publisher.rating }}",
+                balloonContentBody: "date: {{ balloon.date }} <br>x = {{ balloon.coord1 }}<br>y = {{ balloon.coord2 }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Post date={{ balloon.date.year }}",
+                balloonContentFooter: "",
+                hintContent: ""
+		    });                 
+		    myMap.geoObjects.add(myPlacemark{{ balloon.id }});
+        {% endfor %}
+
+        myMap.events.add('click', function (e) {
+            var coords = e.get('coords');           
+            $("#formToAddBalloons").click();
+            $("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(4) + "\">");
+            $("#ycoord").replaceWith("<input type=\"text\" id=\"ycoord\" name=\"coord2\" value=\"" + coords[1].toPrecision(4) + "\">");
+         });
+}
 </script>

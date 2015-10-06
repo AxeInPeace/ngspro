@@ -1,0 +1,18 @@
+<form class="modal fade" method="post" action="{% url 'filter_years' %}" id="filteryears_form">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Input year</h4>
+      </div>
+      <div class="modal-body">
+        <input id="year" name="year" required="required" type="text" placeholder="input year"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value="Filter!"/>
+        {% csrf_token %}
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</form>

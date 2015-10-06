@@ -1,7 +1,7 @@
 <div class="navbar__profile-btn inlineblock rightfloat profile-btn btn-group">
   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
       <div class="navbar__profile-name inlineblock">
-            <p>Кот Бегемот</p>
+          <p>{{ user.username }}</p>
       </div>
 
       <img src="/pic/ic_account_box_black_48dp_2x.png" class="navbar__img">
@@ -17,11 +17,14 @@
       <button type="button" class="btn btn-default" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#avatar_form">Set avatar</button>
 
     </li>
-  </ul>
+    <li>
+        <a href="{% url 'logout' %}">Выход</a>
+    </li>
+</ul>
 </div> 
 
-<!--
-  <form class="modal fade" method="post" action="/setavatar/" id="avatar_form" enctype="multipart/form-data">
+
+  <form class="modal fade" method="post" action="{% url 'setavatar' %}" id="avatar_form" enctype="multipart/form-data">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -38,8 +41,7 @@
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-  </form><!-- /.modal -->
-</div>
+</form>
 
 <script>
     $(".profile-btn").click(function(){
