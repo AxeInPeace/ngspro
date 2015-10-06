@@ -20,6 +20,8 @@ html, body {
 /****************************************MAPS BEGIN**************************************/
 .YMaps {
   height: calc(100% - 50px);
+  position: absolute;
+  top: 50px;
   width: 100%; }
   .YMaps img {
     max-width: none !important; }
@@ -64,7 +66,8 @@ html, body {
 .navbar__profile-name {
   color: #ffffff;
   font-size: large;
-  vertical-align: -12px; }
+  font-weight: bold;
+  vertical-align: 5px; }
 
 .navbar__profile-short {
   background-color: #ffffff;

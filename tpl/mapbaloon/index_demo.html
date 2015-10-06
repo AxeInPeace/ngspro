@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>ENGGEO</title>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../static/bootstrap2/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="../../static/pic/logo_icon_16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="../../static/pic/logo_icon_32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../../static/pic/logo_icon_48.png" sizes="48x48">
+    <script src="../../static/jquery/jquery-1.11.2.js"></script>
+    <script src="../../static/bootstrap2/js/bootstrap.min.js"></script>
+
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+    <!--script>
+        ymaps.ready(init);
+        function init () {
+                    var myMap = new ymaps.Map("YMapsID", {
+                        center: [54.75, 37.60],
+                        zoom: 9,
+                        controls: ['zoomControl', 'rulerControl', 'geolocationControl', 'fullscreenControl', 'typeSelector']
+                    }, {
+                        searchControlProvider: 'yandex#search'
+                    });
+
+                {% for balloon in balloons %}
+                        myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.coord1 }}, {{ balloon.coord2 }}], {
+                            balloonContentHeader: "{{ balloon.publisher.rating }}",
+                            balloonContentBody: "date: {{ balloon.date }} <br>x = {{ balloon.coord1 }}<br>y = {{ balloon.coord2 }}<br>F = {{ balloon.myFormat.name }}<br>T = {{ balloon.instrument.name }}",
+                            balloonContentFooter: "",
+                            hintContent: ""
+                });
+                myMap.geoObjects.add(myPlacemark{{ balloon.id }});
+                    {% endfor %}
+                }
+    </script-->
+</head>
+
+<body> 
+
+    <div class="myNavbar">
+      <div class="navbar__menu-btn inlineblock menu-btn">
+        <img src="../../static/pic/ic_dehaze_black_48dp_2x.png" class="navbar__img">
+      </div>
+      <div class="navbar__logo inlineblock">
+        <a href="/"><img src="../../static/pic/logo.png" class="navbar__img" alt="ENGGEO"></a>
+      </div>
+      <!--{% if user.is_authenticated %}-->
+        <div class="navbar__profile-btn inlineblock rightfloat profile-btn btn-group">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <img src="../../static/pic/ic_account_box_black_48dp_2x.png" class="navbar__img">
+                <div class="navbar__profile-name inlineblock">
+                    <p>Кот Бегемот</p>
+                </div>
+            </a>
+
+            <span class="caret"></span>
+
+            <ul class="dropdown-menu" style="right: 5px; left: auto">
+                <li>
+                  <a href="#">Мой счёт: {{ my_cash }}<br>Мой рейтинг: {{ my_rating }}</a>
+                </li>
+
+                <li>
+                  <button type="button" class="btn btn-default" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#avatar_form">Set avatar</button>
+                </li>
+            </ul>
+<        </div>
+      <!--{% else %}
+        {% include "inc/reg_form.html" %}
+        {% include "inc/auth_form.html" %}
+        <button type="button" class="btn btn-success btn-signup" data-toggle="modal" data-target="#reg_form">Присоединиться</button>
+
+        <button type="button" class="btn btn-default btn-signin" data-toggle="modal" data-target="#auth_form">Войти</button>
+      {% endif %}-->
+      <div class="menu">
+
+      </div>
+    </div>
+
+    <script>
+  $(".menu-btn").click(function(){
+    $(".menu").animate({width: 'toggle'});
+  })
+</script>
+
+    <div id="YMapsID" class="YMaps"></div>
+</body>
+</html>
