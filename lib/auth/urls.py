@@ -3,9 +3,9 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^logout/$', views.fun_logout, name="logout"),
-    url(r'^login/$', views.ajax_login, name="login"),
-    url(r'^reg/$', views.ajax_registration, name="registration"),
-    url(r'^setavatar/$', views.setavatar, name="setavatar"),
+    url(r'^logout/$', views.auth_logout, name="logout"),
+    url(r'^login/$', views.auth_login, name="login"),
+    url(r'^reg/$', views.auth_registration, name="registration"),
+    url(r'^setavatar/$', views.auth_set_avatar, name="setavatar"),
 ]
 

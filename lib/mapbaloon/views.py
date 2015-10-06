@@ -12,7 +12,7 @@ from django.views.decorators.http import require_http_methods
 
 
 @require_http_methods(["GET"])
-def map(request):
+def mapballoon_map(request):
     balloons = Balloon.objects.all()
     
     if request.user.is_authenticated():
@@ -44,7 +44,7 @@ def map(request):
 
 #TODO: превратить в ajax
 @require_http_methods(["POST"])
-def addBalloon(request):
+def mapballoon_add_balloon(request):
     if not request.user.is_authenticated():
         raise Http404
     fr = Format.objects.get(id=request.POST['frm'])
@@ -66,7 +66,7 @@ def addBalloon(request):
     return HttpResponseRedirect("/")
 
 @require_http_methods(["POST"])
-def filterForYears(request):
+def mapballoon_filter_for_years(request):
     if request.POST['year']:
         balloons = Balloon.objects.filter(date__year=request.POST['year'])
         if request.user.is_authenticated():
@@ -93,3 +93,5 @@ def filterForYears(request):
             "signin_form": SigninForm(),
         }
         return render(request, 'mapbaloon/index.html', context)
+    else:
+        return HttpResponseRedirect("/")

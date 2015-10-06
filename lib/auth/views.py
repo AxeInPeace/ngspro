@@ -10,7 +10,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 
 @require_http_methods(["POST"])
-def ajax_login(request):
+def auth_login(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
@@ -24,7 +24,7 @@ def ajax_login(request):
         return JSONResponse({"status" : "403", "messga" : u"Неправильный логин/пароль."})
 
 @require_http_methods(["POST"])
-def ajax_registration(request):
+def auth_registration(request):
     if request.user.is_authenticated():
         return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
     
@@ -46,11 +46,11 @@ def ajax_registration(request):
     CustomUser.objects.create(userid=user, cache=0,rating=0)
     return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
 
-def fun_logout(request):
+def auth_logout(request):
     logout(request)
     return HttpResponseRedirect("/")
 
-def setavatar(request):
+def auth_set_avatar(request):
     avatar=ImageUploadForm(request.POST, request.FILES)
     curuser=CustomUser.objects.get(userid=request.user)
     curuser.avatar = request.FILES['avatar']
