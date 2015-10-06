@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^reg/$', auth_views.ajax_registration),
     url(r'^setavatar/$', auth_views.setavatar),
     url(r'^send_balloon/$', views.addBalloon),
+    url(r'^landing/', include('lib.landing.urls')),
 )
