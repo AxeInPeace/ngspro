@@ -1,0 +1,40 @@
+<form class="modal fade" method="post" action="/login/" id="auth_form">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Войти</h4>
+      </div>
+      <div class="modal-body">
+        <input id="username" name="username" required="required" type="text" placeholder="myusername"/>
+	    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value="Войти"/>
+	{% csrf_token %}
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</form><!-- /.modal -->
+<script>
+$( "#auth_form" ).on('submit', function( event ) {
+  event.preventDefault();
+  if ($("#auth_form").find(".alert")) {
+    $("#auth_form").find(".alert").remove();
+    var no_timer = true;
+  }
+  $.post('/login/', $('#auth_form').serialize(), function(event) {
+    $("#auth_form").find(".modal-header").append("<div class=\"alert alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Еще секундочку!</div>");
+    $("#auth_form").hide()
+  })
+  .fail(function () {
+    $("#auth_form").find(".modal-header").append("<div class=\"alert alert-danger\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Ой! Что-то пошло не так! :(</div>")
+  });
+  if (!no_timer) {
+    setTimeout(function() {
+      $("div.alert").remove();
+    }, 5000);
+  }
+});
+</script>
