@@ -30,6 +30,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'lib.mapbaloon',
     'lib.auth',
+    'lib.photo',
 )
 
 MIDDLEWARE_CLASSES = (
