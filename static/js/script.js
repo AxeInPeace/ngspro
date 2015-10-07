@@ -8,7 +8,7 @@ $( "#auth_form" ).on('submit', function( event ) {
     $("#auth_form").find(".alert").remove();
     var no_timer = true;
   }
-  $.post('{% url 'login' %}', $('#auth_form').serialize(), function(event) {
+  $.post('/login', $('#auth_form').serialize(), function(event) {
     $("#auth_form").find(".modal-header").append("<div class=\"alert alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Еще секундочку!</div>");
     $("#auth_form").hide()
   })
@@ -40,3 +40,42 @@ $( "#reg_form" ).on('submit', function( event ) {
     }, 5000);
   }
 });
+
+/*************** YMAPS *****************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
