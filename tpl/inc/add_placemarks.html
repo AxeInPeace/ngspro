@@ -19,11 +19,21 @@ function init () {
 		    myMap.geoObjects.add(myPlacemark{{ balloon.id }});
         {% endfor %}
 
-        myMap.events.add('click', function (e) {
-            var coords = e.get('coords');           
-            $("#formToAddBalloons").click();
-            $("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(4) + "\">");
-            $("#ycoord").replaceWith("<input type=\"text\" id=\"ycoord\" name=\"coord2\" value=\"" + coords[1].toPrecision(4) + "\">");
+        myMap.events.add('contextmenu', function (e) {
+            
+            var coords = e.get('coords');  
+            myMap.balloon.open(coords, {
+                contentHeader:'Событие!',
+                contentBody:'<p>Кто-то щелкнул по карте.</p>' +
+                    '<p>Координаты щелчка: ' + [
+                    coords[0].toPrecision(6),
+                    coords[1].toPrecision(6)
+                    ].join(', ') + '</p>' +
+                    '<p><a href="#myModal" role="button" class="btn btn-inverse" data-toggle="modal">Добавить материал</a></p>',
+            }); 
+              
+            //$("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(4) + "\">");
+            //$("#ycoord").replaceWith("<input type=\"text\" id=\"ycoord\" name=\"coord2\" value=\"" + coords[1].toPrecision(4) + "\">");
          });
 }
 </script>

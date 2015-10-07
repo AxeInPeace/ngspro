@@ -8,23 +8,11 @@
   {% if user.is_authenticated %}
     {% include "inc/profile.html" %}
   {% else %}
-    {% include "inc/reg_form.html" %}
-    {% include "inc/auth_form.html" %}
     <button type="button" class="btn btn-success btn-signup" data-toggle="modal" data-target="#reg_form">Присоединиться</button>
-
     <button type="button" class="btn btn-default btn-signin" data-toggle="modal" data-target="#auth_form">Войти</button>
   {% endif %}
-  {% include "inc/form_filter_years.html" %}
   <button type="button" class="btn btn-default" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#filteryears_form">Filter Years</button>
   <div class="menu">
   </div>
 
 </div>
-
-
-<script>
-  $(".menu-btn").click(function(){
-    $(".menu").animate({width: 'toggle'});
-  })
-</script>
-
