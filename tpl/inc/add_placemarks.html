@@ -1,22 +1,50 @@
 <script>
 ymaps.ready(init);
 function init () {
-            var myMap = new ymaps.Map("YMapsID", {
-                center: [54.75, 37.60],
-                zoom: 9,
-                controls: ['zoomControl', 'rulerControl', 'geolocationControl', 'fullscreenControl', 'typeSelector']
-            }, {
+    var myMap = new ymaps.Map("YMapsID", {
+        center: [54.75, 37.60],
+        zoom: 9,
+        controls: ['zoomControl', 'rulerControl', 'geolocationControl', 'fullscreenControl', 'typeSelector']
+        }, {
                 searchControlProvider: 'yandex#search'
-            });
+        });
 
 	    {% for balloon in balloons %}
-                myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.coord1 }}, {{ balloon.coord2 }}], {
-                    balloonContentHeader: "{{ balloon.publisher.rating }}",
-                    balloonContentBody: "date: {{ balloon.date }} <br>x = {{ balloon.coord1 }}<br>y = {{ balloon.coord2 }}<br>F = {{ balloon.myFormat.name }}<br>T = {{ balloon.instrument.name }}",
-                    balloonContentFooter: "",
-                    hintContent: ""
-		});                 
-		myMap.geoObjects.add(myPlacemark{{ balloon.id }});
-            {% endfor %}
-        }
+            myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.coord1 }}, {{ balloon.coord2 }}], {
+                balloonContentHeader: "{{ balloon.publisher.rating }}",
+                balloonContentBody: "date: {{ balloon.date }} <br>x = {{ balloon.coord1 }}<br>y = {{ balloon.coord2 }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Post date={{ balloon.date.year }}",
+                balloonContentFooter: "",
+                hintContent: ""}, 
+            {
+                preset: 'twirl#mailPostIcon',
+		    });                 
+		    myMap.geoObjects.add(myPlacemark{{ balloon.id }});
+        {% endfor %}
+        
+        var myPl = new ymaps.Placemark([54.7746, 37.8005], {
+                        balloonContent: 'Заголовок метки! Немного инфы о том, о сем. Лорем ипсум чото там.' // сдесь содержимое балуна в формате html, все стили в css
+        }, {
+            iconLayout: 'default#image',
+            iconImageHref: 'http://ngspro.ru/pic/icon3.png',
+            iconImageSize: [64, 64],
+            iconImageOffset: [-32, -64],
+        });
+		myMap.geoObjects.add(myPl);
+        
+        myMap.events.add('contextmenu', function (e) {
+            var coords = e.get('coords');  
+            myMap.balloon.open(coords, {
+                contentHeader:'Добавить материал',
+                contentBody:
+                    '<p>Координаты щелчка: ' + [
+                    coords[0].toPrecision(6),
+                    coords[1].toPrecision(6)
+                    ].join(', ') + '</p>' +
+                    '<p><a href="#myModal" role="button" class="btn btn-inverse" data-toggle="modal">Добавить материал</a></p>',
+            }); 
+              
+           $("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(4) + "\">");
+           $("#ycoord").replaceWith("<input type=\"text\" id=\"ycoord\" name=\"coord2\" value=\"" + coords[1].toPrecision(4) + "\">");
+         });
+}
 </script>

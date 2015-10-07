@@ -1,4 +1,4 @@
-<form class="modal fade" method="post" action="/reg/" id="reg_form">
+<form class="modal hide fade" method="post" action="{% url 'registration' %}" id="reg_form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -18,23 +18,3 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </form><!-- /.modal -->
-<script>
-$( "#reg_form" ).on('submit', function( event ) {
-  event.preventDefault();
-  if ($("#reg_form").find(".alert")) {
-    $("#reg_form").find(".alert").remove();
-    var no_timer = true;
-  }
-  $.post('/reg/', $('#reg_form').serialize(), function(event) {
-    $("#reg_form").find(".modal-header").append("<div class=\"alert alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Еще секундочку!</div>")
-  })
-  .fail(function () {
-    $("#reg_form").find(".modal-header").append("<div class=\"alert alert-danger\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Ой! Что-то пошло не так! :(</div>")
-  });
-  if (!no_timer) {
-    setTimeout(function() {
-      $("div.alert").remove();
-    }, 5000);
-  }
-});
-</script>

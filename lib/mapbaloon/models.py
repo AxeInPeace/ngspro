@@ -26,10 +26,10 @@ class Instrument(models.Model):
 
 class Balloon(models.Model):
 	def __unicode__(self):
-		return self.coord1 + ' ' + self.coord2
+		return str(self.coord1) + ' ' + str(self.coord2)
 	
 	def __str__(self):
-		return self.coord1 + ' ' + self.coord2
+		return str(self.coord1) + ' ' + str(self.coord2)
 
 	coord1 = models.FloatField()
 	coord2 = models.FloatField()

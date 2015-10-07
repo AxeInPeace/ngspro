@@ -1,50 +1,67 @@
 /******************************************HELP STYLES BEGIN***************************/
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0; 
+}
 
 html, body {
   height: 100%;
-  width: 100%; }
+  width: 100%; 
+}
 
 .rightfloat {
-  float: right; }
+  float: right; 
+}
 
 .nowrap {
-  white-space: nowrap; }
+  white-space: nowrap; 
+}
 
 .inlineblock {
-  display: inline-block; }
+  display: inline-block; 
+}
 
 /****************************************HELP STYLES END**********************************/
 /****************************************MAPS BEGIN**************************************/
 .YMaps {
   height: calc(100% - 50px);
-  width: 100%; }
-  .YMaps img {
-    max-width: none !important; }
+  width: 100%;
+}
+
+.YMaps img {
+  max-width: none !important; 
+}
 
 /***************************************MAPS END*****************************************/
 /**************************************MENU BEGIN***************************************/
 .myNavbar {
   background-color: black;
   height: 50px;
-  width: 100%; }
-  .myNavbar .nowrap {
-    height: 50px; }
-    .myNavbar .nowrap .inlineblock {
-      cursor: pointer;
-      height: inherit; }
+  width: 100%;
+  z-index: 600;
+  top: 0;
+}
+
+.myNavbar .nowrap {
+  height: 50px; 
+}
+
+.myNavbar .nowrap .inlineblock {
+  cursor: pointer;
+  height: inherit; 
+}
 
 .navbar__logo {
   color: white;
   font-family: "Lucida Grande", Verdana, Arial, sans-serif;
   font-size: xx-large;
-  font-weight: bolder; }
+  font-weight: bolder; 
+}
 
 .navbar__img {
   height: 50px;
-  vertical-align: -12px; }
+  vertical-align: -12px; 
+}
 
 .navbar__item {
   color: white;
@@ -53,16 +70,19 @@ html, body {
   font-weight: 100;
   height: inherit;
   padding-left: 5px;
-  padding-right: 5px; }
+  padding-right: 5px; 
+}
 
 .item-text {
   display: inline-block;
-  vertical-align: -12px; }
+  vertical-align: -12px; 
+}
 
 .navbar__profile-name {
   color: #ffffff;
   font-size: large;
-  vertical-align: -12px; }
+  vertical-align: -12px; 
+}
 
 .navbar__profile-short {
   background-color: #ffffff;
@@ -76,7 +96,8 @@ html, body {
   right: 0;
   padding: 5px;
   position: absolute;
-  z-index: 100; }
+  z-index: 100; 
+}
 
 .menu {
   background-color: #000000;
@@ -85,24 +106,136 @@ html, body {
   height: calc(100% - 52px);
   position: absolute;
   width: 150px;
-  z-index: 101; }
+  z-index: 506; 
+}
+
+.btn-signup {
+  background-image: linear-gradient(to bottom, #16BA3F, #51a351) !important;
+  background-image: -webkit-linear-gradient(to bottom, #16BA3F, #51a351) !important;
+  background-image: -o-linear-gradient(to bottom, #16BA3F, #51a351) !important;
+  float: right;
+  font-weight: bold;
+  margin-top: 9px;
+  margin-right: 10px; 
+}
+
+.btn-signin {
+  float: right;
+  font-weight: bold;
+  margin-top: 9px;
+  margin-right: 10px; 
+}
 
 /***************************************MENU END*****************************************/
 /*************************************BALLOON BEGIN**************************************/
 .boldtext {
-  font-weight: bold; }
+  font-weight: bold; 
+}
 
 .bluetext {
-  color: blue; }
+  color: blue; 
+}
 
 /*************************************BALLOON END****************************************/
+/*************************************LENDING BEGIN*******************************************/
+.body-background {
+  background: url("../pic/background.png");
+  background-repeat: round;
+  /*height: calc(100% - 50px);*/
+  width: 100%; 
+}
+
+.land-wrapper {
+  background-color: #16BA3F;
+  border-radius: 30px;
+  color: #ffffff;
+  height: 500px;
+  left: 200px;
+  position: absolute;
+  text-align: center;
+  top: 100px;
+  width: 900px; 
+}
+
+.land-h2 {
+  font-style: italic;
+  text-align: center; 
+}
+
+.land-h3 {
+  margin: 0; 
+}
+
+.land-h3-maxi {
+  font-size: 28px; 
+}
+
+.land-logo {
+  margin: 50px 0 30px 0; 
+}
+
+.circles {
+  left: 1200px;
+  position: absolute;
+  top: 300px; 
+}
+
+.circle {
+  moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  background: #16BA3F;
+  border-radius: 10px;
+  height: 20px;
+  margin: 10px 0 0 0;
+  position: relative;
+  width: 20px; 
+}
+
+.diagram {
+  height: 350px;
+  width: 550px; 
+}
+
+.land-btn {
+  background: #F5B700 !important;
+  moz-border-radius: 20px !important;
+  border-radius: 20px !important;
+  color: #ffffff !important;
+  height: 80px !important;
+  margin: 150px 0 20px 0 !important;
+  padding-top: 25px !important;
+  width: 400px !important; 
+}
+
+.land-btn-text {
+  font-size: 45px; 
+}
+
+.circle-one {
+  background: #16BA3F; 
+}
+
+.circle-two {
+  background: rgba(0, 128, 0, 0.3); 
+}
+
+.circle-three {
+  background: rgba(0, 128, 0, 0.3); 
+}
+
+/************************************LENGING END*********************************************/
 /***************************************TEST BEGIN*******************************************/
 .btn-test {
-  bottom: 0px;
-  right: 0px;
-  position: absolute;
-  z-index: 50; }
+  position: fixed;
+  z-index: 50;
+  right: 35px;
+  height: 35px;
+  top: calc(50% - 80px);
+  -webkit-transform: rotate(270deg);  /* для Chrome и Safari */
+  -moz-transform: rotate(270deg); /* для Firefox */ 
+  -o-transform: rotate(270deg); /* для Opera */ 
+  transform: rotate(270deg);
+  transform-origin: 100% 0;
+}
 
 /****************************************TEST END********************************************/
-
-/*# sourceMappingURL=style.css.map */
