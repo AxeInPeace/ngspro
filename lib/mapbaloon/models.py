@@ -82,7 +82,7 @@ class PolygonCoord(models.Model):
     coord2 = models.FloatField()
 
 
-class TriangulationStation(models.Model):
+class TriangulationStation(GeoObject):
     TYPE_CHOICES = (
         ('trian', 'Пункт триангуляции'),
         ('trial', 'Пункт трилатерации'),

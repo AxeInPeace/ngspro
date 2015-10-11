@@ -45,10 +45,7 @@ MIDDLEWARE_CLASSES = (
 
 DATABASES = local_settings.DATABASES 
 
-
-TEMPLATE_DIRS = (
-    '/home/ngspro/.www/tpl/',
-)
+TEMPLATE_DIRS = local_settings.TEMPLATE_DIRS
 
 ROOT_URLCONF = 'lib.urls'
 
