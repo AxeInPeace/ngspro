@@ -43,7 +43,7 @@ def auth_registration(request):
         return JSONResponse({"status": "400", "message": u"Введите адрес вашей электронной почты."})
 
     user = DUser.objects.create_user(username, email, password)
-    CustomUser.objects.create(userid=user, cache=0,rating=0)
+    CustomUser.objects.create(userid=user, cash=0,rating=0)
     return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
 
 def auth_logout(request):
