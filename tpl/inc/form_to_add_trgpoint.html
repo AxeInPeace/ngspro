@@ -1,0 +1,156 @@
+<div id="trigpoint" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+        <h3 id="myModalLabel">Введите данные:</h3>
+        <h5 class="hide errormsg addballoon">Пожалуйста, введите корректные координаты!</h5>
+    </div>
+
+    <div class="modal-body">
+        <form class="form-horizontal" method="post" action="{% url 'send_balloon' %}" id="mapballoon_form" >
+            <div class="control-group">
+                <label class="control-label">Координаты</label>
+
+                <div class="controls">
+                    <input type="number" class="trgcoordx" placeholder="x" name="trgcoord1" value="" min="-180" max="180">
+                    <input type="number" class="trgcoordy" placeholder="y" name="trgcoord2" value="" min="-90" max="90">
+                </div>
+
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Название пункта</label>
+
+                <div class="controls">
+                    <input type="text" id="name" placeholder="" name="trgname" value="" maxlength="15">
+                </div>
+
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Тип пункта</label>
+
+                <div class="controls">
+                    <select name="trgtype">
+                        <option value='trian'>Пункт триангуляции</option>
+                        <option value='trial'>Пункт трилатерации</option>
+                        <option value='polyg'>Пункт полигонометрии</option>
+                        <option value='reper'>Грунтовый репер</option>
+                        <option value='znak'>Стенной знак</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Класс точности</label>
+
+                <div class="controls">
+                    <input type="text" placeholder="" name="trgaccuracy" value="" maxlength="1">
+                </div>
+
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Тип пункта</label>
+
+                <div class="controls">
+                    <label class="radio inline">
+                        <input type="radio" name="trggov" value="gover">государственный</input>
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="trggov" value="notgover">негосударственный</input>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Высота, м БС</label>
+
+                <div class="controls">
+                    <input type="number" placeholder="" name="trgheight" value="" maxlength="7">
+                </div>
+
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Состояние ориентирного знака</label>
+
+                <div class="controls">
+                    <label class="radio inline">
+                        <input type="radio" name="trgorientstate" value="save">сохранился</input>
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="trgorientstate" value="notsave">не сохранился</input>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Состояние наружного знака</label>
+
+                <div class="controls">
+                    <label class="radio inline">
+                        <input type="radio" name="trgoutstate" value="save">сохранился</input>
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="trgoutstate" value="notsave">не сохранился</input>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Состояние центра</label>
+
+                <div class="controls">
+                    <label class="radio inline">
+                        <input type="radio" name="trgcenterstate" value="save">сохранился</input>
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="trgcenterstate" value="notsave">не сохранился</input>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Положение центра относительно уровня земли, м</label>
+
+                <div class="controls">
+                    <input type="number" placeholder="" name="trgcenterplace" value="" maxlength="3" min="0" max="999">
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
+
+                <input class="btn btn-primary js-submitballoon" type="button" value="Send"/>
+            </div>
+            {% csrf_token %}
+        </form>
+    </div>
+
+</div>
+<script>
+$('.js-submitballoon').click(function(){
+        xValue = $('#xcoord').val();
+        yValue = $('#ycoord').val();
+        if(isCoord(xValue) && isCoord(yValue)){
+        $(".errormsg.addballoon").addClass('hide');
+        document.forms['mapballoon_form'].submit()
+        }
+        else
+        $(".errormsg.addballoon").removeClass('hide');
+
+        });
+
+function isCoord(n) {
+    if(!isNaN(parseFloat(n)) && isFinite(n)) {
+        if (parseFloat(n)>-180 && parseFloat(n)<180)
+            return true
+                else
+                    return false;
+    }
+    else
+        return false;
+}
+</script>

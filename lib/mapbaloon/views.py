@@ -14,6 +14,7 @@ from django.views.decorators.http import require_http_methods
 @require_http_methods(["GET"])
 def mapballoon_map(request):
     balloons = Balloon.objects.all()
+    trgstations = TriangulationStation.objects.all()
     
     if request.user.is_authenticated():
         frmat = Format.objects.all()
@@ -31,6 +32,7 @@ def mapballoon_map(request):
             "my_rating": my_rating,
             "user": request.user,			
             "avatar": avatar,
+            "trgstations": trgstations,
         }
         return render(request, 'mapbaloon/index.html', context)		
     context = {		

@@ -21,6 +21,21 @@ function init () {
 		    myMap.geoObjects.add(myPlacemark{{ balloon.id }});
         {% endfor %}
         
+	    {% for trgstation in trgstations %}
+            myTrgMark{{ trgstation.id }} = new ymaps.Placemark([{{ trgstation.lat }}, {{ trgstation.lng }}], {
+balloonContentHeader: "{{ trgstation.title }}<br>lat = {{ trgstation.lat }}<br>lng = {{ trgstation.lng }}",
+                balloonContentBody: "type: {{ trgstation.type }} <br>accuracy = {{ trgstation.precision }}<br>height = {{ trgstation.height }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Post date={{ balloon.date.year }}",
+                balloonContentFooter: "",
+                hintContent: "" 
+        }, {
+            iconLayout: 'default#image',
+            iconImageHref: 'https://pp.vk.me/c622319/v622319300/5bb2a/8QpiT5SffLk.jpg',
+            iconImageSize: [64, 64],
+            iconImageOffset: [-32, -64],
+        });
+		    myMap.geoObjects.add(mytrgMark{{ trgstation.id }});
+        {% endfor %}
+
         var myPl = new ymaps.Placemark([54.7746, 37.8005], {
                         balloonContent: 'Заголовок метки! Немного инфы о том, о сем. Лорем ипсум чото там.' // сдесь содержимое балуна в формате html, все стили в css
         }, {
@@ -40,11 +55,31 @@ function init () {
                     coords[0].toPrecision(6),
                     coords[1].toPrecision(6)
                     ].join(', ') + '</p>' +
-                    '<p><a href="#myModal" role="button" class="btn btn-inverse" data-toggle="modal">Добавить материал</a></p>',
+                    '<p><a href="#myModal" role="button" class="btn btn-inverse" data-toggle="modal">Добавить материал</a></p>' + 
+                    '<p><a href="#trigpoint" role="button" class="btn btn-inverse" data-toggle="modal">Добавить тригапункт</a></p>',
             }); 
               
            $("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(4) + "\">");
            $("#ycoord").replaceWith("<input type=\"text\" id=\"ycoord\" name=\"coord2\" value=\"" + coords[1].toPrecision(4) + "\">");
+           $(".trgcoordx").attr('value', coords[0].toPrecision(4));
+           $(".trgcoordy").attr('value', coords[1].toPrecision(4));
          });
+        filterYear = new ymaps.control.Button({
+            data: {
+                content: "Отфильтровать по годам",
+            },
+            options: {
+                selectOnClick: false,
+                maxWidth: 200,
+                    }
+        });
+        filterYear.events
+            .add(
+                    'press',
+                    function () {
+                        $(".filteryears").trigger("click");
+                    }
+                )
+        myMap.controls.add(filterYear, {float: 'right'});
 }
 </script>

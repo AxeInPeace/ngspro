@@ -33,6 +33,7 @@ class Instrument(models.Model):
 class GeoObject(models.Model):
     lat = models.IntegerField()
     lng = models.IntegerField()
+
     class Meta:
         abstract = True
 
