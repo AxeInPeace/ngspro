@@ -3,53 +3,44 @@
 <head lang="en">
     <title>ENGGEO</title>
     {% include "inc/header.html" %}
-    <link rel="stylesheet" type="text/css" href="/jquery/fullPage.js-master/jquery.fullPage.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/jquery/fullPage.js-master/jquery.fullPage.js"></script>
-    <script type="text/javascript">
-		$(document).ready(function() {
-			$('#fullpage').fullpage({
-				navigation: true,
-				navigationPosition: 'right'
-			});
-		});
-    </script>
 </head>
 
 <body>
     {% include "inc/menu.html" %}
 
     <div class="body-background">
-        <div id="fullpage">
-            <div class="section" id="section0">
-                <div class="land-wrapper">
-                    <img src="/pic/logo_alfa.png" class="land-logo">
-
-                    <h2 class="land-h2">Материалы по вашему проекту уже у нас!</h2>
-                </div>
+        <div class="land-block">
+            <div class="land-img left inlineblock">
+                <img src="/pic/demopic.jpg">
             </div>
 
-            <div class="section" id="section1">
-                <div class="land-wrapper">
-                    <h2>Почему мы?</h2>
+            <h4 class="land-text right inlineblock">
+                Вы точно знаете, где искать геодезический пункт.<br/>
+                Даже под метровым слоем снега!
+            </h4>
+        </div>
 
-                    <h3>Мы знаем, какие трудности вам встречаются:</h3>
+        <div class="land-block">
+            <h4 class="land-text inlineblock">
+                Сомнений, что для с большим трудом найденного <br/>
+                геодезического пункта найдутся координаты, больше нет!
+            </h4>
 
-                    <img src="/pic/diagram.png" class="diagram">
+            <div class="land-img inlineblock">
+                <img src="/pic/demopic.jpg">
+            </div>
+        </div>
 
-                    <h3 class="land-h3">И умеем их разрешать!</h3>
-                </div>
+        <div class="land-block">
+            <div class="land-img inlineblock">
+                <img src="/pic/demopic.jpg">
             </div>
 
-            <div class="section" id="section2">
-                <div class="land-wrapper">
-                    <div class="btn btn-large land-btn">
-                        <h1 class="land-btn-text">Присоединиться!</h1>
-                    </div>
-
-                    <h3 class="land-h3-maxi">Снижайте ваши издержки, пользуясь нашими материалами!</h3>
-                </div>
-            </div>
+            <h4 class="land-text right inlineblock">
+                Экономия рабочего времени, топлива, здоровья <br/>
+                и нервов сотрудников - преимущество во всем!
+            </h4>
         </div>
     </div>
 </body>
