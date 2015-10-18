@@ -62,7 +62,6 @@ def rewrite_url(url):
     return settings.HOST + settings.GCS_MEDIA_URL + url.split('/enggeo')[-1]
 
 
-@csrf_exempt
 @require_http_methods(["POST"])
 def upload(request):
     f = request.FILES['material']
