@@ -68,6 +68,13 @@ def mapballoon_add_balloon(request):
     return HttpResponseRedirect("/")
 
 @require_http_methods(["POST"])
+def mapballoon_add_trgpoint(request):
+    if not request.user.is_authenticated():
+        raise Http404
+    return HttpResponseRedirect("/")
+
+
+@require_http_methods(["POST"])
 def mapballoon_filter_for_years(request):
     if request.POST['year']:
         balloons = Balloon.objects.filter(date__year=request.POST['year'])

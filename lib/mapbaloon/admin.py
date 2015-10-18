@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Balloon, Polygon, Format, Instrument
+from .models import Balloon, Polygon, Format, Instrument, TriangulationStation
 
 
 admin.site.register(Balloon)
