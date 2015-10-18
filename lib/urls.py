@@ -12,5 +12,3 @@ urlpatterns = [
     url(r'^landing/', include('lib.landing.urls')),
     url(r'^', include('lib.photo.urls')),
 ]
-
-
