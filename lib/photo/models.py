@@ -1,4 +1,7 @@
 from django.db import models
 
-class Photo(models.Model):
-    pass
+from lib.core.models import DownloadableMixin
+
+
+class Photo(DownloadableMixin):
+    alt = models.CharField(max_length=255)
