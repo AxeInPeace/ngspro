@@ -45,8 +45,10 @@ html, body
 
 .YMaps
 {
-    height: calc(100% - 50px);
-    width: 100%;
+    height: calc(100% - 53px);
+    position: absolute;
+    top: 53px;
+    width:100%;
 }
 
 .YMaps img
@@ -74,7 +76,7 @@ html, body
     height: 60px;
     position: absolute;
     width: 100%;
-    z-index: 600;
+    z-index: 800;
     -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
 }
