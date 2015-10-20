@@ -9,6 +9,7 @@ $( "#auth_form" ).on('submit', function( event ) {
     var no_timer = true;
   }
   $.post('/login', $('#auth_form').serialize(), function(event) {
+    event.preventDefault();
     $("#auth_form").find(".modal-header").append("<div class=\"alert alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Еще секундочку!</div>");
     $("#auth_form").hide()
   })
@@ -42,40 +43,3 @@ $( "#reg_form" ).on('submit', function( event ) {
 });
 
 /*************** YMAPS *****************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

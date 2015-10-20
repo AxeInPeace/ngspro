@@ -64,3 +64,13 @@ USE_TZ = True
 
 STATIC_URL = local_settings.STATIC_URL
 STATIC_ROOT = local_settings.STATIC_ROOT
+
+# PROJECT
+KEYFILE = local_settings.KEYFILE
+HOSTNAME = local_settings.HOSTNAME
+HOST = local_settings.HOST
+
+# Google cloud storage
+GCS_BUCKET = 'enggeo'
+GCS_PROJECT = 'enggeo'
+GCS_MEDIA_URL = '/media'
