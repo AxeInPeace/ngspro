@@ -1,30 +1,42 @@
+/**************************************TO DO LIST BEGIN**************************************/
+/*
+1024x768 iPad
+1280x1024 RuslOn
+320x480 iPhone 3 остальные больше
+/***************************************TO DO LIST END***************************************/
+
 /******************************************HELP STYLES BEGIN***************************/
 
 *
 {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 html, body
 {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 .rightfloat
 {
-  float: right;
+    float: right;
+}
+
+.leftfloat
+{
+    float: left;
 }
 
 .nowrap
 {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 .inlineblock
 {
-  display: inline-block;
+    display: inline-block;
 }
 
 /****************************************HELP STYLES END**********************************/
@@ -33,26 +45,38 @@ html, body
 
 .YMaps
 {
-  height: calc(100% - 50px);
-  width: 100%;
+    height: calc(100% - 50px);
+    width: 100%;
 }
 
 .YMaps img
 {
-  max-width: none !important;
+    max-width: none !important;
 }
 
 /***************************************MAPS END*****************************************/
 
-/**************************************MENU BEGIN***************************************/
+/**************************************NAVBAR BEGIN***************************************/
+
+.nav-black
+{
+    background-color: black;
+}
+
+.nav-white
+{
+    background-color: white;
+}
+
 
 .myNavbar
 {
-  background-color: black;
-  height: 50px;
-  position: fixed;
-  width: 100%;
-  z-index: 600;
+    height: 60px;
+    position: fixed;
+    width: 100%;
+    z-index: 600;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
 }
 
 .myNavbar .nowrap
@@ -62,106 +86,122 @@ html, body
 
 .nowrap .inlineblock
 {
-  cursor: pointer;
-  height: inherit;
+    cursor: pointer;
+    height: inherit;
+}
+
+.myNavbar-nav
+{
+    margin: 7px 70px 0 70px
 }
 
 .navbar__logo
 {
-  color: white;
-  font-family: "Lucida Grande", Verdana, Arial, sans-serif;
-  font-size: xx-large;
-  font-weight: bolder;
+    color: white;
+    font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+    font-size: xx-large;
+    font-weight: bolder;
 }
 
-.navbar__img
+.navbar__img-logo
 {
-  height: 50px;
-  vertical-align: -12px;
+    height: 50px;
 }
 
-.navbar__item
+.navbar__img-menu
 {
-  color: white;
-  font-family: "Lucida Grande", Verdana, Arial, sans-serif;
-  font-size: large;
-  font-weight: 100;
-  height: inherit;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.item-text
-{
-  display: inline-block;
-  vertical-align: -12px;
+    height: 40px;
+    margin: 0 0 10px 0;
+    width: 30px;
 }
 
 .navbar__profile-name
 {
-  color: #ffffff;
-  font-size: large;
-  vertical-align: -12px;
+    color: #ffffff;
+    font-size: large;
+    vertical-align: -12px;
 }
 
 .navbar__profile-short
 {
-  background-color: #ffffff;
-  border-bottom-color: black;
-  border-bottom-left-radius: 10px;
-  border-left-color: black;
-  border-style: groove;
-  color: black;
-  display: none;
-  height: 100px;
-  right: 0;
-  padding: 5px;
-  position: absolute;
-  z-index: 100;
-}
-
-.menu
-{
-  background-color: #000000;
-  border-top: 1px solid #ffffff;
-  display: none;
-  height: calc(100% - 52px);
-  position: absolute;
-  width: 150px;
-  z-index: 506;
+    background-color: #ffffff;
+    border-bottom-color: black;
+    border-bottom-left-radius: 10px;
+    border-left-color: black;
+    border-style: groove;
+    color: black;
+    display: none;
+    height: 100px;
+    right: 0;
+    padding: 5px;
+    position: absolute;
+    z-index: 100;
 }
 
 .btn-signup
 {
-  background-image: linear-gradient(to bottom,#16BA3F,#51a351) !important;
-  background-image: -webkit-linear-gradient(to bottom,#16BA3F,#51a351) !important;
-  background-image: -o-linear-gradient(to bottom,#16BA3F,#51a351) !important;
-  float: right;
-  font-weight: bold;
-  margin-top: 9px;
-  margin-right: 10px;
+    background-image: linear-gradient(to bottom,#16BA3F,#51a351) !important;
+    background-image: -webkit-linear-gradient(to bottom,#16BA3F,#51a351) !important;
+    background-image: -o-linear-gradient(to bottom,#16BA3F,#51a351) !important;
+    float: right;
+    font-weight: bold;
+    margin-top: 9px;
+    margin-right: 10px;
 }
 
 .btn-signin
 {
-  float: right;
-  font-weight: bold;
-  margin-top: 9px;
-  margin-right:10px;
+    float: right;
+    font-weight: bold;
+    margin-top: 9px;
+    margin-right:10px;
 }
 
-/***************************************MENU END*****************************************/
+/***************************************NAVBAR END*****************************************/
+
+/****************************************MENU BEGIN***************************************/
+
+.menu
+{
+    background-color: #000000;
+    border-top: 1px solid #ffffff;
+    display: none;
+    height: calc(100% - 52px);
+    position: absolute;
+    width: 150px;
+    z-index: 700;
+}
+
+/*Может потом понадобится. Изменить названия классов!
+.navbar__item
+{
+    color: white;
+    font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+    font-size: large;
+    font-weight: 100;
+    height: inherit;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.item-text
+{
+    display: inline-block;
+    vertical-align: -12px;
+}*/
+
+/****************************************MENU END******************************************/
 
 /*************************************BALLOON BEGIN**************************************/
 
 .boldtext
 {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .bluetext
 {
-  color: blue;
+    color: blue;
 }
 
 /*************************************BALLOON END****************************************/
@@ -170,36 +210,90 @@ html, body
 
 .body-background
 {
+    top: 50px;
     margin: auto;
-    padding: 20px;
-    width: 80Я а%;
+    position: absolute;
+    width: 100%
+}
+
+.land-block
+{
+    padding: 15px 0 15px 0;
+    text-align: center;
+}
+
+.land-block-first
+{
+    padding-top: 30px;
+}
+
+.back1
+{
+    background: url(/pic/back1.png)
+}
+
+.back2
+{
+    background: url(/pic/back2.png);
 }
 
 .land-text
 {
-    text-align: center;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.left
+{
+    margin: 0 50px 0 0;
+}
+
+.right
+{
+    margin: 0 0 0 50px;
 }
 
 .land-logo
 {
-  margin: 50px 0 30px 0;
+    margin: 50px 0 30px 0;
 }
 
 .land-btn
 {
-  background: #F5B700 !important;
-  moz-border-radius: 20px !important;
-  border-radius: 20px !important;
-  color: #ffffff !important;
-  height: 80px !important;
-  margin: 150px 0 20px 0 !important;
-  padding-top: 25px !important;
-  width: 400px !important;
+    background: #F5B700 !important;
+    moz-border-radius: 20px !important;
+    border-radius: 20px !important;
+    color: #ffffff !important;
+    height: 80px !important;
+    margin: 150px 0 20px 0 !important;
+    padding-top: 25px !important;
+    width: 400px !important;
 }
 
 .land-btn-text
 {
-  font-size: 45px;
+    font-size: 1.3em;
+}
+
+.text-grey
+{
+    color: grey;
+}
+
+.land-round
+{
+    -moz-border-radius: 175px; /* Firefox */
+    -webkit-border-radius: 175px; /* Safari, Chrome */
+    -khtml-border-radius: 175px; /* KHTML */
+    border-radius: 175px; /* CSS3 */
+    behavior: url(border-radius.htc); /*IE */
+}
+
+hr
+{
+    background-color: #9b9b9b;
+    border-bottom:1px solid #F4F4F4 !important;
+    margin: 0 !important;
 }
 
 /************************************LANDING END*********************************************/
@@ -208,10 +302,10 @@ html, body
 
 .btn-test
 {
-  bottom: 0px;
-  right: 0px;
-  position: absolute;
-  z-index: 50;
+    bottom: 0px;
+    right: 0px;
+    position: absolute;
+    z-index: 50;
 }
 
 /****************************************TEST END********************************************/
