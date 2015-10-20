@@ -72,7 +72,7 @@ html, body
 .myNavbar
 {
     height: 60px;
-    position: fixed;
+    position: absolute;
     width: 100%;
     z-index: 600;
     -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
@@ -224,7 +224,7 @@ html, body
 
 .land-block-first
 {
-    padding-top: 30px;
+    padding: 4% 4% 15px 4%;
 }
 
 .back1
@@ -237,9 +237,15 @@ html, body
     background: url(/pic/back2.png);
 }
 
-.land-text
+.land-text-left
 {
     text-align: left;
+    vertical-align: middle;
+}
+
+.land-text-right
+{
+    text-align: right;
     vertical-align: middle;
 }
 
@@ -251,6 +257,11 @@ html, body
 .right
 {
     margin: 0 0 0 50px;
+}
+
+.land-img
+{
+    width: 350px;
 }
 
 .land-logo
