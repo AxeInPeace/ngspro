@@ -11,4 +11,4 @@ class CustomUser(models.Model):
     rating = models.IntegerField(default=0)
     cash = models.PositiveIntegerField(u'Счет кошелька', default=0, blank=False)
     userid = models.OneToOneField(User)
-    avatar = models.ImageField(upload_to='avatar/')
+    avatar = models.URLField()

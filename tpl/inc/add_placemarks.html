@@ -10,9 +10,9 @@ function init () {
         });
 
 	    {% for balloon in balloons %}
-            myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.coord1 }}, {{ balloon.coord2 }}], {
-                balloonContentHeader: "{{ balloon.publisher.rating }}",
-                balloonContentBody: "date: {{ balloon.date }} <br>x = {{ balloon.coord1 }}<br>y = {{ balloon.coord2 }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Post date={{ balloon.date.year }}",
+            myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.lat }}, {{ balloon.lng }}], {
+                balloonContentHeader: "{{ balloon.title }}",
+                balloonContentBody: "x = {{ balloon.lat }}; y = {{ balloon.lng }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Date={{ balloon.date }}",
                 balloonContentFooter: "",
                 hintContent: ""}, 
             {
@@ -23,17 +23,17 @@ function init () {
         
 	    {% for trgstation in trgstations %}
             myTrgMark{{ trgstation.id }} = new ymaps.Placemark([{{ trgstation.lat }}, {{ trgstation.lng }}], {
-balloonContentHeader: "{{ trgstation.title }}<br>lat = {{ trgstation.lat }}<br>lng = {{ trgstation.lng }}",
-                balloonContentBody: "type: {{ trgstation.type }} <br>accuracy = {{ trgstation.precision }}<br>height = {{ trgstation.height }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Post date={{ balloon.date.year }}",
+                balloonContentHeader: "{{ trgstation.title }}<br>lat = {{ trgstation.lat }}<br>lng = {{ trgstation.lng }}",
+                balloonContentBody: "type: {{ trgstation.type }} <br>accuracy = {{ trgstation.precision }}<br>height = {{ trgstation.height }}<br>date = {{ trgstation.date }} ",
                 balloonContentFooter: "",
                 hintContent: "" 
         }, {
             iconLayout: 'default#image',
-            iconImageHref: 'https://pp.vk.me/c622319/v622319300/5bb2a/8QpiT5SffLk.jpg',
-            iconImageSize: [64, 64],
-            iconImageOffset: [-32, -64],
+            iconImageHref: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Japanese_Map_symbol_(Triangulation_point).svg/2000px-Japanese_Map_symbol_(Triangulation_point).svg.png',
+            iconImageSize: [32, 32],
+            iconImageOffset: [-16, -16],
         });
-		    myMap.geoObjects.add(mytrgMark{{ trgstation.id }});
+		    myMap.geoObjects.add(myTrgMark{{ trgstation.id }});
         {% endfor %}
 
         var myPl = new ymaps.Placemark([54.7746, 37.8005], {

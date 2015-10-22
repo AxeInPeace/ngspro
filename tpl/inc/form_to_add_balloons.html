@@ -65,7 +65,13 @@
                 <label class="control-label">Система координат</label>
 
                 <div class="controls">
-                  <input type="text" id="inputEmail" placeholder="" name="coordsys">
+                    <select name="coordsys">
+                        <option value="SK42">СК-42</option>
+                        <option value="SK63">СК-63</option>
+                        <option value="SK95">СК-95</option>
+                        <option value="GSK2011">ГСК-2011</option>
+                        <option value="MSK01">МСК-01</option>
+                    </select>
                 </div>
             </div>
 
@@ -73,7 +79,13 @@
                 <label class="control-label">Система высот</label>
 
                 <div class="controls">
-                  <input type="text" id="inputEmail" placeholder="" name="altsys">
+                    <label class="radio inline">
+                        <input type="radio" name="altsys" value="BS 1977"> БС высот 1977 г.
+                    </label>
+
+                    <label class="radio inline">
+                        <input type="radio" name="altsys" value="notional"> условная система высот
+                    </label>
                 </div>
             </div>
 
@@ -81,11 +93,11 @@
                 <label class="control-label">Вид</label>
 
                 <div class="controls">
-          {% for format in formats %}
-                    <label class="radio inline">
-                        <input type="radio" name="frm" value="{{ format.id }}">{{ format.name }}
-                    </label>
-          {% endfor %}
+                    <select name="frm">
+                        {% for format in formats %}
+                            <option value="{{ format.id }}">{{ format.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
 
@@ -93,11 +105,11 @@
                 <label class="control-label">Инструмент</label>
 
                 <div class="controls">
-          {% for tool in tools %}
-                    <label class="radio inline">
-                        <input type="radio" name="tool" value="{{ tool.id }}">{{ tool.name }}
-                    </label>
-          {% endfor %}
+                    <select name="tool">
+                        {% for tool in tools %}
+                            <option value="{{ tool.id }}">{{ tool.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
             

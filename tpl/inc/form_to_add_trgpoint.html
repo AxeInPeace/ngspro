@@ -3,11 +3,11 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 
         <h3 id="myModalLabel">Введите данные:</h3>
-        <h5 class="hide errormsg addballoon">Пожалуйста, введите корректные координаты!</h5>
+        <h5 class="hide errormsg addtrgpoint">Пожалуйста, введите корректные данные!</h5>
     </div>
 
     <div class="modal-body">
-        <form class="form-horizontal" method="post" action="{% url 'send_trgpoint' %}" id="mapballoon_form" >
+        <form class="form-horizontal" method="post" action="{% url 'send_trgpoint' %}" id="trgpoint_form" >
             <div class="control-group">
                 <label class="control-label">Координаты</label>
 
@@ -45,7 +45,7 @@
                 <label class="control-label">Класс точности</label>
 
                 <div class="controls">
-                    <input type="text" placeholder="" name="trgaccuracy" value="" maxlength="1">
+                    <input type="number" class="trgaccuracy"  placeholder="" name="trgaccuracy" value="" maxlength="1">
                 </div>
 
             </div>
@@ -67,7 +67,7 @@
                 <label class="control-label">Высота, м БС</label>
 
                 <div class="controls">
-                    <input type="number" placeholder="" name="trgheight" value="" maxlength="7">
+                    <input type="number" class="trgheight" placeholder="" name="trgheight" value="" maxlength="7">
                 </div>
 
             </div>
@@ -115,7 +115,7 @@
                 <label class="control-label">Положение центра относительно уровня земли, м</label>
 
                 <div class="controls">
-                    <input type="number" placeholder="" name="trgcenterplace" value="" maxlength="3" min="0" max="999">
+                    <input type="number"class="ctrheight" placeholder="" name="trgcenterplace" value="" maxlength="3" min="0" max="999">
                 </div>
 
             </div>
@@ -132,23 +132,32 @@
 </div>
 <script>
 $('.js-submittrgpoint').click(function(){
-        xValue = $('#xcoord').val();
-        yValue = $('#ycoord').val();
-        if(isCoord(xValue) && isCoord(yValue)){
-        $(".errormsg.addballoon").addClass('hide');
-        document.forms['mapballoon_form'].submit()
+        xValue = $('.trgcoordx').val();
+        yValue = $('.trgcoordy').val();
+        accuracyClass = $('.trgaccuracy').val();
+        trgHeight = $('.trgheight').val();
+        centerHeight = $('.ctrheight').val();
+        if(isCoord(xValue) && isCoord(yValue) && isNumber(accuracyClass) && isNumber(trgHeight) && isNumber(centerHeight)){
+            $(".errormsg.addtrgpoint").addClass('hide');
+            document.forms['trgpoint_form'].submit()
         }
         else
-        $(".errormsg.addballoon").removeClass('hide');
-
+            $(".errormsg.addtrgpoint").removeClass('hide');
         });
 
+function isNumber(n) {
+    if (!isNaN(parseFloat(n)) && isFinite(n)) 
+        return true
+    else
+        return false;
+}
+
 function isCoord(n) {
-    if(!isNaN(parseFloat(n)) && isFinite(n)) {
+    if (isNumber(n)) {
         if (parseFloat(n)>-180 && parseFloat(n)<180)
             return true
-                else
-                    return false;
+        else
+            return false;
     }
     else
         return false;

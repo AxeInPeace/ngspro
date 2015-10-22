@@ -53,8 +53,8 @@ def mapballoon_add_balloon(request):
     tl = Instrument.objects.get(id=request.POST['tool'])
     pub = CustomUser.objects.get(userid=request.user)
     Balloon.objects.create(
-        coord1=request.POST['coord1'],
-        coord2=request.POST['coord2'],
+        lat=request.POST['coord1'],
+        lng=request.POST['coord2'],
         isugrshoot=request.POST['ugbool'],
         isaltmark=request.POST['altbool'],
         isrelelems=request.POST['relbool'],
@@ -71,6 +71,28 @@ def mapballoon_add_balloon(request):
 def mapballoon_add_trgpoint(request):
     if not request.user.is_authenticated():
         raise Http404
+    pub = CustomUser.objects.get(userid=request.user)
+    if(request.POST['trggov'] == "gover"):
+        govtype = True
+    else:
+        govtype = False
+
+    TriangulationStation.objects.create(
+        lat=request.POST['trgcoord1'],
+        lng=request.POST['trgcoord2'],
+        title=request.POST['trgname'],
+        type=request.POST['trgtype'],
+        precision=request.POST['trgaccuracy'],
+        height=request.POST['trgheight'],
+        national=govtype,
+        backsight=(request.POST['trgorientstate']=="save"),
+        outer=(request.POST['trgoutstate']=="save"),
+        center=(request.POST['trgcenterstate']=="save"),
+        center_height=request.POST['trgcenterplace'],
+        center_photo=Photo.objects.get(id=1),
+        publisher=pub,
+        date=datetime.datetime.now().date(),
+    )    
     return HttpResponseRedirect("/")
 
 
