@@ -49,7 +49,6 @@ html, body
     position: absolute;
     top: 60px;
     width:100%;
-    z-index: -1;
 }
 
 .YMaps img
@@ -77,8 +76,8 @@ html, body
     height: 60px;
     position: relative;
     width: 100%;
+    z-index: 1;
     -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
-    z-index: 3;
 }
 
 .myNavbar .nowrap
