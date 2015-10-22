@@ -14,9 +14,9 @@ function init () {
                 balloonContentHeader: "{{ balloon.title }}",
                 balloonContentBody: "x = {{ balloon.lat }}; y = {{ balloon.lng }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Date={{ balloon.date }}",
                 balloonContentFooter: "",
-                hintContent: ""}, 
+                hintContent: "",}, 
             {
-                preset: 'twirl#mailPostIcon',
+                iconLayout: 'default#image',
 		    });                 
 		    myMap.geoObjects.add(myPlacemark{{ balloon.id }});
         {% endfor %}
@@ -36,15 +36,6 @@ function init () {
 		    myMap.geoObjects.add(myTrgMark{{ trgstation.id }});
         {% endfor %}
 
-        var myPl = new ymaps.Placemark([54.7746, 37.8005], {
-                        balloonContent: 'Заголовок метки! Немного инфы о том, о сем. Лорем ипсум чото там.' // сдесь содержимое балуна в формате html, все стили в css
-        }, {
-            iconLayout: 'default#image',
-            iconImageHref: 'http://ngspro.ru/pic/icon3.png',
-            iconImageSize: [64, 64],
-            iconImageOffset: [-32, -64],
-        });
-		myMap.geoObjects.add(myPl);
         
         myMap.events.add('contextmenu', function (e) {
             var coords = e.get('coords');  
@@ -73,13 +64,29 @@ function init () {
                 maxWidth: 200,
                     }
         });
-        filterYear.events
-            .add(
-                    'press',
-                    function () {
-                        $(".filteryears").trigger("click");
-                    }
-                )
+        filterYear.events.add(
+            'press',
+            function () {
+                $(".filteryears").trigger("click");
+            }
+        )
         myMap.controls.add(filterYear, {float: 'right'});
+        
+        filterFormat = new ymaps.control.Button({
+            data: {
+                content: "Отфильтровать по format",
+            },
+            options: {
+                selectOnClick: false,
+                maxWidth: 200,
+                    }
+        });
+        filterFormat.events.add(
+            'press',
+            function () {
+                $(".filterformat").trigger("click");
+            }
+        )
+        myMap.controls.add(filterFormat, {float: 'right'});
 }
 </script>

@@ -126,3 +126,27 @@ def mapballoon_filter_for_years(request):
         return render(request, 'mapbaloon/index.html', context)
     else:
         return HttpResponseRedirect("/")
+
+
+@require_http_methods(["POST"])
+def mapballoon_filter_for_formats(request):
+    if request.POST['format']:
+        balloons = Balloon.objects.filter(myFormat=int(request.POST['format']))
+        if request.user.is_authenticated():
+            frmat = Format.objects.all()
+            tools = Instrument.objects.all()
+            custuser = CustomUser.objects.get(userid=request.user)
+            my_cash = custuser.cash
+            my_rating = custuser.rating            
+            avatar = custuser.avatar
+            context = {		
+                "formats": frmat,
+                "tools": tools,
+                "balloons": balloons,
+                "signin_error": None,
+                "my_cash": my_cash,				
+                "my_rating": my_rating,
+                "user": request.user,			
+                "avatar": avatar,
+            }
+            return render(request, 'mapbaloon/index.html', context)		
