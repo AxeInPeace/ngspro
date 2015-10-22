@@ -1,0 +1,28 @@
+<button type="button" class="btn btn-default hide filterformat" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#filterformats_form"></button>
+<form class="modal hide fade" method="post" action="{% url 'filter_formats' %}" id="filterformats_form">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Input format</h4>
+            </div>
+            <div class="modal-body">
+                <select id="format" name="format" required="required" type="text" >
+                    {% for frm in formats %}
+                    <option value="{{ frm.id }}">{{ frm.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="button" class="btn btn-primary js-submitformat" value="Filter!"/>
+                {% csrf_token %}
+            </div>
+        </div><!— /.modal-content —>
+
+    </div><!— /.modal-dialog —>
+</form>
+
+<script>
+$('.js-submitformat').click(function(){
+        document.forms['filterformats_form'].submit();
+        });
+</script>

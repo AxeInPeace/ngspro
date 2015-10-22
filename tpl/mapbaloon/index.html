@@ -15,7 +15,10 @@
 
 
     {% include "inc/form_to_add_balloons.html" %}
+    {% include "inc/form_to_add_trgpoint.html" %}
     {% include "inc/form_filter_years.html" %}
+    {% include "inc/form_filter_format.html" %}
+
     {% if not user.is_authenticated %}
       {% include "inc/reg_form.html" %}
       {% include "inc/auth_form.html" %}

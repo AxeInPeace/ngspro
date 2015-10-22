@@ -1,5 +1,4 @@
 from django.db import models
-
 from lib.core.models import DownloadableMixin
 
 
