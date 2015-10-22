@@ -99,6 +99,7 @@ def mapballoon_add_trgpoint(request):
 @require_http_methods(["POST"])
 def mapballoon_filter_for_years(request):
     if request.POST['year']:
+        trgstations = TriangulationStation.objects.all()
         balloons = Balloon.objects.filter(date__year=request.POST['year'])
         if request.user.is_authenticated():
             frmat = Format.objects.all()
@@ -116,6 +117,7 @@ def mapballoon_filter_for_years(request):
                 "my_rating": my_rating,
                 "user": request.user,			
                 "avatar": avatar,
+                "trgstations": trgstations,
             }
             return render(request, 'mapbaloon/index.html', context)		
         context = {		
@@ -131,6 +133,7 @@ def mapballoon_filter_for_years(request):
 @require_http_methods(["POST"])
 def mapballoon_filter_for_formats(request):
     if request.POST['format']:
+        trgstations = TriangulationStation.objects.all()
         balloons = Balloon.objects.filter(myFormat=int(request.POST['format']))
         if request.user.is_authenticated():
             frmat = Format.objects.all()
@@ -148,5 +151,6 @@ def mapballoon_filter_for_formats(request):
                 "my_rating": my_rating,
                 "user": request.user,			
                 "avatar": avatar,
+                "trgstations": trgstations,
             }
             return render(request, 'mapbaloon/index.html', context)		

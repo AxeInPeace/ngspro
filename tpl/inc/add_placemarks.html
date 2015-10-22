@@ -13,11 +13,8 @@ function init () {
             myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.lat }}, {{ balloon.lng }}], {
                 balloonContentHeader: "{{ balloon.title }}",
                 balloonContentBody: "x = {{ balloon.lat }}; y = {{ balloon.lng }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Date={{ balloon.date }}",
-                balloonContentFooter: "",
-                hintContent: "",}, 
-            {
-                iconLayout: 'default#image',
-		    });                 
+                iconContent: 'T',
+            });                 
 		    myMap.geoObjects.add(myPlacemark{{ balloon.id }});
         {% endfor %}
         
