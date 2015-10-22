@@ -173,10 +173,10 @@ html, body
     background-color: #000000;
     border-top: 1px solid #ffffff;
     display: none;
-    height: calc(100% - 52px);
+    height: calc(100% - 60px);
     position: absolute;
     width: 150px;
-    z-index: 5;
+    z-index: 10;
 }
 
 /*Может потом понадобится. Изменить названия классов!
