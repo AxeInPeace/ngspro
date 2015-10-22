@@ -1,9 +1,8 @@
-<button type="button" class="btn btn-default hide filteryears" style="float: right; margin-top: 9px; margin-right:10px;font-weight: bold;" data-toggle="modal" data-target="#filteryears_form">Years</button>
-<form class="modal hide fade" method="post" action="{% url 'filter_years' %}" id="filteryears_form">
+<form class="modal fade" method="post" action="{% url 'filter_years' %}" id="filteryears_form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
         <h4 class="modal-title">Input year</h4>
         <h5 class="hide errormsg">Please input correct year</h5>
       </div>
