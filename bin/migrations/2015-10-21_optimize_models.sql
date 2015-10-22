@@ -11,4 +11,3 @@ ALTER TABLE mapbaloon_triangulationstation
     ALTER COLUMN center_height SET DATA TYPE integer USING (center_height::integer),
     ADD COLUMN publisher_id integer NOT NULL REFERENCES "ngsproauth_customuser" ("id") DEFERRABLE INITIALLY DEFERRED DEFAULT 1,
     ADD COLUMN "date" date NOT NULL DEFAULT now();
-CREATE INDEX "mapbaloon_triangulationstation_publisher_id" ON "mapbaloon_triangulationstation" ("publisher_id");
