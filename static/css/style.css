@@ -45,9 +45,9 @@ html, body
 
 .YMaps
 {
-    height: calc(100% - 53px);
+    height: calc(100% - 60px);
     position: absolute;
-    top: 53px;
+    top: 60px;
     width:100%;
     z-index: -1;
 }
@@ -71,14 +71,14 @@ html, body
     background-color: white;
 }
 
-
 .myNavbar
 {
-    height: 60px;
-    width: 100%;
-    z-index: 1;
-    -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
+    height: 60px;
+    position: relative;
+    width: 100%;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
+    z-index: 3;
 }
 
 .myNavbar .nowrap
@@ -94,26 +94,32 @@ html, body
 
 .myNavbar-nav
 {
-    margin: 0 70px
+    height: 60px;
+    margin: 0 70px;
+}
+
+.navbar__menu-btn
+{
+
+}
+
+.navbar__img-menu
+{
+    height: 40px;
+    width: 25px;
 }
 
 .navbar__logo
 {
     color: white;
     font-family: "Lucida Grande", Verdana, Arial, sans-serif;
-    font-size: xx-large;
     font-weight: bolder;
+    margin: 5px 0 5px 0;
 }
 
 .navbar__img-logo
 {
     height: 50px;
-}
-
-.navbar__img-menu
-{
-    height: 40px;
-    width: 30px;
 }
 
 .navbar__profile-name
@@ -136,26 +142,27 @@ html, body
     right: 0;
     padding: 5px;
     position: absolute;
-    z-index: 100;
+    z-index: 5;
 }
 
 .btn-signup
 {
-    background-image: linear-gradient(to bottom,#16BA3F,#51a351) !important;
-    background-image: -webkit-linear-gradient(to bottom,#16BA3F,#51a351) !important;
-    background-image: -o-linear-gradient(to bottom,#16BA3F,#51a351) !important;
+    background-image: linear-gradient(to bottom, #16BA3F, #51a351) !important;
+    background-image: -webkit-linear-gradient(to bottom, #16BA3F, #51a351) !important;
+    background-image: -o-linear-gradient(to bottom, #16BA3F, #51a351) !important;
     float: right;
     font-weight: bold;
-    margin-top: 9px;
-    margin-right: 10px;
 }
 
 .btn-signin
 {
     float: right;
     font-weight: bold;
-    margin-top: 9px;
-    margin-right:10px;
+}
+
+.navbar-btn
+{
+    margin: 13px 5px 13px 5px !important;
 }
 
 /***************************************NAVBAR END*****************************************/
@@ -170,7 +177,7 @@ html, body
     height: calc(100% - 52px);
     position: absolute;
     width: 150px;
-    z-index: 700;
+    z-index: 5;
 }
 
 /*Может потом понадобится. Изменить названия классов!
@@ -211,10 +218,11 @@ html, body
 
 .body-background
 {
-    top: 50px;
+    top: 60px;
     margin: auto;
     position: absolute;
-    width: 100%
+    width: 100%;
+    z-index: 2;
 }
 
 .land-block
@@ -290,6 +298,16 @@ html, body
 .text-grey
 {
     color: grey;
+    font-family: 'Open Sans', Arial, Helvetica, FreeSans, 'Liberation Sans', 'Nimbus Sans L', sans-serif;
+    font-size: 1.664em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.22em
+}
+
+.text-bold
+{
+    font-weight: bold;
 }
 
 .land-round
@@ -317,7 +335,7 @@ hr
     bottom: 0px;
     right: 0px;
     position: absolute;
-    z-index: 50;
+    z-index: 6;
 }
 
 /****************************************TEST END********************************************/
