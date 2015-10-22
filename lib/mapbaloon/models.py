@@ -31,28 +31,27 @@ class Instrument(models.Model):
 
 
 class GeoObject(models.Model):
-    lat = models.IntegerField()
-    lng = models.IntegerField()
+    def __unicode__(self):
+        return self.__str__()
+    
+    def __str__(self):
+        return title + '(' + str(self.lat) + ', ' + str(self.lng) + ')'
+
+    title = models.CharField(max_length=255)
+    lat = models.FloatField()
+    lng = models.FloatField()
+    publisher = models.ForeignKey(CustomUser)
+    date = models.DateField()
     class Meta:
         abstract = True
 
 
 
-class Balloon(models.Model):
-    def __unicode__(self):
-        return str(self.coord1) + ' ' + str(self.coord2)
-    
-    def __str__(self):
-        return str(self.coord1) + ' ' + str(self.coord2)
-
-    coord1 = models.FloatField()
-    coord2 = models.FloatField()
-    date = models.DateField()
+class Balloon(GeoObject):
     isugrshoot = models.BooleanField(default=False, blank=True) #having underground communication shooting
     isaltmark = models.BooleanField(default=False, blank=True) #having altitude mark
     isrelelems = models.BooleanField(default=False, blank=True) #having relief elements
 
-    publisher = models.ForeignKey(CustomUser)
     myFormat = models.ForeignKey(Format)
 
     syscoord = models.CharField(max_length=255)
@@ -91,7 +90,6 @@ class TriangulationStation(GeoObject):
         ('znak',  'Стенной знак'),
     )
 
-    title = models.CharField(max_length=255)
     type = models.CharField(max_length=7, choices=TYPE_CHOICES)
     precision = models.IntegerField()
     national = models.BooleanField()
@@ -99,5 +97,5 @@ class TriangulationStation(GeoObject):
     backsight = models.BooleanField()
     outer = models.BooleanField()
     center = models.BooleanField()
-    center_height = models.BooleanField()
+    center_height = models.IntegerField()
     center_photo = models.ForeignKey(Photo)

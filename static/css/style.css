@@ -1,241 +1,323 @@
+/**************************************TO DO LIST BEGIN**************************************/
+/*
+1024x768 iPad
+1280x1024 RuslOn
+320x480 iPhone 3 остальные больше
+/***************************************TO DO LIST END***************************************/
+
 /******************************************HELP STYLES BEGIN***************************/
-* {
-  margin: 0;
-  padding: 0; 
+
+*
+{
+    margin: 0;
+    padding: 0;
 }
 
-html, body {
-  height: 100%;
-  width: 100%; 
+html, body
+{
+    height: 100%;
+    width: 100%;
 }
 
-.rightfloat {
-  float: right; 
+.rightfloat
+{
+    float: right;
 }
 
-.nowrap {
-  white-space: nowrap; 
+.leftfloat
+{
+    float: left;
 }
 
-.inlineblock {
-  display: inline-block; 
+.nowrap
+{
+    white-space: nowrap;
+}
+
+.inlineblock
+{
+    display: inline-block !important;
 }
 
 /****************************************HELP STYLES END**********************************/
+
 /****************************************MAPS BEGIN**************************************/
-.YMaps {
-  height: calc(100% - 50px);
-  width: 100%;
+
+.YMaps
+{
+    height: calc(100% - 53px);
+    position: absolute;
+    top: 53px;
+    width:100%;
 }
 
-.YMaps img {
-  max-width: none !important; 
+.YMaps img
+{
+    max-width: none !important;
 }
 
 /***************************************MAPS END*****************************************/
-/**************************************MENU BEGIN***************************************/
-.myNavbar {
-  background-color: black;
-  height: 50px;
-  width: 100%;
-  z-index: 600;
-  top: 0;
+
+/**************************************NAVBAR BEGIN***************************************/
+
+.nav-black
+{
+    background-color: black;
 }
 
-.myNavbar .nowrap {
-  height: 50px; 
+.nav-white
+{
+    background-color: white;
 }
 
-.myNavbar .nowrap .inlineblock {
-  cursor: pointer;
-  height: inherit; 
+
+.myNavbar
+{
+    height: 60px;
+    width: 100%;
+    z-index: 1;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
+    position: relative;
 }
 
-.navbar__logo {
-  color: white;
-  font-family: "Lucida Grande", Verdana, Arial, sans-serif;
-  font-size: xx-large;
-  font-weight: bolder; 
+.myNavbar .nowrap
+{
+    height: 50px;
 }
 
-.navbar__img {
-  height: 50px;
-  vertical-align: -12px; 
+.nowrap .inlineblock
+{
+    cursor: pointer;
+    height: inherit;
 }
 
-.navbar__item {
-  color: white;
-  font-family: "Lucida Grande", Verdana, Arial, sans-serif;
-  font-size: large;
-  font-weight: 100;
-  height: inherit;
-  padding-left: 5px;
-  padding-right: 5px; 
+.myNavbar-nav
+{
+    margin: 0 70px
 }
 
-.item-text {
-  display: inline-block;
-  vertical-align: -12px; 
+.navbar__logo
+{
+    color: white;
+    font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+    font-size: xx-large;
+    font-weight: bolder;
 }
 
-.navbar__profile-name {
-  color: #ffffff;
-  font-size: large;
-  vertical-align: -12px; 
+.navbar__img-logo
+{
+    height: 50px;
 }
 
-.navbar__profile-short {
-  background-color: #ffffff;
-  border-bottom-color: black;
-  border-bottom-left-radius: 10px;
-  border-left-color: black;
-  border-style: groove;
-  color: black;
-  display: none;
-  height: 100px;
-  right: 0;
-  padding: 5px;
-  position: absolute;
-  z-index: 100; 
+.navbar__img-menu
+{
+    height: 40px;
+    width: 30px;
 }
 
-.menu {
-  background-color: #000000;
-  border-top: 1px solid #ffffff;
-  display: none;
-  height: calc(100% - 52px);
-  position: absolute;
-  width: 150px;
-  z-index: 506; 
+.navbar__profile-name
+{
+    color: #ffffff;
+    font-size: large;
+    vertical-align: -12px;
 }
 
-.btn-signup {
-  background-image: linear-gradient(to bottom, #16BA3F, #51a351) !important;
-  background-image: -webkit-linear-gradient(to bottom, #16BA3F, #51a351) !important;
-  background-image: -o-linear-gradient(to bottom, #16BA3F, #51a351) !important;
-  float: right;
-  font-weight: bold;
-  margin-top: 9px;
-  margin-right: 10px; 
+.navbar__profile-short
+{
+    background-color: #ffffff;
+    border-bottom-color: black;
+    border-bottom-left-radius: 10px;
+    border-left-color: black;
+    border-style: groove;
+    color: black;
+    display: none;
+    height: 100px;
+    right: 0;
+    padding: 5px;
+    position: absolute;
+    z-index: 100;
 }
 
-.btn-signin {
-  float: right;
-  font-weight: bold;
-  margin-top: 9px;
-  margin-right: 10px; 
+.btn-signup
+{
+    background-image: linear-gradient(to bottom,#16BA3F,#51a351) !important;
+    background-image: -webkit-linear-gradient(to bottom,#16BA3F,#51a351) !important;
+    background-image: -o-linear-gradient(to bottom,#16BA3F,#51a351) !important;
+    float: right;
+    font-weight: bold;
+    margin-top: 9px;
+    margin-right: 10px;
 }
 
-/***************************************MENU END*****************************************/
+.btn-signin
+{
+    float: right;
+    font-weight: bold;
+    margin-top: 9px;
+    margin-right:10px;
+}
+
+/***************************************NAVBAR END*****************************************/
+
+/****************************************MENU BEGIN***************************************/
+
+.menu
+{
+    background-color: #000000;
+    border-top: 1px solid #ffffff;
+    display: none;
+    height: calc(100% - 52px);
+    position: absolute;
+    width: 150px;
+    z-index: 700;
+}
+
+/*Может потом понадобится. Изменить названия классов!
+.navbar__item
+{
+    color: white;
+    font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+    font-size: large;
+    font-weight: 100;
+    height: inherit;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.item-text
+{
+    display: inline-block;
+    vertical-align: -12px;
+}*/
+
+/****************************************MENU END******************************************/
+
 /*************************************BALLOON BEGIN**************************************/
-.boldtext {
-  font-weight: bold; 
+
+.boldtext
+{
+    font-weight: bold;
 }
 
-.bluetext {
-  color: blue; 
+.bluetext
+{
+    color: blue;
 }
 
 /*************************************BALLOON END****************************************/
-/*************************************LENDING BEGIN*******************************************/
-.body-background {
-  background: url("../pic/background.png");
-  background-repeat: round;
-  /*height: calc(100% - 50px);*/
-  width: 100%; 
+
+/*************************************LANDING BEGIN*******************************************/
+
+.body-background
+{
+    top: 50px;
+    margin: auto;
+    position: absolute;
+    width: 100%
 }
 
-.land-wrapper {
-  background-color: #16BA3F;
-  border-radius: 30px;
-  color: #ffffff;
-  height: 500px;
-  left: 200px;
-  position: absolute;
-  text-align: center;
-  top: 100px;
-  width: 900px; 
+.land-block
+{
+    padding: 15px 0 15px 0;
+    text-align: center;
 }
 
-.land-h2 {
-  font-style: italic;
-  text-align: center; 
+.land-block-first
+{
+    padding: 4% 4% 15px 4%;
 }
 
-.land-h3 {
-  margin: 0; 
+.back1
+{
+    background: url(/pic/back1.png)
 }
 
-.land-h3-maxi {
-  font-size: 28px; 
+.back2
+{
+    background: url(/pic/back2.png);
 }
 
-.land-logo {
-  margin: 50px 0 30px 0; 
+.land-text-left
+{
+    text-align: left;
+    vertical-align: middle;
 }
 
-.circles {
-  left: 1200px;
-  position: absolute;
-  top: 300px; 
+.land-text-right
+{
+    text-align: right;
+    vertical-align: middle;
 }
 
-.circle {
-  moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  background: #16BA3F;
-  border-radius: 10px;
-  height: 20px;
-  margin: 10px 0 0 0;
-  position: relative;
-  width: 20px; 
+.left
+{
+    margin: 0 50px 0 0;
 }
 
-.diagram {
-  height: 350px;
-  width: 550px; 
+.right
+{
+    margin: 0 0 0 50px;
 }
 
-.land-btn {
-  background: #F5B700 !important;
-  moz-border-radius: 20px !important;
-  border-radius: 20px !important;
-  color: #ffffff !important;
-  height: 80px !important;
-  margin: 150px 0 20px 0 !important;
-  padding-top: 25px !important;
-  width: 400px !important; 
+.land-img
+{
+    width: 350px;
 }
 
-.land-btn-text {
-  font-size: 45px; 
+.land-logo
+{
+    margin: 50px 0 30px 0;
 }
 
-.circle-one {
-  background: #16BA3F; 
+.land-btn
+{
+    background: #F5B700 !important;
+    moz-border-radius: 20px !important;
+    border-radius: 20px !important;
+    color: #ffffff !important;
+    height: 80px !important;
+    margin: 150px 0 20px 0 !important;
+    padding-top: 25px !important;
+    width: 400px !important;
 }
 
-.circle-two {
-  background: rgba(0, 128, 0, 0.3); 
+.land-btn-text
+{
+    font-size: 1.3em;
 }
 
-.circle-three {
-  background: rgba(0, 128, 0, 0.3); 
+.text-grey
+{
+    color: grey;
 }
 
-/************************************LENGING END*********************************************/
+.land-round
+{
+    -moz-border-radius: 175px; /* Firefox */
+    -webkit-border-radius: 175px; /* Safari, Chrome */
+    -khtml-border-radius: 175px; /* KHTML */
+    border-radius: 175px; /* CSS3 */
+    behavior: url(border-radius.htc); /*IE */
+}
+
+hr
+{
+    background-color: #9b9b9b;
+    border-bottom:1px solid #F4F4F4 !important;
+    margin: 0 !important;
+}
+
+/************************************LANDING END*********************************************/
+
 /***************************************TEST BEGIN*******************************************/
-.btn-test {
-  position: fixed;
-  z-index: 50;
-  right: 35px;
-  height: 35px;
-  top: calc(50% - 80px);
-  -webkit-transform: rotate(270deg);  /* для Chrome и Safari */
-  -moz-transform: rotate(270deg); /* для Firefox */ 
-  -o-transform: rotate(270deg); /* для Opera */ 
-  transform: rotate(270deg);
-  transform-origin: 100% 0;
+
+.btn-test
+{
+    bottom: 0px;
+    right: 0px;
+    position: absolute;
+    z-index: 50;
 }
 
 /****************************************TEST END********************************************/

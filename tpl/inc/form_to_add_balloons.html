@@ -1,112 +1,147 @@
-    <a href="#myModal" role="button" class="btn btn-inverse btn-test" data-toggle="modal">Добавить материал</a>
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+      <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" >×</button>
 
-            <h3 id="myModalLabel">Введите данные:</h3>
+          <h3 id="myModalLabel">Введите данные:</h3>
         </div>
 
         <div class="modal-body">
-            <form class="form-horizontal" method="post" action="{% url 'send_balloon' %}">
-                <div class="control-group">
-                    <label class="control-label">Координаты</label>
-
-                    <div class="controls">
-                        <input type="text" id="xcoord" placeholder="x" name="coord1" value="">
-                        <input type="text" id="ycoord" placeholder="y" name="coord2" value="">
-                    </div>
-                    
-
+          <form class="form-horizontal" method="post" action="{% url 'send_balloon' %}">
+            <div class="form-group">
+                <label class="col-sm-2">Координаты</label>
+                <div class="col-sm-10">
+                    <input type="text" id="xcoord" placeholder="x" name="coord1" value="">
+                    <input type="text" id="ycoord" placeholder="y" name="coord2" value="">
                 </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Подземные коммуникации</label>
 
-                <div class="control-group">
-                    <label class="control-label">Подземные коммуникации</label>
+                <div class="radio">
+                    <label class="radio inlineblock">
+                        <input type="radio" name="ugbool" value="True"> Да
+                    </label>
 
-                    <div class="controls">
-                        <label class="radio inline">
-                            <input type="radio" name="ugbool" value="True"> Да
-                        </label>
-
-                        <label class="radio inline">
-                            <input type="radio" name="ugbool" value="False"> Нет
-                        </label>
-                    </div>
+                    <label class="radio inlineblock">
+                        <input type="radio" name="ugbool" value="False"> Нет
+                    </label>
                 </div>
+            </div>
 
-                <div class="control-group">
-                    <label class="control-label">Высотные отметки</label>
+            <div class="control-group">
+                <label class="control-label">Высотные отметки</label>
 
-                    <div class="controls">
-                        <label class="radio inline">
-                            <input type="radio" name="altbool" value="True"> Да
-                        </label>
+                <div class="radio">
+                    <label class="radio inlineblock">
+                        <input type="radio" name="altbool" value="True"> Да
+                    </label>
 
-                        <label class="radio inline">
-                            <input type="radio" name="altbool" value="False"> Нет
-                        </label>
-                    </div>
+                    <label class="radio inlineblock">
+                        <input type="radio" name="altbool" value="False"> Нет
+                    </label>
                 </div>
+            </div>
 
-                <div class="control-group">
-                    <label class="control-label">Элементы рельефа</label>
+            <div class="control-group">
+                <label class="control-label">Элементы рельефа</label>
 
-                    <div class="controls">
-                        <label class="radio inline">
-                            <input type="radio" name="relbool" value="True"> Да
-                        </label>
+                <div class="radio">
+                    <label class="radio inlineblock">
+                        <input type="radio" name="relbool" value="True"> Да
+                    </label>
 
-                        <label class="radio inline">
-                            <input type="radio" name="relbool" value="False"> Нет                        </label>
-                    </div>
+                    <label class="radio inlineblock">
+                        <input type="radio" name="relbool" value="False"> Нет                        </label>
                 </div>
+            </div>
 
-                <div class="control-group">
-                    <label class="control-label">Система координат</label>
+            <div class="control-group">
+                <label class="control-label">Система координат</label>
 
-                    <div class="controls">
-                      <input type="text" id="inputEmail" placeholder="" name="coordsys">
-                    </div>
+                <div class="controls">
+                    <select name="coordsys">
+                        <option value="SK42">СК-42</option>
+                        <option value="SK63">СК-63</option>
+                        <option value="SK95">СК-95</option>
+                        <option value="GSK2011">ГСК-2011</option>
+                        <option value="MSK01">МСК-01</option>
+                    </select>
                 </div>
+            </div>
 
-                <div class="control-group">
-                    <label class="control-label">Система высот</label>
+            <div class="control-group">
+               <label class="control-label">Система высот</label>
 
-                    <div class="controls">
-                      <input type="text" id="inputEmail" placeholder="" name="altsys">
-                    </div>
+               <div class="radio">
+                  <label class="radio inline">
+                    <input type="radio" name="altsys" value="BS 1977"> БС высот 1977 г.
+                  </label>
+
+                  <label class="radio inline">
+                    <input type="radio" name="altsys" value="notional"> условная система высот
+                  </label>
+               </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Вид</label>
+
+                <div class="controls">
+                    <select name="frm">
+                        {% for format in formats %}
+                            <option value="{{ format.id }}">{{ format.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
+            </div>
 
-                <div class="control-group">
-                    <label class="control-label">Вид</label>
+            <div class="control-group">
+                <label class="control-label">Инструмент</label>
 
-                    <div class="controls">
-		      {% for format in formats %}
-                        <label class="radio inline">
-                            <input type="radio" name="frm" value="{{ format.id }}">{{ format.name }}
-                        </label>
-		      {% endfor %}
-                    </div>
+                <div class="controls">
+                    <select name="tool">
+                        {% for tool in tools %}
+                            <option value="{{ tool.id }}">{{ tool.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
+            </div>
+            
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
 
-                <div class="control-group">
-                    <label class="control-label">Инструмент</label>
-
-                    <div class="controls">
-		      {% for tool in tools %}
-                        <label class="radio inline">
-                            <input type="radio" name="tool" value="{{ tool.id }}">{{ tool.name }}
-                        </label>
-		      {% endfor %}
-                    </div>
-                </div>
-                
-		<div class="modal-footer">
-            	    <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
-
-	            <button class="btn btn-primary" type="submit">Send</button>
-        	</div>
-		{% csrf_token %}
-            </form>
+              <input class="btn btn-primary js-submitballoon" type="button" value="Send"/>
+            </div>
+          {% csrf_token %}
+          </form>
         </div>
-
-    </div>
+     </div>
+ </div>
+</div>
+<!-- END BALOON-->
+<script>
+    $('.js-submitballoon').click(function(){
+        xValue = $('#xcoord').val();
+        yValue = $('#ycoord').val();
+        if(isCoord(xValue) && isCoord(yValue)){
+            $(".errormsg.addballoon").addClass('hide');
+            document.forms['mapballoon_form'].submit()
+            }
+        else
+            $(".errormsg.addballoon").removeClass('hide');
+        
+    });
+    
+    function isCoord(n) {
+        if(!isNaN(parseFloat(n)) && isFinite(n)) {
+            if (parseFloat(n)>-180 && parseFloat(n)<180)
+                return true
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+</script>
