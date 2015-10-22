@@ -79,18 +79,6 @@ def mapballoon_add_trgpoint(request):
     if lat and lng:
         raise Http404 # TODO: Ошибки для ajaxi
 
-    title=request.POST.get('trgname'),
-    type=request.POST.get('trgtype'),
-    precision=request.POST.get('trgaccuracy'),
-    height=request.POST.get('trgheight'),
-    national=request.POST.get('trggov') == "gover"),
-    backsight=(request.POST.get('trgorientstate') == "save"),
-    outer=(request.POST.get('trgoutstate') == "save"),
-    center=(request.POST.get('trgcenterstate') == "save"),
-    center_height=request.POST.get('trgcenterplace'),
-    center_photo=Photo.objects.get(id=1),
-    
-
     # TODO: А если здесь уже есть пункт триангуляцуии?
     TriangulationStation.objects.create(
         lat=lat,
@@ -99,7 +87,7 @@ def mapballoon_add_trgpoint(request):
         type=request.POST.get('trgtype'),
         precision=request.POST.get('trgaccuracy'),
         height=request.POST.get('trgheight'),
-        national=request.POST.get('trggov') == "gover"),
+        national=(request.POST.get('trggov') == "gover"),
         backsight=(request.POST.get('trgorientstate') == "save"),
         outer=(request.POST.get('trgoutstate') == "save"),
         center=(request.POST.get('trgcenterstate') == "save"),
