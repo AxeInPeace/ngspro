@@ -1,18 +1,22 @@
 <div class="myNavbar nav-white">
     <div class="myNavbar-nav">
       <div class="navbar__menu-btn inlineblock menu-btn">
-        <img src="/pic/ic_dehaze_black_48dp_2x_black.png" class="navbar__img-menu">
+        <img src="/pic/ic_dehaze_black_48dp_2x_black.png" class="navbar__img-menu" alt="Меню">
       </div>
+
       <div class="navbar__logo inlineblock">
         <img src="/pic/logo_alfa_black.png" class="navbar__img-logo" alt="ENGGEO">
       </div>
       {% if user.is_authenticated %}
         {% include "inc/profile.html" %}
       {% else %}
-        <button type="button" class="btn btn-success btn-signup" data-toggle="modal" data-target="#reg_form">Присоединиться</button>
-        <button type="button" class="btn btn-default btn-signin" data-toggle="modal" data-target="#auth_form">Войти</button>
+        <button type="button" class="btn btn-default btn-signin navbar-btn" data-toggle="modal" data-target="#auth_form">Войти</button>
+
+        <button type="button" class="btn btn-success btn-signup navbar-btn" data-toggle="modal" data-target="#reg_form">Присоединиться</button>
       {% endif %}
-      <div class="menu">
-      </div>
     </div>
+</div>
+
+<div class="menu">
+
 </div>

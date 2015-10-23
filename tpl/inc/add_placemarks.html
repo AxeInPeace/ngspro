@@ -64,7 +64,7 @@ function init () {
         filterYear.events.add(
             'press',
             function () {
-                $(".filteryears").trigger("click");
+                $("#filteryears_form").modal('show');
             }
         )
         myMap.controls.add(filterYear, {float: 'right'});
@@ -81,7 +81,7 @@ function init () {
         filterFormat.events.add(
             'press',
             function () {
-                $(".filterformat").trigger("click");
+            $("#filterformats_form").modal('show');
             }
         )
         myMap.controls.add(filterFormat, {float: 'right'});
