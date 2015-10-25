@@ -10,58 +10,64 @@
         <div class="modal-body">
           <form class="form-horizontal" method="post" action="{% url 'send_balloon' %}" enctype="multipart/form-data" id="mapballoon_form">
             <div class="form-group">
-                <label class="col-sm-2">Координаты</label>
-                <div class="col-sm-10">
-                    <input type="text" id="xcoord" placeholder="x" name="coord1" value="">
-                    <input type="text" id="ycoord" placeholder="y" name="coord2" value="">
+                <label class="col-sm-2 control-label label-align-left">Координаты</label>
+
+                <div class="col-sm-4">
+                    <input type="text" id="xcoord" placeholder="x" name="coord1" value="" class="form-control">
+                </div>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="ycoord" placeholder="y" name="coord2" value="">
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label">Подземные коммуникации</label>
 
-                <div class="radio">
-                    <label class="radio inlineblock">
+            <div class="form-group">
+                <label class="col-sm-3 control-label label-align-left">Подземные коммуникации</label>
+
+                <div class="col-sm-9 margin-form">
+                    <label class="radio-inline">
                         <input type="radio" name="ugbool" value="True"> Да
                     </label>
 
-                    <label class="radio inlineblock">
+                    <label class="radio-inline">
                         <input type="radio" name="ugbool" value="False"> Нет
                     </label>
                 </div>
             </div>
 
-            <div class="control-group">
-                <label class="control-label">Высотные отметки</label>
+            <div class="form-group">
+                <label class="col-sm-3 control-label label-align-left">Высотные отметки</label>
 
-                <div class="radio">
-                    <label class="radio inlineblock">
+                <div class="col-sm-9 margin-form">
+                    <label class="radio-inline">
                         <input type="radio" name="altbool" value="True"> Да
                     </label>
 
-                    <label class="radio inlineblock">
+                    <label class="radio-inline">
                         <input type="radio" name="altbool" value="False"> Нет
                     </label>
                 </div>
             </div>
 
-            <div class="control-group">
-                <label class="control-label">Элементы рельефа</label>
+            <div class="form-group">
+                <label class="col-sm-3 control-label label-align-left">Элементы рельефа</label>
 
-                <div class="radio">
-                    <label class="radio inlineblock">
+                <div class="col-sm-9 margin-form">
+                    <label class="radio-inline">
                         <input type="radio" name="relbool" value="True"> Да
                     </label>
 
-                    <label class="radio inlineblock">
-                        <input type="radio" name="relbool" value="False"> Нет                        </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="relbool" value="False"> Нет
+                    </label>
                 </div>
             </div>
 
-            <div class="control-group">
-                <label class="control-label">Система координат</label>
+            <div class="form-group">
+                <label class="col-sm-3 control-label label-align-left">Система координат</label>
 
-                <div class="controls">
-                    <select name="coordsys">
+                <div class="col-sm-3">
+                    <select name="coordsys" class="form-control">
                         <option value="SK42">СК-42</option>
                         <option value="SK63">СК-63</option>
                         <option value="SK95">СК-95</option>
@@ -71,25 +77,25 @@
                 </div>
             </div>
 
-            <div class="control-group">
-               <label class="control-label">Система высот</label>
+            <div class="form-group">
+               <label class="col-sm-3 control-label label-align-left">Система высот</label>
 
-               <div class="radio">
-                  <label class="radio inline">
+               <div class="col-sm-9">
+                  <label class="radio-inline">
                     <input type="radio" name="altsys" value="BS 1977"> БС высот 1977 г.
                   </label>
 
-                  <label class="radio inline">
+                  <label class="radio-inline">
                     <input type="radio" name="altsys" value="notional"> условная система высот
                   </label>
                </div>
             </div>
 
-            <div class="control-group">
-                <label class="control-label">Вид</label>
+            <div class="form-group">
+                <label class="col-sm-3 control-label label-align-left">Вид</label>
 
-                <div class="controls">
-                    <select name="frm">
+                <div class="col-sm-3">
+                    <select name="frm" class="form-control">
                         {% for format in formats %}
                             <option value="{{ format.id }}">{{ format.name }}</option>
                         {% endfor %}
@@ -97,11 +103,11 @@
                 </div>
             </div>
 
-            <div class="control-group">
-                <label class="control-label">Инструмент</label>
+            <div class="form-group">
+                <label class="col-sm-3 control-label label-align-left">Инструмент</label>
 
-                <div class="controls">
-                    <select name="tool">
+                <div class="col-sm-3">
+                    <select name="tool" class="form-control">
                         {% for tool in tools %}
                             <option value="{{ tool.id }}">{{ tool.name }}</option>
                         {% endfor %}

@@ -80,26 +80,22 @@ html, body
     -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 12px 0 rgba(0, 0, 0, 0.28);
 }
 
-.myNavbar .nowrap
-{
-    height: 50px;
-}
-
-.nowrap .inlineblock
-{
-    cursor: pointer;
-    height: inherit;
-}
-
 .myNavbar-nav
 {
     height: 60px;
+    line-height: 60px;
     margin: 0 70px;
+}
+
+.myNavbar-nav li
+{
+    display: inline;
+    line-height: 60px;
 }
 
 .navbar__menu-btn
 {
-
+    cursor: pointer;
 }
 
 .navbar__img-menu
@@ -113,7 +109,6 @@ html, body
     color: white;
     font-family: "Lucida Grande", Verdana, Arial, sans-serif;
     font-weight: bolder;
-    margin: 5px 0 5px 0;
 }
 
 .navbar__img-logo
@@ -121,11 +116,26 @@ html, body
     height: 50px;
 }
 
+.navbar__btn-signin
+{
+    height: 60px;
+}
+
+.navbar__btn-signup
+{
+    height: 60px;
+    width: 100px;
+}
+
 .navbar__profile-name
 {
-    color: #ffffff;
+    color: black;
     font-size: large;
-    vertical-align: -12px;
+}
+
+.navbar__img-avatar
+{
+    height: 60px;
 }
 
 .navbar__profile-short
@@ -164,13 +174,19 @@ html, body
     margin: 13px 5px 13px 5px !important;
 }
 
+.myDropdown-menu
+{
+    right: 5px;
+    left: auto;
+}
+
 /***************************************NAVBAR END*****************************************/
 
 /****************************************MENU BEGIN***************************************/
 
 .menu
 {
-    background-color: #000000;
+    background-color: white;
     border-top: 1px solid #ffffff;
     display: none;
     height: calc(100% - 60px);
@@ -209,6 +225,21 @@ html, body
 .bluetext
 {
     color: blue;
+}
+
+.label-align-left
+{
+    text-align: left !important;
+}
+
+.margin-form
+{
+    margin: 10px 0 0 0;
+}
+
+.modal-add-trgpoint
+{
+    width: 690px !important;
 }
 
 /*************************************BALLOON END****************************************/

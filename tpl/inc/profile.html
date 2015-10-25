@@ -1,4 +1,4 @@
-<div class="navbar__profile-btn inlineblock rightfloat profile-btn btn-group">
+<li class="navbar__profile-btn rightfloat profile-btn btn-group">
   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
       <div class="navbar__profile-name inlineblock">
           <p>{{ user.username }}</p>
@@ -12,7 +12,7 @@
 
   <span class="caret"></span>
 
-  <ul class="dropdown-menu" style="right: 5px; left: auto">
+    <ul class="dropdown-menu myDroprown-menu">
     <li>
       <a href="#">Мой счёт: {{ my_cash }}<br>Мой рейтинг: {{ my_rating }}</a>
     </li>
@@ -22,8 +22,8 @@
     <li>
         <a href="{% url 'logout' %}">Выход</a>
     </li>
-</ul>
-</div> 
+    </ul>
+</li>
 
 <script>
     $(".profile-btn").click(function(){

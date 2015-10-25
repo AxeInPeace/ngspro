@@ -1,5 +1,5 @@
 <div id="trigpoint" class="modal fade">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-add-trgpoint">
       <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">×</button>
@@ -11,29 +11,30 @@
         <div class="modal-body">
             <form class="form-horizontal" method="post" action="{% url 'send_trgpoint' %}" id="trgpoint_form" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label class="col-sm-2">Координаты</label>
+                    <label class="col-sm-3 control-label label-align-left">Координаты</label>
 
-                    <div class="controls col-sm-10">
-                        <input type="number" class="trgcoordx" placeholder="x" name="trgcoord1" value="" min="-180" max="180">
-                        <input type="number" class="trgcoordy" placeholder="y" name="trgcoord2" value="" min="-90" max="90">
+                    <div class="col-sm-4">
+                        <input type="number" class="trgcoordx form-control" placeholder="x" name="trgcoord1" value="" min="-180" max="180">
                     </div>
 
+                    <div class="col-sm-4">
+                        <input type="number" class="trgcoordy form-control" placeholder="y" name="trgcoord2" value="" min="-90" max="90">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2">Название пункта</label>
+                    <label class="col-sm-3 control-label label-align-left">Название пункта</label>
 
-                    <div class="controls">
-                        <input type="text" id="name" placeholder="" name="trgname" value="" maxlength="15">
+                    <div class="col-sm-9">
+                        <input class="form-control" type="text" id="name" placeholder="" name="trgname" value="" maxlength="15">
                     </div>
-
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2">Тип пункта</label>
+                    <label class="col-sm-3 control-label label-align-left">Тип пункта</label>
 
-                    <div class="controls">
-                        <select name="trgtype">
+                    <div class="col-sm-9">
+                        <select name="trgtype" class="form-control">
                             <option value='trian'>Пункт триангуляции</option>
                             <option value='trial'>Пункт трилатерации</option>
                             <option value='polyg'>Пункт полигонометрии</option>
@@ -44,82 +45,83 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2">Класс точности</label>
+                    <label class="col-sm-3 control-label label-align-left">Класс точности</label>
 
-                    <div class="controls">
-                        <input type="number" class="trgaccuracy"  placeholder="" name="trgaccuracy" value="" maxlength="1">
+                    <div class="col-sm-9">
+                        <input class="form-control" type="text" id="name" placeholder="" name="trgname" value="" maxlength="15">
                     </div>
-
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2">Тип пункта</label>
+                    <label class="col-sm-3 control-label label-align-left">Тип пункта</label>
 
-                    <div class="radio">
-                        <label class="radio inline">
+                    <div class="col-sm-9">
+                        <label class="radio-inline">
                             <input type="radio" name="trggov" value="gover">государственный</input>
                         </label>
-                        <label class="radio inline">
+
+                        <label class="radio-inline">
                             <input type="radio" name="trggov" value="notgover">негосударственный</input>
                         </label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2">Высота, м БС</label>
+                    <label class="col-sm-3 control-label label-align-left">Высота, м БС</label>
 
-                    <div class="controls">
-                        <input type="number" class="trgheight" placeholder="" name="trgheight" value="" maxlength="7">
+                    <div class="col-sm-9">
+                        <input type="number" class="trgheight form-control" placeholder="" name="trgheight" value="" maxlength="7">
                     </div>
-
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4">Состояние ориентирного знака</label>
+                    <label class="col-sm-3 control-label label-align-left">Состояние ориентирного знака</label>
 
-                    <div class="radio col-sm-8">
-                        <label class="radio inline">
+                    <div class="col-sm-9 margin-form">
+                        <label class="radio-inline">
                             <input type="radio" name="trgorientstate" value="save">сохранился</input>
                         </label>
-                        <label class="radio inline">
+
+                        <label class="radio-inline">
                             <input type="radio" name="trgorientstate" value="notsave">не сохранился</input>
                         </label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4">Состояние наружного знака</label>
+                    <label class="col-sm-3 control-label label-align-left">Состояние наружного знака</label>
 
-                    <div class="radio col-sm-8">
-                        <label class="radio inline">
+                    <div class="col-sm-9 margin-form">
+                        <label class="radio-inline">
                             <input type="radio" name="trgoutstate" value="save">сохранился</input>
                         </label>
-                        <label class="radio inline">
+
+                        <label class="radio-inline">
                             <input type="radio" name="trgoutstate" value="notsave">не сохранился</input>
                         </label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4">Состояние центра</label>
+                    <label class="col-sm-3 control-label label-align-left">Состояние центра</label>
 
-                    <div class="radio col-sm-8">
-                        <label class="radio inline">
+                    <div class="col-sm-9">
+                        <label class="radio-inline">
                             <input type="radio" name="trgcenterstate" value="save">сохранился</input>
                         </label>
-                        <label class="radio inline">
+
+                        <label class="radio-inline">
                             <input type="radio" name="trgcenterstate" value="notsave">не сохранился</input>
                         </label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4">Положение центра относительно уровня земли, м</label>
+                    <label class="col-sm-3 control-label label-align-left">Положение центра относительно уровня земли, м</label>
 
-                    <div class="controls col-sm-8">
-                        <input type="number"class="ctrheight" placeholder="" name="trgcenterplace" value="" maxlength="3" min="0" max="999">
+                    <div class="col-sm-9 margin-form">
+                        <input type="number" class="ctrheight form-control" placeholder="" name="trgcenterplace" value="" maxlength="3" min="0" max="999">
                     </div>
-
                 </div>
 
                 <div class="form-group">
