@@ -66,5 +66,4 @@ function isYear(n) {
     else
         return false;
 } 
-
 /*************** YMAPS *****************/

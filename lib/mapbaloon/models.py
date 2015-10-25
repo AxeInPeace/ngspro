@@ -35,7 +35,7 @@ class GeoObject(models.Model):
         return self.__str__()
     
     def __str__(self):
-        return title + '(' + str(self.lat) + ', ' + str(self.lng) + ')'
+        return self.title + '(' + str(self.lat) + ', ' + str(self.lng) + ')'
 
     title = models.CharField(max_length=255)
     lat = models.FloatField()
@@ -58,7 +58,7 @@ class Balloon(GeoObject):
     sysaltit = models.CharField(max_length=255)	
     
     instrument = models.ForeignKey(Instrument)
-
+    material_photo = models.ForeignKey(Photo) 
 
 class Polygon(models.Model):
     date = models.DateField()
