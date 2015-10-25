@@ -13,6 +13,7 @@ function init () {
             myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.lat }}, {{ balloon.lng }}], {
                 balloonContentHeader: "{{ balloon.title }}",
                 balloonContentBody: "x = {{ balloon.lat }}; y = {{ balloon.lng }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Date={{ balloon.date }}",
+                balloonContentFooter: "<img src='{{ balloon.material_photo.url }}' width='128' height='128'/>",
                 iconContent: 'T',
             });                 
 		    myMap.geoObjects.add(myPlacemark{{ balloon.id }});
@@ -22,7 +23,7 @@ function init () {
             myTrgMark{{ trgstation.id }} = new ymaps.Placemark([{{ trgstation.lat }}, {{ trgstation.lng }}], {
                 balloonContentHeader: "{{ trgstation.title }}<br>lat = {{ trgstation.lat }}<br>lng = {{ trgstation.lng }}",
                 balloonContentBody: "type: {{ trgstation.type }} <br>accuracy = {{ trgstation.precision }}<br>height = {{ trgstation.height }}<br>date = {{ trgstation.date }} ",
-                balloonContentFooter: "",
+                balloonContentFooter: "<img src='{{ trgstation.center_photo.url }}' width='128' height='128'/>",
                 hintContent: "" 
         }, {
             iconLayout: 'default#image',
@@ -64,7 +65,7 @@ function init () {
         filterYear.events.add(
             'press',
             function () {
-                $(".filteryears").trigger("click");
+                $("#filteryears_form").modal('show');
             }
         )
         myMap.controls.add(filterYear, {float: 'right'});
@@ -81,7 +82,7 @@ function init () {
         filterFormat.events.add(
             'press',
             function () {
-                $(".filterformat").trigger("click");
+            $("#filterformats_form").modal('show');
             }
         )
         myMap.controls.add(filterFormat, {float: 'right'});
