@@ -12,6 +12,8 @@ https://yadi.sk/i/cIZgBhOajrMgB<br>
 Делаем всплывашку через яндекс карты
 
 [Awaiting]
+Отфильтровать по годам -> год создания
+Отфильтровать по format -> Тип материала
 полнить карусель<br>
 заполнить фичу (чем?)<br>
 Киллер фичи https://github.com/LifeMoroz/ngspro/wiki/%D0%A1%D0%BB%D0%BE%D0%B3%D0%B0%D0%BD%D1%8B
