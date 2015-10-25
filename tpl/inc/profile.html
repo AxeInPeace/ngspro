@@ -1,8 +1,13 @@
 <li class="navbar__profile-btn rightfloat profile-btn btn-group">
   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <p class="navbar__profile-name inlineblock">{{ user.username }}</p>
-
-      <img src="/pic/ic_account_box_black_48dp_2x_black.png" class="navbar__img-avatar inlineblock">
+      <div class="navbar__profile-name inlineblock">
+          <p>{{ user.username }}</p>
+      </div>
+      {% if avatar == "" %}
+      <img src="/pic/ic_account_box_black_48dp_2x.png" class="navbar__img">
+      {% else %}
+      <img src="{{ avatar }}" class="navbar__img">
+      {% endif %}
   </a>
 
   <span class="caret"></span>
@@ -10,6 +15,9 @@
     <ul class="dropdown-menu myDroprown-menu">
     <li>
       <a href="#">Мой счёт: {{ my_cash }}<br>Мой рейтинг: {{ my_rating }}</a>
+    </li>
+    <li>
+      <button type="button" class="avataradd">Добавить аватарку</button>
     </li>
     <li>
         <a href="{% url 'logout' %}">Выход</a>
@@ -24,4 +32,7 @@
         else
             $(".profile-short").css("display", "none");
     })
+    $(".avataradd").click(function () {
+        $("#avatar_form").modal('show');
+    });
 </script> 

@@ -4,12 +4,15 @@ from django.shortcuts import render
 from .models import *
 from .forms import *
 from lib.auth.models import User
+from json import loads
+from lib.core.views import JSONResponse
 
 from lib.auth.models import CustomUser
 import datetime
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.decorators.http import require_http_methods
-
+from lib.photo.views import  upload
+from lib.photo.models import Photo
 
 @require_http_methods(["GET"])
 def mapballoon_map(request):
@@ -52,6 +55,18 @@ def mapballoon_add_balloon(request):
     fr = Format.objects.get(id=request.POST.get('frm'))
     tl = Instrument.objects.get(id=request.POST.get('tool'))
     pub = CustomUser.objects.get(userid=request.user)
+
+    response = upload(request)
+    data = loads(response.content)
+    message = data.get('message', None)
+    if message != 'ok':
+        return response
+    
+    url_photo = data.get('url', None)
+    if url_photo is None:
+        return JSONResponse({'status': 500, 'message': 'fail'})
+    material_photo = Photo.objects.create(url=url_photo, alt="")
+
     Balloon.objects.create(
         lat=request.POST.get('coord1'),
         lng=request.POST.get('coord2'),
@@ -64,6 +79,7 @@ def mapballoon_add_balloon(request):
         instrument=tl,
         publisher=pub,
         date=datetime.datetime.now().date(),
+        material_photo=material_photo,
     )    
     return HttpResponseRedirect("/")
 
@@ -74,12 +90,29 @@ def mapballoon_add_trgpoint(request):
     print request.POST.items()
     pub = CustomUser.objects.get(userid=request.user)
 
-    lat=request.POST.get('trgcoord1'),
-    lng=request.POST.get('trgcoord2'),
-    if lat and lng:
-        raise Http404 # TODO: Ошибки для ajaxi
+    lat=request.POST.get('trgcoord1')
+    lng=request.POST.get('trgcoord2')
+  #  if lat and lng:
+   #     raise Http404 # TODO: Ошибки для ajaxi
+
+    response = upload(request)
+    data = loads(response.content)
+    message = data.get('message', None)
+    if message != 'ok':
+        return response
+    
+    url_photo = data.get('url', None)
+    if url_photo is None:
+        return JSONResponse({'status': 500, 'message': 'fail'})
+    material_photo = Photo.objects.create(url=url_photo, alt="")
 
     # TODO: А если здесь уже есть пункт триангуляцуии?
+
+    same_station = TriangulationStation.objects.filter(lat=lat, lng=lng)
+    if same_station:
+        return JSONResponse({'message': 'В этом месте уже есть тригопункт', '': same_station})
+    
+
     TriangulationStation.objects.create(
         lat=lat,
         lng=lng,
@@ -92,7 +125,7 @@ def mapballoon_add_trgpoint(request):
         outer=(request.POST.get('trgoutstate') == "save"),
         center=(request.POST.get('trgcenterstate') == "save"),
         center_height=request.POST.get('trgcenterplace'),
-        center_photo=Photo.objects.get(id=1),
+        center_photo=material_photo,
         publisher=pub,
         date=datetime.datetime.now().date(),
     )    

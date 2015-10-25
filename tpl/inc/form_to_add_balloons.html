@@ -8,7 +8,7 @@
         </div>
 
         <div class="modal-body">
-          <form class="form-horizontal" method="post" action="{% url 'send_balloon' %}">
+          <form class="form-horizontal" method="post" action="{% url 'send_balloon' %}" enctype="multipart/form-data" id="mapballoon_form">
             <div class="form-group">
                 <label class="col-sm-2 control-label label-align-left">Координаты</label>
 
@@ -112,6 +112,14 @@
                             <option value="{{ tool.id }}">{{ tool.name }}</option>
                         {% endfor %}
                     </select>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Фото материала</label>
+
+                <div class="controls">
+                    <input class="materialinput" name="material" required="required" type="file"/>
                 </div>
             </div>
             
