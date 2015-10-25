@@ -13,7 +13,7 @@ function init () {
             myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.lat }}, {{ balloon.lng }}], {
                 balloonContentHeader: "{{ balloon.title }}",
                 balloonContentBody: "x = {{ balloon.lat }}; y = {{ balloon.lng }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Date={{ balloon.date }}",
-                balloonContentFooter: "<img src='{{ balloon.material_photo.url }}' width='128' height='128'/>",
+                {% if balloon.material_photo %}balloonContentFooter: "<img src='{{ balloon.material_photo.url }}' width='128' height='128'/>",{% endif %}
                 iconContent: 'T',
             });                 
 		    myMap.geoObjects.add(myPlacemark{{ balloon.id }});
@@ -23,7 +23,7 @@ function init () {
             myTrgMark{{ trgstation.id }} = new ymaps.Placemark([{{ trgstation.lat }}, {{ trgstation.lng }}], {
                 balloonContentHeader: "{{ trgstation.title }}<br>lat = {{ trgstation.lat }}<br>lng = {{ trgstation.lng }}",
                 balloonContentBody: "type: {{ trgstation.type }} <br>accuracy = {{ trgstation.precision }}<br>height = {{ trgstation.height }}<br>date = {{ trgstation.date }} ",
-                balloonContentFooter: "<img src='{{ trgstation.center_photo.url }}' width='128' height='128'/>",
+                {% if trgstation.center_photo %}balloonContentFooter: "<img src='{{ trgstation.center_photo.url }}' width='128' height='128'/>", {% endif %}
                 hintContent: "" 
         }, {
             iconLayout: 'default#image',
