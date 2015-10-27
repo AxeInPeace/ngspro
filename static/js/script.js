@@ -14,6 +14,7 @@ $( "#auth_form" ).on('submit', function( event ) {
     $("#auth_form").hide()
   })
   .fail(function () {
+    event.preventDefault();
     $("#auth_form").find(".modal-header").append("<div class=\"alert alert-danger\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Ой! Что-то пошло не так! :(</div>")
   });
   if (!no_timer) {
@@ -24,7 +25,6 @@ $( "#auth_form" ).on('submit', function( event ) {
 });
 
 $( "#reg_form" ).on('submit', function( event ) {
-  event.preventDefault();
   if ($("#reg_form").find(".alert")) {
     $("#reg_form").find(".alert").remove();
     var no_timer = true;
@@ -33,6 +33,7 @@ $( "#reg_form" ).on('submit', function( event ) {
     $("#reg_form").find(".modal-header").append("<div class=\"alert alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Еще секундочку!</div>")
   })
   .fail(function () {
+    event.preventDefault();
     $("#reg_form").find(".modal-header").append("<div class=\"alert alert-danger\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Ой! Что-то пошло не так! :(</div>")
   });
   if (!no_timer) {
