@@ -131,6 +131,7 @@ html, body
 {
     color: black;
     font-size: large;
+    top: 5px;
 }
 
 .navbar__img-avatar
@@ -178,6 +179,17 @@ html, body
 {
     right: 5px;
     left: auto;
+}
+
+.li-margin-btn
+{
+    margin: 0 0 0 15px;
+}
+
+.btn-group.open .dropdown-toggle
+{
+    -webkit-box-shadow: 0 !important;
+    box-shadow: 0 !important;
 }
 
 /***************************************NAVBAR END*****************************************/
