@@ -47,3 +47,15 @@ def upload_file(readable, filename, filter):
     blob.upload_from_string(readable.read())
     blob.make_public()
     return rewrite_url(blob.public_url)
+
+
+def dec_to_grad(decimal):
+    g = int(decimal)
+    tmp = (decimal - g) * 60
+    m = int(tmp)
+    s = round((tmp - m) * 100, 2)
+    return g, m, s
+
+
+def grad_to_dec(g, m, s):
+    return g + (m + s / 100.0) / 60
