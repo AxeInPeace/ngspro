@@ -8,6 +8,7 @@ from lib.auth.forms import *
 from django.http import HttpResponse, HttpResponseRedirect
 # from django.http import Http404
 from django.http import HttpResponseRedirect
+from django.contrib.auth import login, authenticate 
 
 
 @require_http_methods(["POST"])
@@ -18,7 +19,7 @@ def auth_login(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            return JSONResponse({'status': "200", "redirect": "/map"})  # JSONResponse({"status" : "200", "message": "ok", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
+            return JSONResponse({'status': "200", "redirect": "/map/"})  # JSONResponse({"status" : "200", "message": "ok", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
         else:
             return JSONResponse({"status" : "201", "message" : u"Ваш аккаунт не активирован. Чтобы активировать ваш аккаунт перейдите по ссылке, указанной в письме.", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
     else:
@@ -27,14 +28,17 @@ def auth_login(request):
 @require_http_methods(["POST"])
 def auth_registration(request):
     if request.user.is_authenticated():
-        return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
+        return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }, "redirect": "/map/"})
     
     username = request.POST.get('username')
     password = request.POST.get('password')
     email = request.POST.get('email')
     
-    if DUser.objects.filter(username=username) or DUser.objects.filter(email=email): 
-        return JSONResponse({"status": "201", "message": u"Имя уже существует"})
+    if DUser.objects.filter(username=username): 
+        return JSONResponse({"status": "400", "message": u"Имя уже существует"})
+
+    if DUser.objects.filter(email=email): 
+        return JSONResponse({"status": "400", "message": u"Email уже занят"})
 
     if not username:
         return JSONResponse({"status": "400", "message": u"Введите имя пользователя."})
@@ -45,7 +49,10 @@ def auth_registration(request):
 
     user = DUser.objects.create_user(username, email, password)
     CustomUser.objects.create(userid=user, cash=0,rating=0)
-    return HttpResponseRedirect('/map')  #JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
+
+    ruser = authenticate(username=username, password=password)
+    login(request, ruser)
+    return JSONResponse({'status': "200", "redirect": "/map/"})  # JSONResponse({"status" : "200", "message": "ok", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
 
 def auth_logout(request):
     logout(request)
