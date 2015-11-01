@@ -1,4 +1,4 @@
-<form class="modal fade" method="post" action="{% url 'uploadavatar' %}" id="avatar_form" enctype="multipart/form-data">
+<form class="modal fade" method="post" action="{% url 'upload-avatar' %}" id="avatar_form" enctype="multipart/form-data">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,9 @@
                 <h5 class="hide errormsg-file">Выберете файл</h5>
             </div>
             <div class="modal-body">
-                <input class="avatarinput" name="material" required="required" type="file"/>
+                <input class="avatar__input" name="material" required="required" type="file"/>
+            </div>
+            <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                 <button type="button" class="btn btn-primary js-submitavatar">Отправить</button>
                 {% csrf_token %}

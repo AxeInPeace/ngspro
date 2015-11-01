@@ -31,5 +31,15 @@ function isYear(n) {
             return false;}
     else
         return false;
-} 
+};
+
+$(".fancybox").fancybox({
+openEffect  : 'elastic',
+closeEffect : 'elastic',
+    helpers : {
+        title : {
+            type : 'inside'
+        }
+    }
+});
 /*************** YMAPS *****************/

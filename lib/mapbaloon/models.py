@@ -37,11 +37,11 @@ class GeoObject(models.Model):
     def __str__(self):
         return self.title + '(' + str(self.lat) + ', ' + str(self.lng) + ')'
 
-    title = models.CharField(max_length=255)
-    lat = models.FloatField()
-    lng = models.FloatField()
-    publisher = models.ForeignKey(CustomUser)
-    date = models.DateField()
+    title = models.CharField(max_length=255, verbose_name="Название")
+    lat = models.FloatField(verbose_name="Широта")
+    lng = models.FloatField(verbose_name="Долгота")
+    publisher = models.ForeignKey(CustomUser, verbose_name="Автор")
+    date = models.DateField(verbose_name="Дата")
     class Meta:
         abstract = True
 
@@ -90,12 +90,18 @@ class TriangulationStation(GeoObject):
         ('znak',  'Стенной знак'),
     )
 
-    type = models.CharField(max_length=7, choices=TYPE_CHOICES)
-    precision = models.IntegerField()
-    national = models.BooleanField()
-    height = models.IntegerField()
-    backsight = models.BooleanField()
-    outer = models.BooleanField()
-    center = models.BooleanField()
-    center_height = models.IntegerField()
-    center_photo = models.ForeignKey(Photo)
+    type = models.CharField(max_length=7, choices=TYPE_CHOICES, verbose_name="Тип")
+    precision = models.IntegerField(verbose_name="Класс точности")
+    national = models.BooleanField(verbose_name="Государственный?")
+    height = models.IntegerField(verbose_name="Высота над уровнем моря")
+    backsight = models.BooleanField(verbose_name="Ориентирный знак сохранился?")
+    outer = models.BooleanField(verbose_name="Наружный знак сохранился?")
+    center = models.BooleanField(verbose_name="Центр сохранился?")
+    center_height = models.IntegerField(verbose_name="Положение относительно земли, м")
+    center_photo = models.ForeignKey(Photo, verbose_name="Фото центра")
+
+    class Meta:
+        verbose_name = "Тригопункт"
+        verbose_name_plural = "Тригопункты"
+
+

@@ -1,4 +1,4 @@
-<form class="modal fade" method="post" action="{% url 'uploadmaterial' %}" id="material_form" enctype="multipart/form-data">
+<form class="modal fade" method="post" action="{% url 'upload-material' %}" id="material_form" enctype="multipart/form-data">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,10 +16,3 @@
         </div><!— /.modal-content —>
     </div><!— /.modal-dialog —>
 </form>
-
-
-<script>
-$('.js-submitmaterial').click(function(){
-        document.forms['material_form'].submit();
-        });
-</script>

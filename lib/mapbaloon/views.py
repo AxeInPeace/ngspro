@@ -106,8 +106,6 @@ def mapballoon_add_trgpoint(request):
         return JSONResponse({'status': 500, 'message': 'fail'})
     material_photo = Photo.objects.create(url=url_photo, alt="")
 
-    # TODO: А если здесь уже есть пункт триангуляцуии?
-
     same_station = TriangulationStation.objects.filter(lat=lat, lng=lng)
     if same_station:
         return JSONResponse({'message': 'В этом месте уже есть тригопункт', '': same_station})

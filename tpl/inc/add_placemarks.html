@@ -21,9 +21,9 @@ function init () {
         
 	    {% for trgstation in trgstations %}
             myTrgMark{{ trgstation.id }} = new ymaps.Placemark([{{ trgstation.lat }}, {{ trgstation.lng }}], {
-                balloonContentHeader: "{{ trgstation.title }}<br>lat = {{ trgstation.lat }}<br>lng = {{ trgstation.lng }}",
-                balloonContentBody: "Тип: {{ trgstation.get_type_display }} <br>Класс точности: {{ trgstation.precision }}<br>Высота над уровнем моря: {{ trgstation.height }}м<br>date = {{ trgstation.date|date:"d.m.Y" }} ",
-                {% if trgstation.center_photo %}balloonContentFooter: "<img src='{{ trgstation.center_photo.url }}' width='128' height='128'/>", {% endif %}
+                balloonContentHeader: "{{ trgstation.title }}",
+                balloonContentBody: "Ширина: {{ trgstation.lat }}<br>Долгота: {{ trgstation.lng }}<br>Тип: {{ trgstation.get_type_display }} <br>Класс точности: {{ trgstation.precision }}<br>Высота над уровнем моря: {{ trgstation.height }}м<br>date = {{ trgstation.date|date:"d.m.Y" }} ",
+                {% if trgstation.center_photo %}balloonContentFooter: "<a href='{{ trgstation.center_photo.url }}' class='fancybox' title='Фото центра'><img src='{{ trgstation.center_photo.url }}' width='128' height='128'/></a>", {% endif %}
                 hintContent: "" 
         }, {
             iconLayout: 'default#image',
@@ -48,10 +48,10 @@ function init () {
                     '<p><a href="#trigpoint" role="button" class="btn btn-primary" data-toggle="modal">Добавить тригапункт</a></p>',
             }); 
               
-           $("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(4) + "\">");
-           $("#ycoord").replaceWith("<input type=\"text\" id=\"ycoord\" name=\"coord2\" value=\"" + coords[1].toPrecision(4) + "\">");
-           $(".trgcoordx").attr('value', coords[0].toPrecision(4));
-           $(".trgcoordy").attr('value', coords[1].toPrecision(4));
+           $("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(6) + "\">");
+           $("#ycoord").replaceWith("<input type=\"text\" id=\"ycoord\" name=\"coord2\" value=\"" + coords[1].toPrecision(6) + "\">");
+           $(".trgcoordx").attr('value', coords[0].toPrecision(6));
+           $(".trgcoordy").attr('value', coords[1].toPrecision(6));
          });
         filterYear = new ymaps.control.Button({
             data: {
