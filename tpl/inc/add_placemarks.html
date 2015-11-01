@@ -22,7 +22,7 @@ function init () {
 	    {% for trgstation in trgstations %}
             myTrgMark{{ trgstation.id }} = new ymaps.Placemark([{{ trgstation.lat }}, {{ trgstation.lng }}], {
                 balloonContentHeader: "{{ trgstation.title }}<br>lat = {{ trgstation.lat }}<br>lng = {{ trgstation.lng }}",
-                balloonContentBody: "type: {{ trgstation.type }} <br>accuracy = {{ trgstation.precision }}<br>height = {{ trgstation.height }}<br>date = {{ trgstation.date }} ",
+                balloonContentBody: "Тип: {{ trgstation.get_type_display }} <br>Класс точности: {{ trgstation.precision }}<br>Высота над уровнем моря: {{ trgstation.height }}м<br>date = {{ trgstation.date|date:"d.m.Y" }} ",
                 {% if trgstation.center_photo %}balloonContentFooter: "<img src='{{ trgstation.center_photo.url }}' width='128' height='128'/>", {% endif %}
                 hintContent: "" 
         }, {

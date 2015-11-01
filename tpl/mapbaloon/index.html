@@ -3,6 +3,7 @@
 <head lang="en">
     <title>ENGGEO</title>
     {% include "inc/header.html" %}
+    <script src="/js/map.js"></script>
     {% include "inc/map_window.html" %}    
     {% include "inc/add_placemarks.html" %}
 </head>
@@ -20,9 +21,6 @@
     {% include "inc/form_filter_format.html" %}
     {% include "inc/form_avatar.html" %} 
 
-    {% if not user.is_authenticated %}
-      {% include "inc/reg_form.html" %}
-      {% include "inc/auth_form.html" %}
-    {% endif %}
+    {% include "inc/footer.html" %}
 </body>
 </html>

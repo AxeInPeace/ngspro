@@ -7,6 +7,7 @@ from lib.auth.models import CustomUser
 from lib.auth.forms import *
 from django.http import HttpResponse, HttpResponseRedirect
 # from django.http import Http404
+from django.http import HttpResponseRedirect
 
 
 @require_http_methods(["POST"])
@@ -17,7 +18,7 @@ def auth_login(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            return JSONResponse({"status" : "200", "message": "ok", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
+            return JSONResponse({'status': "200", "redirect": "/map"})  # JSONResponse({"status" : "200", "message": "ok", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
         else:
             return JSONResponse({"status" : "201", "message" : u"Ваш аккаунт не активирован. Чтобы активировать ваш аккаунт перейдите по ссылке, указанной в письме.", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
     else:
@@ -44,7 +45,7 @@ def auth_registration(request):
 
     user = DUser.objects.create_user(username, email, password)
     CustomUser.objects.create(userid=user, cash=0,rating=0)
-    return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
+    return HttpResponseRedirect('/map')  #JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
 
 def auth_logout(request):
     logout(request)
