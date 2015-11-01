@@ -4,7 +4,7 @@
           <p>{{ user.username }}</p>
       </div>
       {% if avatar == "" %}
-      <img src="/pic/ic_account_box_black_48dp_2x.png" class="navbar__img">
+      <img src="/pic/ic_account_box_black_48dp_2x_grey.png" class="navbar__img-avatar">
       {% else %}
       <img src="{{ avatar }}" class="navbar__img">
       {% endif %}
@@ -14,11 +14,17 @@
 
     <ul class="dropdown-menu myDroprown-menu">
     <li>
-      <a href="#">Мой счёт: {{ my_cash }}<br>Мой рейтинг: {{ my_rating }}</a>
+      <a href="#">Мой счёт: {{ my_cash }}</a>
     </li>
+
     <li>
-      <button type="button" class="avataradd">Добавить аватарку</button>
+        <a href="#">Мой рейтинг: {{ my_rating }}</a>
     </li>
+
+    <li class="li-margin-btn">
+      <button type="button" class="btn btn-primary btn-sm avataradd">Добавить аватарку</button>
+    </li>
+
     <li>
         <a href="{% url 'logout' %}">Выход</a>
     </li>
