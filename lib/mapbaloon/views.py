@@ -9,10 +9,12 @@ from lib.core.views import JSONResponse
 
 from lib.auth.models import CustomUser
 import datetime
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, Http404
 from django.views.decorators.http import require_http_methods
 from lib.photo.views import  upload
 from lib.photo.models import Photo
+from django.shortcuts import redirect
+
 
 @require_http_methods(["GET"])
 def mapballoon_map(request):
@@ -37,14 +39,16 @@ def mapballoon_map(request):
             "avatar": avatar,
             "trgstations": trgstations,
         }
-        return render(request, 'mapbaloon/index.html', context)		
+        return render(request, 'mapbaloon/index.html', context)
+    else:
+        return redirect('main')
+
     context = {		
         "balloons": balloons,
         "signin_error": None,
         "signin_form": SigninForm(),
     }
     return render(request, 'mapbaloon/index.html', context)
-
 
 
 #TODO: превратить в ajax
@@ -81,7 +85,8 @@ def mapballoon_add_balloon(request):
         date=datetime.datetime.now().date(),
         material_photo=material_photo,
     )    
-    return HttpResponseRedirect("/")
+    return redirect('main')
+
 
 @require_http_methods(["POST"])
 def mapballoon_add_trgpoint(request):
@@ -127,7 +132,7 @@ def mapballoon_add_trgpoint(request):
         publisher=pub,
         date=datetime.datetime.now().date(),
     )    
-    return HttpResponseRedirect("/")
+    return redirect('map')
 
 
 @require_http_methods(["POST"])
@@ -161,7 +166,7 @@ def mapballoon_filter_for_years(request):
         }
         return render(request, 'mapbaloon/index.html', context)
     else:
-        return HttpResponseRedirect("/")
+        return redirect('map')
 
 
 @require_http_methods(["POST"])
