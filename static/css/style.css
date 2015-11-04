@@ -56,7 +56,27 @@ html, body
     max-width: none !important;
 }
 
-/***************************************MAPS END*****************************************/
+ .customControl
+{
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    width: 450px;
+    padding: 10px;
+}
+
+.info__img-prev
+{
+    height: 100px;
+    margin: 0 5px 0 5px;
+}
+
+.btn-download
+{
+    margin: 0 0 0 10px;
+}
+
+/**************************************MAPS END*****************************************/
 
 /**************************************NAVBAR BEGIN***************************************/
 
@@ -188,8 +208,13 @@ html, body
 
 .btn-group.open .dropdown-toggle
 {
-    -webkit-box-shadow: 0 !important;
-    box-shadow: 0 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+a.dropdown-toggle:hover
+{
+    text-decoration: none;
 }
 
 .avatar__input 
