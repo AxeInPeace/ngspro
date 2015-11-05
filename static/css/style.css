@@ -73,7 +73,23 @@ html, body
 
 .btn-download
 {
-    margin: 0 0 0 10px;
+    margin: 0 0 0 175px;
+}
+
+.info__title-center
+{
+    font-weight: bold;
+    text-align: center;
+}
+
+.text-grey
+{
+    color: grey;
+}
+
+.images
+{
+    margin: 0 0 0 50px;
 }
 
 /**************************************MAPS END*****************************************/
@@ -367,7 +383,7 @@ a.dropdown-toggle:hover
     font-size: 1.3em;
 }
 
-.text-grey
+.land-text-grey
 {
     color: grey;
     font-family: 'Open Sans', Arial, Helvetica, FreeSans, 'Liberation Sans', 'Nimbus Sans L', sans-serif;

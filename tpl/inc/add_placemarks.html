@@ -143,33 +143,33 @@ function init () {
                 var members = result.GeoObjectCollection.featureMember,
                     geoObjectData = (members && members.length) ? members[0].GeoObject : null;
                 if (geoObjectData) {
-                    this._$content.html(geoObjectData.metaDataProperty.GeocoderMetaData.text
+                    this._$content.html(//geoObjectData.metaDataProperty.GeocoderMetaData.text
+
+                    "<h5 class=\"info__title-center\">СУПЕР-ТРИГОПУНКТ XXX</h5>"
                     +
-                    "<h5>Координаты: XXXXXX XXXXXX<h5>"
+                    "<h5 class=\"text-grey\">Широта: XXXX Долгота: XXXX Альтитуда: XXXX<h5>"
                     +
-                    "<h5>Название пункта: XXX XXX</h5>"
+                    "<hr/>"
                     +
                     "<h5>Тип пункта: smth </h5>"
                     +
                     "<h5>Класс точности: 2 </h5>"
                     +
-                    "<h5>Высота: 5м </h5>"
+                    "<h5>Ориентирный знак: сохраняется </h5>"
                     +
-                    "<h5>Состояние ориентирного знака: сохраняется </h5>"
+                    "<h5>Наружный знак: сохраняется </h5>"
                     +
-                    "<h5>Состояние наружного знака: сохраняется </h5>"
-                    +
-                    "<h5>Состояние центра: сохраняется </h5>"
+                    "<h5>Центр: сохраняется </h5>"
                     +
                     "<h5>Положение центра относительно уровня земли: smth </h5>"
                     +
-                    "<span class=\"glyphicon glyphicon-chevron-left\"></span>"
+                    "<div class=\"images\"><span class=\"glyphicon glyphicon-chevron-left\"></span>"
                     +
                     "<img src=\"/pic/preview.jpg\" class=\"info__img-prev\"/>"
                     +
                     "<img src=\"/pic/preview.jpg\" class=\"info__img-prev\"/>"
                     +
-                    "<span class=\"glyphicon glyphicon-chevron-right\"></span>"
+                    "<span class=\"glyphicon glyphicon-chevron-right\"></span></div>" + "<br/>"
                     +
                     "<button type=\"button\" class=\"btn btn-primary btn-download\">Скачать</button>");
                 }
