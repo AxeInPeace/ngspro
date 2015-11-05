@@ -71,9 +71,14 @@ html, body
     margin: 0 5px 0 5px;
 }
 
-.btn-download
+.info__btn-download
 {
-    margin: 0 0 0 175px;
+
+}
+
+.info__btn-close
+{
+    margin: 0 0 0 5px;
 }
 
 .info__title-center
@@ -90,6 +95,11 @@ html, body
 .images
 {
     margin: 0 0 0 50px;
+}
+
+.info__btns
+{
+    margin: 12px 0 0 260px;
 }
 
 /**************************************MAPS END*****************************************/
