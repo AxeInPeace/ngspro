@@ -7,14 +7,28 @@ function init () {
         controls: ['zoomControl', 'rulerControl', 'geolocationControl', 'fullscreenControl', 'typeSelector']
         }, {
                 searchControlProvider: 'yandex#search'
-        });
-
+        }),
+        loadingObjectManager = new ymaps.LoadingObjectManager('http://test2.enggeo.ru/map/tile/?bbox=%b', {   
+            // Включаем кластеризацию.
+            clusterize: true,
+            // Опции кластеров задаются с префиксом cluster.
+            clusterHasBalloon: true,
+            // Опции объектов задаются с префиксом geoObject
+            geoObjectOpenBalloonOnClick: true,
+            clusterDisableClickZoom: true
+        });   
+ 
+    loadingObjectManager.objects.options.set('preset', 'islands#greenDotIcon');
+    loadingObjectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+    myMap.geoObjects.add(loadingObjectManager);
+    
+    /*
 	    {% for balloon in balloons %}
             myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.lat }}, {{ balloon.lng }}], {
                 balloonContentHeader: "{{ balloon.title }}",
                 balloonContentBody: "x = {{ balloon.lat }}; y = {{ balloon.lng }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Date={{ balloon.date }}",
                 {% if balloon.material_photo %}balloonContentFooter: "<img src='{{ balloon.material_photo.url }}' width='128' height='128'/>",{% endif %}
-                iconContent: 'T',
+                iconContent: 'T'
             });                 
 		    myMap.geoObjects.add(myPlacemark{{ balloon.id }});
         {% endfor %}
@@ -29,12 +43,12 @@ function init () {
             iconLayout: 'default#image',
             iconImageHref: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Japanese_Map_symbol_(Triangulation_point).svg/2000px-Japanese_Map_symbol_(Triangulation_point).svg.png',
             iconImageSize: [32, 32],
-            iconImageOffset: [-16, -16],
+            iconImageOffset: [-16, -16]
         });
 		    myMap.geoObjects.add(myTrgMark{{ trgstation.id }});
         {% endfor %}
+*/
 
-        
         myMap.events.add('contextmenu', function (e) {
             var coords = e.get('coords');  
             myMap.balloon.open(coords, {
@@ -59,7 +73,7 @@ function init () {
             },
             options: {
                 selectOnClick: false,
-                maxWidth: 200,
+                maxWidth: 200
                     }
         });
         filterYear.events.add(
@@ -72,11 +86,11 @@ function init () {
         
         filterFormat = new ymaps.control.Button({
             data: {
-                content: "Отфильтровать по format",
+                content: "Отфильтровать по format"
             },
             options: {
                 selectOnClick: false,
-                maxWidth: 200,
+                maxWidth: 200
                     }
         });
         filterFormat.events.add(

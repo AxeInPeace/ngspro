@@ -61,6 +61,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+# APPEND_SLASH = True
 
 STATIC_URL = local_settings.STATIC_URL
 STATIC_ROOT = local_settings.STATIC_ROOT
