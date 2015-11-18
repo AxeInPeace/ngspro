@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from lib.mapbaloon.models import TriangulationStation
 from .utils import serialize_trg
 
-def get_tile(request):
+def get_trg(request):
     bbox = request.GET['bbox']
     print bbox
     response = {

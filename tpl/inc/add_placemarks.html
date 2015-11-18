@@ -22,187 +22,56 @@ function init () {
     loadingObjectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
     myMap.geoObjects.add(loadingObjectManager);
     
-    /*
-	    {% for balloon in balloons %}
-            myPlacemark{{ balloon.id }} = new ymaps.Placemark([{{ balloon.lat }}, {{ balloon.lng }}], {
-                balloonContentHeader: "{{ balloon.title }}",
-                balloonContentBody: "x = {{ balloon.lat }}; y = {{ balloon.lng }}<br>Format = {{ balloon.myFormat.name }}<br>Instrument = {{ balloon.instrument.name }} <br>Date={{ balloon.date }}",
-                {% if balloon.material_photo %}balloonContentFooter: "<img src='{{ balloon.material_photo.url }}' width='128' height='128'/>",{% endif %}
-                iconContent: 'T'
-            });                 
-		    myMap.geoObjects.add(myPlacemark{{ balloon.id }});
-        {% endfor %}
-        
-	    {% for trgstation in trgstations %}
-            myTrgMark{{ trgstation.id }} = new ymaps.Placemark([{{ trgstation.lat }}, {{ trgstation.lng }}], {
-                balloonContentHeader: "{{ trgstation.title }}",
-                balloonContentBody: "Ширина: {{ trgstation.lat }}<br>Долгота: {{ trgstation.lng }}<br>Тип: {{ trgstation.get_type_display }} <br>Класс точности: {{ trgstation.precision }}<br>Высота над уровнем моря: {{ trgstation.height }}м<br>date = {{ trgstation.date|date:"d.m.Y" }} ",
-                {% if trgstation.center_photo %}balloonContentFooter: "<a href='{{ trgstation.center_photo.url }}' class='fancybox' title='Фото центра'><img src='{{ trgstation.center_photo.url }}' width='128' height='128'/></a>", {% endif %}
-                hintContent: "" 
-        }, {
-            iconLayout: 'default#image',
-            iconImageHref: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Japanese_Map_symbol_(Triangulation_point).svg/2000px-Japanese_Map_symbol_(Triangulation_point).svg.png',
-            iconImageSize: [32, 32],
-            iconImageOffset: [-16, -16]
-        });
-		    myMap.geoObjects.add(myTrgMark{{ trgstation.id }});
-        {% endfor %}
-*/
-
-        myMap.events.add('contextmenu', function (e) {
-            var coords = e.get('coords');  
-            myMap.balloon.open(coords, {
-                contentHeader:'Добавить материал',
-                contentBody:
-                    '<p>Координаты щелчка: ' + [
-                    coords[0].toPrecision(6),
-                    coords[1].toPrecision(6)
-                    ].join(', ') + '</p>' +
-                    '<p><a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">Добавить материал</a></p>' + 
-                    '<p><a href="#trigpoint" role="button" class="btn btn-primary" data-toggle="modal">Добавить тригапункт</a></p>',
-            }); 
-              
-           $("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(6) + "\">");
-           $("#ycoord").replaceWith("<input type=\"text\" id=\"ycoord\" name=\"coord2\" value=\"" + coords[1].toPrecision(6) + "\">");
-           $(".trgcoordx").attr('value', coords[0].toPrecision(6));
-           $(".trgcoordy").attr('value', coords[1].toPrecision(6));
-         });
-        filterYear = new ymaps.control.Button({
-            data: {
-                content: "Отфильтровать по годам",
-            },
-            options: {
-                selectOnClick: false,
-                maxWidth: 200
-                    }
-        });
-        filterYear.events.add(
-            'press',
-            function () {
-                $("#filteryears_form").modal('show');
-            }
-        )
-        myMap.controls.add(filterYear, {float: 'right'});
-        
-        filterFormat = new ymaps.control.Button({
-            data: {
-                content: "Отфильтровать по format"
-            },
-            options: {
-                selectOnClick: false,
-                maxWidth: 200
-                    }
-        });
-        filterFormat.events.add(
-            'press',
-            function () {
-            $("#filterformats_form").modal('show');
-            }
-        )
-        myMap.controls.add(filterFormat, {float: 'right'});
-
-        //-----------------ВСПЛЫВАШКА--------------------------------
-        // Создаем собственный класс.
-            CustomControlClass = function (options) {
-                CustomControlClass.superclass.constructor.call(this, options);
-                this._$content = null;
-                this._geocoderDeferred = null;
-            };
-        // И наследуем его от collection.Item.
-        ymaps.util.augment(CustomControlClass, ymaps.collection.Item, {
-            onAddToMap: function (myMap) {
-                CustomControlClass.superclass.onAddToMap.call(this, myMap);
-                this._lastCenter = null;
-                this.getParent().getChildElement(this).then(this._onGetChildElement, this);
-            },
-
-            onRemoveFromMap: function (oldMap) {
-                this._lastCenter = null;
-                if (this._$content) {
-                    this._$content.remove();
-                    this._mapEventGroup.removeAll();
-                }
-                CustomControlClass.superclass.onRemoveFromMap.call(this, oldMap);
-            },
-
-            _onGetChildElement: function (parentDomContainer) {
-                // Создаем HTML-элемент с текстом.
-                this._$content = $('<div class="customControl"></div>').appendTo(parentDomContainer);
-                this._mapEventGroup = this.getMap().events.group();
-                // Запрашиваем данные после изменения положения карты.
-                this._mapEventGroup.add('boundschange', this._createRequest, this);
-                // Сразу же запрашиваем название места.
-                this._createRequest();
-            },
-
-            _createRequest: function() {
-                var lastCenter = this._lastCenter = this.getMap().getCenter().join(',');
-                // Запрашиваем информацию о месте по координатам центра карты.
-                ymaps.geocode(this._lastCenter, {
-                    // Указываем, что ответ должен быть в формате JSON.
-                    json: true,
-                    // Устанавливаем лимит на кол-во записей в ответе.
-                    results: 1
-                }).then(function (result) {
-                        // Будем обрабатывать только ответ от последнего запроса.
-                        if (lastCenter == this._lastCenter) {
-                            this._onServerResponse(result);
-                        }
-                    }, this);
-            },
-
-            _onServerResponse: function (result) {
-                // Данные от сервера были получены и теперь их необходимо отобразить.
-                // Описание ответа в формате JSON.
-                var members = result.GeoObjectCollection.featureMember,
-                    geoObjectData = (members && members.length) ? members[0].GeoObject : null;
-                if (geoObjectData) {
-                    this._$content.html(//geoObjectData.metaDataProperty.GeocoderMetaData.text
-
-                    "<h5 class=\"info__title-center\">СУПЕР-ТРИГОПУНКТ XXX</h5>"
-                    +
-                    "<h5 class=\"text-grey\">Широта: XXXX </h5>"
-                    +
-                    "<h5 class=\"text-grey\">Долгота: XXXX </h5>"
-                    +
-                    "<h5 class=\"text-grey\">Альтитуда: XXXX <h5>"
-                    +
-                    "<hr/>"
-                    +
-                    "<h5>Тип пункта: smth </h5>"
-                    +
-                    "<h5>Класс точности: 2 </h5>"
-                    +
-                    "<h5>Ориентирный знак: сохраняется </h5>"
-                    +
-                    "<h5>Наружный знак: сохраняется </h5>"
-                    +
-                    "<h5>Центр: сохраняется </h5>"
-                    +
-                    "<h5>Положение центра относительно уровня земли: smth </h5>"
-                    +
-                    "<div class=\"images\"><span class=\"glyphicon glyphicon-chevron-left\"></span>"
-                    +
-                    "<img src=\"/pic/preview.jpg\" class=\"info__img-prev\"/>"
-                    +
-                    "<img src=\"/pic/preview.jpg\" class=\"info__img-prev\"/>"
-                    +
-                    "<span class=\"glyphicon glyphicon-chevron-right\"></span></div>"
-                    +
-                    "<div class=\"info__btns\"><button type=\"button\" class=\"btn btn-primary info__btn-download\">Скачать</button>"
-                    +
-                    "<button type=\"button\" class=\"btn btn-danger info__btn-close\">Закрыть</button></div>");
-                }
-            }
-        });
-
-        var customControl = new CustomControlClass();
-        myMap.controls.add(customControl, {
-            float: 'none',
-            position: {
-                top: 45,
-                right: 10
-            }
-        });
+    myMap.events.add('contextmenu', function (e) {
+    var coords = e.get('coords');  
+    myMap.balloon.open(coords, {
+     contentHeader:'Добавить материал',
+     contentBody:
+         '<p>Координаты щелчка: ' + [
+         coords[0].toPrecision(6),
+         coords[1].toPrecision(6)
+         ].join(', ') + '</p>' +
+         '<p><a href="#modal_material" role="button" class="btn btn-primary" data-toggle="modal">Добавить материал</a></p>' + 
+         '<p><a href="#trigpoint" role="button" class="btn btn-primary" data-toggle="modal">Добавить тригапункт</a></p>',
+    }); 
+    
+    $("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(6) + "\">");
+    $("#ycoord").replaceWith("<input type=\"text\" id=\"ycoord\" name=\"coord2\" value=\"" + coords[1].toPrecision(6) + "\">");
+    $(".trgcoordx").attr('value', coords[0].toPrecision(6));
+    $(".trgcoordy").attr('value', coords[1].toPrecision(6));
+    });
+    filterYear = new ymaps.control.Button({
+    data: {
+     content: "Отфильтровать по годам",
+    },
+    options: {
+     selectOnClick: false,
+     maxWidth: 200
+         }
+    });
+    filterYear.events.add(
+    'press',
+    function () {
+     $("#filteryears_form").modal('show');
+    }
+    )
+    myMap.controls.add(filterYear, {float: 'right'});
+    
+    filterFormat = new ymaps.control.Button({
+    data: {
+     content: "Отфильтровать по format"
+    },
+    options: {
+     selectOnClick: false,
+     maxWidth: 200
+         }
+    });
+    filterFormat.events.add(
+    'press',
+    function () {
+    $("#filterformats_form").modal('show');
+    }
+    )
+    myMap.controls.add(filterFormat, {float: 'right'});
 }
 </script>

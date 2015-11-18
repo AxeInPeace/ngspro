@@ -1,4 +1,4 @@
-<div id="myModal" class="modal fade">
+<div id="modal_material" class="modal fade">
   <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,7 +8,16 @@
         </div>
 
         <div class="modal-body">
-          <form class="form-horizontal" method="post" action="{% url 'send_balloon' %}" enctype="multipart/form-data" id="mapballoon_form">
+          <form class="form-horizontal" enctype="multipart/form-data" id="mapballoon_form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label label-align-left">Название</label>
+
+                <div class="col-sm-4">
+                    <input type="text" name="title" value="" class="form-control">
+                </div>
+
+            </div>
+
             <div class="form-group">
                 <label class="col-sm-2 control-label label-align-left">Координаты</label>
 
@@ -119,14 +128,22 @@
                 <label class="control-label">Фото материала</label>
 
                 <div class="controls">
-                    <input class="materialinput" name="material" required="required" type="file"/>
+                    <input class="materialinput" name="photo" required="required" type="file"/>
                 </div>
             </div>
             
+            <div class="control-group">
+                <label class="control-label">Архив материала (rar, zip)</label>
+
+                <div class="controls">
+                    <input class="materialinput" name="material" required="required" type="file"/>
+                </div>
+            </div>
+
             <div class="modal-footer">
               <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
 
-              <input class="btn btn-primary js-submitballoon" type="button" value="Send"/>
+              <input class="btn btn-primary" type="button" value="Send" id="mapballoon_send"/>
             </div>
           {% csrf_token %}
           </form>
@@ -135,27 +152,3 @@
  </div>
 </div>
 <!-- END BALOON-->
-<script>
-    $('.js-submitballoon').click(function(){
-        xValue = $('#xcoord').val();
-        yValue = $('#ycoord').val();
-        if(isCoord(xValue) && isCoord(yValue)){
-            $(".errormsg.addballoon").addClass('hide');
-            document.forms['mapballoon_form'].submit()
-            }
-        else
-            $(".errormsg.addballoon").removeClass('hide');
-        
-    });
-    
-    function isCoord(n) {
-        if(!isNaN(parseFloat(n)) && isFinite(n)) {
-            if (parseFloat(n)>-180 && parseFloat(n)<180)
-                return true
-            else
-                return false;
-        }
-        else
-            return false;
-    }
-</script>

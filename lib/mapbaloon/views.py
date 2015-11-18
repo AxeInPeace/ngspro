@@ -11,7 +11,7 @@ from lib.auth.models import CustomUser
 import datetime
 from django.http import HttpResponse, Http404
 from django.views.decorators.http import require_http_methods
-from lib.photo.views import  upload
+from lib.core.utils import  upload_file
 from lib.photo.models import Photo
 from django.shortcuts import redirect
 
@@ -59,17 +59,22 @@ def mapballoon_add_balloon(request):
     fr = Format.objects.get(id=request.POST.get('frm'))
     tl = Instrument.objects.get(id=request.POST.get('tool'))
     pub = CustomUser.objects.get(userid=request.user)
-
-    response = upload(request)
-    data = loads(response.content)
-    message = data.get('message', None)
-    if message != 'ok':
-        return response
     
-    url_photo = data.get('url', None)
-    if url_photo is None:
-        return JSONResponse({'status': 500, 'message': 'fail'})
-    material_photo = Photo.objects.create(url=url_photo, alt="")
+    material_photo = request.POST.get("photo")
+    if material_photo is not None:
+        photo_url = upload_file(material_photo, material_photo.name, ["jpg", "jpeg", "png"])
+    else:
+        photo_url = None
+
+    material_photo_url = Photo.objects.create(url=photo_url, alt=u"Фото центра")
+
+    material = request.POST.get("material")
+    if material is not None:
+        material_url = upload_file(material, material.name, ["rar", "zip"])
+    else:
+        material_url = None
+
+    material_url = Photo.objects.create(url=material_url, alt=u"Фото центра")
 
     Balloon.objects.create(
         lat=request.POST.get('coord1'),
@@ -79,13 +84,15 @@ def mapballoon_add_balloon(request):
         isrelelems=request.POST.get('relbool'),
         syscoord=request.POST.get('altsys'),
         sysaltit=request.POST.get('coordsys'),
+        title=request.POST.get('title'), 
         myFormat=fr,
         instrument=tl,
         publisher=pub,
         date=datetime.datetime.now().date(),
-        material_photo=material_photo,
+        material_photo=material_photo_url,
+        material=material_url,
     )    
-    return redirect('main')
+    return JSONResponse({'status': 200, 'message': 'ok'})
 
 
 @require_http_methods(["POST"])
@@ -97,23 +104,19 @@ def mapballoon_add_trgpoint(request):
 
     lat=request.POST.get('trgcoord1')
     lng=request.POST.get('trgcoord2')
-  #  if lat and lng:
-   #     raise Http404 # TODO: Ошибки для ajaxi
 
-    response = upload(request)
-    data = loads(response.content)
-    message = data.get('message', None)
-    if message != 'ok':
-        return response
-    
-    url_photo = data.get('url', None)
-    if url_photo is None:
-        return JSONResponse({'status': 500, 'message': 'fail'})
+    material_photo = request.POST.get("photo")
+    if material_photo is not None:
+        photo_url = upload_file(material_photo, material_photo.name, ["jpg", "jpeg", "png"])
+    else:
+        photo_url = None
+
+    material_photo_id = Photo.objects.create(url=photo_url, alt=u"Фото центра")
     material_photo = Photo.objects.create(url=url_photo, alt="")
 
     same_station = TriangulationStation.objects.filter(lat=lat, lng=lng)
     if same_station:
-        return JSONResponse({'message': 'В этом месте уже есть тригопункт', '': same_station})
+        return JSONResponse({'status': 300, 'message': 'В этом месте уже есть тригопункт', '': same_station})
     
 
     TriangulationStation.objects.create(
@@ -128,7 +131,7 @@ def mapballoon_add_trgpoint(request):
         outer=(request.POST.get('trgoutstate') == "save"),
         center=(request.POST.get('trgcenterstate') == "save"),
         center_height=request.POST.get('trgcenterplace'),
-        center_photo=material_photo,
+        center_photo=material_photo_id,
         publisher=pub,
         date=datetime.datetime.now().date(),
     )    
