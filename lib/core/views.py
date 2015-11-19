@@ -15,5 +15,4 @@ from lib.core.utils import upload_file
 class JSONResponse(HttpResponse):
     def __init__(self, data):
         content = json.dumps(data, ensure_ascii=False)
-        print data
         super(JSONResponse, self).__init__(content=content, content_type='application/json; charset=utf-8')

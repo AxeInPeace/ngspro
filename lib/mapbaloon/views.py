@@ -56,11 +56,20 @@ def mapballoon_map(request):
 def mapballoon_add_balloon(request):
     if not request.user.is_authenticated():
         raise Http404
-    fr = Format.objects.get(id=request.POST.get('frm'))
-    tl = Instrument.objects.get(id=request.POST.get('tool'))
-    pub = CustomUser.objects.get(userid=request.user)
+    fr = Format.objects.filter(id=request.POST.get('frm')).first()
+    tl = Instrument.objects.filter(id=request.POST.get('tool')).first()
+    pub = CustomUser.objects.filter(userid=request.user).first()
+
+    if not fr:
+        return JSONResponse({'status': 301, 'message': u'Такого формата не существует'})
+
+    if not tl:
+        return JSONResponse({'status': 301, 'message': u'Такого иструмента не существует'})
+
+    if not pub:
+        return JSONResponse({'status': 301, 'message': u'Вы не авторизованы?'})
     
-    material_photo = request.POST.get("photo")
+    material_photo = request.FILES.get("photo")
     if material_photo is not None:
         photo_url = upload_file(material_photo, material_photo.name, ["jpg", "jpeg", "png"])
     else:
@@ -68,7 +77,7 @@ def mapballoon_add_balloon(request):
 
     material_photo_url = Photo.objects.create(url=photo_url, alt=u"Фото центра")
 
-    material = request.POST.get("material")
+    material = request.FILES.get("material")
     if material is not None:
         material_url = upload_file(material, material.name, ["rar", "zip"])
     else:
@@ -99,20 +108,19 @@ def mapballoon_add_balloon(request):
 def mapballoon_add_trgpoint(request):
     if not request.user.is_authenticated():
         raise Http404
-    print request.POST.items()
     pub = CustomUser.objects.get(userid=request.user)
 
     lat=request.POST.get('trgcoord1')
     lng=request.POST.get('trgcoord2')
 
-    material_photo = request.POST.get("photo")
+    material_photo = request.FILES.get("photo")
     if material_photo is not None:
         photo_url = upload_file(material_photo, material_photo.name, ["jpg", "jpeg", "png"])
+        print(photo_url)
+        material_photo_id = Photo.objects.create(url=photo_url, alt=u"Фото центра")
     else:
-        photo_url = None
+        material_photo_id = None
 
-    material_photo_id = Photo.objects.create(url=photo_url, alt=u"Фото центра")
-    material_photo = Photo.objects.create(url=url_photo, alt="")
 
     same_station = TriangulationStation.objects.filter(lat=lat, lng=lng)
     if same_station:

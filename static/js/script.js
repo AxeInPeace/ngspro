@@ -36,10 +36,12 @@ function isYear(n) {
 $(".fancybox").fancybox({
 openEffect  : 'elastic',
 closeEffect : 'elastic',
-    helpers : {
-        title : {
-            type : 'inside'
-        }
+helpers : {
+    title : {
+        type : 'inside'
     }
+},
+'width': 640,
+'height': 480
 });
 /*************** YMAPS *****************/

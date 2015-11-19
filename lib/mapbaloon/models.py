@@ -100,10 +100,13 @@ class TriangulationStation(GeoObject):
     outer = models.BooleanField(verbose_name="Наружный знак сохранился?")
     center = models.BooleanField(verbose_name="Центр сохранился?")
     center_height = models.IntegerField(verbose_name="Положение относительно земли, м")
-    center_photo = models.ForeignKey(Photo, verbose_name="Фото центра")
+    center_photo = models.ForeignKey(Photo, verbose_name="Фото центра", null=True)
+
+    @property
+    def images(self):
+        return [self.center_photo] if self.center_photo else []
 
     class Meta:
         verbose_name = "Тригопункт"
         verbose_name_plural = "Тригопункты"
-
-
+    
