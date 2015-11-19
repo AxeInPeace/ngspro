@@ -412,6 +412,8 @@ a.dropdown-toggle:hover
 
 .land-round
 {
+    height:300px;
+    width: 300px;
     -moz-border-radius: 175px; /* Firefox */
     -webkit-border-radius: 175px; /* Safari, Chrome */
     -khtml-border-radius: 175px; /* KHTML */
