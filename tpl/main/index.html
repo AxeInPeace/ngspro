@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Carousel Template for Bootstrap</title>
+    <title>ENGGEO - ваш личный архив материалов</title>
     
     {% include "inc/header.html" %}
 
@@ -17,7 +17,7 @@
   </head>
 <!-- NAVBAR
 ================================================== -->
-  <body>
+  <body class='back1'>
     {% include "inc/menuWhite.html" %}
 
     <!-- Carousel
@@ -27,29 +27,30 @@
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <!--        <li data-target="#myCarousel" data-slide-to="2"></li> -->
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img class="first-slide" data-src="holder.js/900x500/auto/#777:#777" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide" data-holder-rendered="true">
+          <img class="first-slide" src="http://landsurveyorsspreadsheets.com/img/landsurveyor.png" alt="First slide" data-holder-rendered="true">
             <div class="container">
                 <div class="carousel-caption">
-                  <h1>Example headline.</h1>
-                  <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-                  <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                  <h1>Скидка на все работы 15%</h1>
+                  <p>Только с 1 по 31 декабря 2015 года</p>
+                  <p><a class="btn btn-lg btn-primary" {% if not user.is_authenticated %}data-toggle="modal" data-target="#reg_form"href="#reg" role="button">Присоединяйтесь уже сейчас!{% else %}href="{% url 'map' %}" role="button">Скорее выбирайте!{% endif %}</a></p>
                 </div>
             </div>
         </div>
         <div class="item">
-          <img class="second-slide" data-src="holder.js/900x500/auto/#777:#777" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide"  data-holder-rendered="true">
+          <img class="second-slide" src="http://geo-team.cz/wp-content/uploads/slide-lom-28801.jpg" alt="Second slide"  data-holder-rendered="true">
             <div class="container">
                 <div class="carousel-caption">
-                  <h1>Another example headline.</h1>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                  <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                  <h1>Крупнейший архив в России и мире</h1>
+                  <p>Хотите узнать почему мы лучшие?</p>
+                  <p><a class="btn btn-lg btn-primary" href="{% url 'landing' %}" role="button">Смотрите тут!</a></p>
                 </div>
             </div>
         </div>
+<!--
         <div class="item">
           <img class="third-slide" data-src="holder.js/900x500/auto/#777:#777" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide"  data-holder-rendered="true">
             <div class="container">
@@ -60,6 +61,7 @@
                 </div>
             </div>
         </div>
+-->
       </div>
       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -81,21 +83,21 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-xs-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+          <img class="img-circle" src="http://test2.enggeo.ru/pic/trg.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h2>Легкий поиск</h2>
+          <p>Мы предоставляем самые точные координаты и фото местоположения тригопунктов</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-xs-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+          <img class="img-circle" src="http://iskra-et.ru/media/iskraetru/2014/50/geodez_1_big.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h2>Сравнивайте работы</h2>
+          <p>Выбирайте работы из наших крупнейших архивов и сравнивайте их со своей</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-xs-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <img class="img-circle" src="http://test2.enggeo.ru/pic/arenda.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h2>Аренда и лизинг</h2>
+          <p>Оборудование на любой вкус от лучших поставщиков по самым низким ценам уже у нас</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
