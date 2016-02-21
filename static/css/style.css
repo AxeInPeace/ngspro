@@ -141,6 +141,7 @@ html, body
 {
     display: inline;
     line-height: 60px;
+    height: 60px;
 }
 
 .navbar__menu-btn
