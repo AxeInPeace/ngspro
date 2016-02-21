@@ -1,17 +1,30 @@
-<div class="myNavbar">
-  <div class="navbar__menu-btn inlineblock menu-btn">
-    <img src="/pic/ic_dehaze_black_48dp_2x.png" class="navbar__img">
-  </div>
-  <div class="navbar__logo inlineblock">
-    <a href="/"><img src="/pic/logo.png" class="navbar__img" alt="ENGGEO"></a>
-  </div>
-  {% if user.is_authenticated %}
-    {% include "inc/profile.html" %}
-  {% else %}
-    <button type="button" class="btn btn-success btn-signup" data-toggle="modal" data-target="#reg_form">Присоединиться</button>
-    <button type="button" class="btn btn-default btn-signin" data-toggle="modal" data-target="#auth_form">Войти</button>
-  {% endif %}
-  <div class="menu">
-  </div>
+{% if not user.is_authenticated %}
+  {% include "inc/reg_form.html" %}
+  {% include "inc/auth_form.html" %}
+{% endif %}
+<div class="myNavbar nav-white">
+    <ul class="myNavbar-nav">
+      <li class="navbar__menu-btn menu-btn">
+        <img src="/pic/ic_dehaze_black_48dp_2x_black.png" class="navbar__img-menu" alt="Меню">
+      </li>
+
+      <li class="navbar__logo">
+        <img src="/pic/logo_alfa_black.png" class="navbar__img-logo" alt="ENGGEO">
+      </li>
+      {% if user.is_authenticated %}
+        {% include "inc/profile.html" %}
+      {% else %}
+        <li class="navbar__btn-signin">
+            <button type="button" class="btn btn-default btn-signin navbar-btn" data-toggle="modal" data-target="#auth_form">Войти</button>
+        </li>
+
+        <li class="navbar__btn-signup">
+            <button type="button" class="btn btn-success btn-signup navbar-btn" data-toggle="modal" data-target="#reg_form">Присоединиться</button>
+        </li>
+      {% endif %}
+    </ul>
+</div>
+
+<div class="menu">
 
 </div>

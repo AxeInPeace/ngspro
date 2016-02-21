@@ -48,9 +48,9 @@ class GeoObject(models.Model):
 
 
 class Balloon(GeoObject):
-    isugrshoot = models.BooleanField(blank=True, null=True) #having underground communication shooting
-    isaltmark = models.BooleanField(blank=True, null=True) #having altitude mark
-    isrelelems = models.BooleanField(blank=True, null=True) #having relief elements
+    isugrshoot = models.BooleanField(blank=True) #having underground communication shooting
+    isaltmark = models.BooleanField(blank=True) #having altitude mark
+    isrelelems = models.BooleanField(blank=True) #having relief elements
 
     myFormat = models.ForeignKey(Format)
 

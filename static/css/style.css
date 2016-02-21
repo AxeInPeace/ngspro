@@ -187,7 +187,12 @@ html, body
 
 .navbar__img-avatar
 {
-    height: 60px;
+    height: 50px;
+    width: 50px;
+    -moz-border-radius: 25px; /* Firefox */
+    -webkit-border-radius: 25px; /* Safari, Chrome */
+    -khtml-border-radius: 25px; /* KHTML */
+    border-radius: 25px; /* CSS3 */
 }
 
 .navbar__profile-short
@@ -349,12 +354,14 @@ a.dropdown-toggle:hover
 
 .land-text-left
 {
+    width: 50%;
     text-align: left;
     vertical-align: middle;
 }
 
 .land-text-right
 {
+    width: 50%;
     text-align: right;
     vertical-align: middle;
 }
