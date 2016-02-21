@@ -137,18 +137,36 @@ html, body
     margin: 0 70px;
 }
 
-.myNavbar-nav li
+.myNavbar-nav > .navbar__menu-btn
 {
-    display: inline;
+    display: inline-block;
+    padding: 0 5px 0 5px;
     line-height: 60px;
     height: 60px;
 }
 
 .navbar__menu-btn
 {
+    text-transform: uppercase;
     cursor: pointer;
 }
 
+.navbar__menu-btn:hover 
+{
+    background-color: #E0E0E0;
+    height: 59px;
+    box-shadow: inset 0px 0px 2px -1px !important;
+}
+
+.navbar__menu-btn > a:hover
+{
+    text-decoration: none;
+}
+
+.navbar__menu-btn > a:visited
+{
+    color: #333;
+}
 .navbar__img-menu
 {
     height: 40px;
@@ -180,9 +198,15 @@ html, body
 
 .navbar__profile-name
 {
+    display: inline-block;
     color: black;
     font-size: large;
-    top: 5px;
+}
+
+.navbar__profile-name p
+{
+    margin: 0;
+    text-transform: none;
 }
 
 .navbar__img-avatar

@@ -7,5 +7,6 @@ urlpatterns = [
     url(r'^login/$', views.auth_login, name="login"),
     url(r'^reg/$', views.auth_registration, name="registration"),
     url(r'^setavatar/$', views.auth_set_avatar, name="setavatar"),
+    url(r'^verify/$', views.approve_email, name="auth-approve-email"),
 ]
 

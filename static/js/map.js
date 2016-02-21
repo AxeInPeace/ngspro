@@ -5,7 +5,7 @@ function init () {
         zoom: 9,
         controls: ['zoomControl', 'rulerControl', 'geolocationControl', 'fullscreenControl', 'typeSelector']
         }, {
-                searchControlProvider: 'yandex#search'
+          searchControlProvider: 'yandex#search'
         }),
         loadingObjectManager = new ymaps.LoadingObjectManager('http://test2.enggeo.ru/map/trg/?bbox=%b', {   
             // Включаем кластеризацию.
@@ -48,15 +48,17 @@ function init () {
     $(".trgcoordx").attr('value', coords[0].toPrecision(6));
     $(".trgcoordy").attr('value', coords[1].toPrecision(6));
     });
-    filterYear = new ymaps.control.Button({
-    data: {
-     content: "Отфильтровать по годам",
-    },
-    options: {
-     selectOnClick: false,
-     maxWidth: 200
-    }
+    var filterYear = new ymaps.control.Button({
+      data: {
+        content: "Отфильтровать по годам",
+      },
+      options: {
+        selectOnClick: false,
+        maxWidth: 200
+      }
     });
+    filterYear.events.add('click', function() { $("#filteryears_form").modal('show') });
+    myMap.controls.add(filterYear);
 }
 
 $('.js-submittrgpoint').click(function(){
@@ -100,7 +102,7 @@ function isCoord(n) {
 
 $("#mapballoon_send").click( function( event ) {
   $("#modal_material").find(".alert").hide().remove()
-  $.post('/mapbaloon/send_balloon/', $("#mapballoon_form").serialize(), function(event) {
+  $.post('/map/send_balloon/', $("#mapballoon_form").serialize(), function(event) {
     if (event.status != 200)
         $("#modal_material").find(".modal-header").append("<div class=\"alert alert-danger\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" + event.message +"</div>")
     else

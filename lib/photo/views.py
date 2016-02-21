@@ -105,7 +105,7 @@ def upload_avatar(request):
         custUser.avatar = url
         custUser.save()
 #        return JSONResponse({'status': 200, 'message': 'ok', 'url': url})
-        return HttpResponseRedirect(url)
+    return HttpResponseRedirect("/")
 
 
 @require_http_methods(["POST"])

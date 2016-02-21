@@ -1,30 +1,40 @@
 {% if not user.is_authenticated %}
   {% include "inc/reg_form.html" %}
   {% include "inc/auth_form.html" %}
+{% else %}
+  {% include "inc/form_avatar.html" %} 
 {% endif %}
 <div class="myNavbar nav-white">
-    <ul class="myNavbar-nav">
-      <li class="navbar__menu-btn menu-btn">
-        <img src="/pic/ic_dehaze_black_48dp_2x_black.png" class="navbar__img-menu" alt="Меню">
-      </li>
-
-      <li class="navbar__logo">
+    <div class="myNavbar-nav">
+      <div class="navbar__menu-btn navbar__logo">
+      <a href = "{% url 'main' %}">
         <img src="/pic/logo_alfa_black.png" class="navbar__img-logo" alt="ENGGEO">
-      </li>
+      </a>
+      </div>
+      <div class="navbar__menu-btn menu-btn">
+      <a href = "{% url 'map' %}">
+          <p>
+          карта
+          </p>
+      </a>
+      </div>
+      <div class="navbar__menu-btn menu-btn">
+          <a href = "{% url 'landing' %}"><p>функционал</p></a>
+      </div>
+      <div class="navbar__menu-btn menu-btn">
+          <a href = "{% url 'main' %}"><p>заказ работ</p></a>
+      </div>
       {% if user.is_authenticated %}
         {% include "inc/profile.html" %}
       {% else %}
-        <li class="navbar__btn-signin">
+        <div class="navbar__btn-signin">
             <button type="button" class="btn btn-default btn-signin navbar-btn" data-toggle="modal" data-target="#auth_form">Войти</button>
-        </li>
+        </div>
 
-        <li class="navbar__btn-signup">
+        <div class="navbar__btn-signup">
             <button type="button" class="btn btn-success btn-signup navbar-btn" data-toggle="modal" data-target="#reg_form">Присоединиться</button>
-        </li>
+        </div>
       {% endif %}
-    </ul>
+    </div>
 </div>
 
-<div class="menu">
-
-</div>

@@ -25,21 +25,3 @@ def serialize_trg(trg):
     if trg.center_photo:
         trgp['properties']["balloonContentFooter"] = u"<a href='" + unicode(trg.center_photo.url) + u"' class='fancybox' title='Фото центра'><img src='" + unicode(trg.center_photo.url) + u"' width='128' height='128'/></a>"
     return trgp
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
