@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^', include('lib.main.urls')),
     url(r'^', include('lib.photo.urls')),
     url(r'^map/', include('lib.map.urls')),
+    url(r'^job/', include('lib.job.urls')),
 ]

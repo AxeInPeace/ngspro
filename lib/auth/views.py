@@ -2,16 +2,18 @@
 import datetime
 import uuid
 
-from django.core.urlresolvers import reverse
 from django.conf import settings
-from django.core.mail import send_mail
-from django.contrib.auth import authenticate, login, logout
-from django.views.decorators.http import require_http_methods
-from lib.core.views import JSONResponse
+from django.contrib.auth import logout
 from django.contrib.auth.models import User as DUser
-from lib.auth.models import CustomUser, EmailApprove
+from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
+from django.shortcuts import render
+from django.views.decorators.http import require_http_methods
+
 from lib.auth.forms import *
-from django.http import HttpResponse, HttpResponseRedirect
+from lib.auth.models import CustomUser, EmailApprove
+from lib.core.views import JSONResponse
+
 # from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate 
@@ -35,7 +37,7 @@ def auth_login(request):
 @require_http_methods(["POST"])
 def auth_registration(request):
     if request.user.is_authenticated():
-        return JSONResponse({"status" : "200", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }, "redirect": "/map/"})
+        return JSONResponse({"status" : "200", "user": {"username": request.user.username, "cash": request.usr.cash}, "redirect": "/map/"})
     
     username = request.POST.get('username')
     password = request.POST.get('password')
@@ -72,8 +74,8 @@ def approve_email(request):
         approve.user.is_registered = True
         approve.user.save()
         approve.delete()
-        return HttpResponse("ok")
-    return HttpResponse("Nope")
+        return render(request, 'auth/approve.html', {'status': True, 'message': u'Успешно!'})
+    return render(request, 'auth//approve.html', {'status': False, 'message': u'К сожалению такого кода нет'})
 
 
 def auth_logout(request):
@@ -82,8 +84,7 @@ def auth_logout(request):
 
 
 def auth_set_avatar(request):
-    avatar=ImageUploadForm(request.POST, request.FILES)
-    curuser=CustomUser.objects.get(userid=request.user)
-    curuser.avatar = request.FILES['avatar']
-    curuser.save()
+    form = ImageUploadForm(request.POST, request.FILES)
+    if form.is_valid():
+        request.usr.avatar = request.FILES['avatar']
     return HttpResponseRedirect('/') 
