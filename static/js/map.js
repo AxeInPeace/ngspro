@@ -52,6 +52,7 @@ function init () {
                 popupFloat: 'right'
             }
         });
+
     var years = [];
     function update_manager() {
         loadingObjectManager.objects.removeAll();

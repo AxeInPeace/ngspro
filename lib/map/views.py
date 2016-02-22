@@ -11,7 +11,7 @@ from django.http import HttpResponse, Http404
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import redirect, render
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from lib.auth.models import CustomUser, User
 from lib.core.views import JSONResponse
@@ -143,17 +143,8 @@ def mapballoon_add_trgpoint(request):
     return redirect('map')
 
 
-def get_trg(request):
-    bbox = request.GET['bbox']
-    response = {
-        'callback': request.GET['callback'],
-        'data': TriangulationStation.objects.all()
-    }
-    return render(request, 'inc/map_tile_response.json', response, content_type='application/json')
-
-
-class MaterialsJsonList(ListView):
-    template_name = 'inc/map_tile_response.json'
+class MaterialJsonList(TemplateView):
+    template_name = 'inc/../../tpl/map/map_tile_response.html'
     model = TriangulationStation
     content_type = 'application/json'
 
@@ -161,9 +152,24 @@ class MaterialsJsonList(ListView):
     def dispatch(self, request, *args, **kwargs):
         self.years = request.GET.getlist('year')
         self.bbox = request.GET.get('bbox')
-        return super(MaterialsJsonList, self).dispatch(request, *args, **kwargs)
+        return super(MaterialJsonList, self).dispatch(request, *args, **kwargs)
 
-    def get_queryset(self):
+    def _get_years_filter(self):
+        q_filter = Q()
+        if self.years:
+            for year in self.years:
+                q_filter = q_filter | (Q(date__gte=datetime.date(int(year), 1, 1)) & Q(date__lt=datetime.date(int(year) + 1, 1, 1)))
+        return q_filter
+
+    def get_topo(self):
+        """
+        Список наших объектов будет состоять лишь из приватных и не удаленных статей
+        """
+        q_filter = self._get_years_filter()
+
+        return Balloon.objects.filter(q_filter)
+
+    def get_trg(self):
         """
         Список наших объектов будет состоять лишь из приватных и не удаленных статей
         """
@@ -177,6 +183,8 @@ class MaterialsJsonList(ListView):
         return TriangulationStation.objects.filter(q_filter, **filters)
 
     def get_context_data(self, **kwargs):
-        data = super(MaterialsJsonList, self).get_context_data()
+        data = super(MaterialJsonList, self).get_context_data()
+        data['trg_list'] = self.get_trg()
+        data['topo_list'] = self.get_topo()
         data['callback'] = self.request.GET['callback']
         return data
