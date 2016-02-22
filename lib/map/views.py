@@ -215,6 +215,6 @@ def get_materials(request):
     bbox = request.GET['bbox']
     response = {
         'callback': request.GET['callback'],
-        'data': TriangulationStation.objects.all()
+        'data': TriangulationStation.objects.all()  # TODO: filter box
     }
     return render(request, 'inc/map_tile_response.json', response, content_type='application/json')
