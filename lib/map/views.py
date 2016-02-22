@@ -46,15 +46,7 @@ def mapballoon_map(request):
     else:
         return redirect('main')
 
-    context = {		
-        "balloons": balloons,
-        "signin_error": None,
-        "signin_form": SigninForm(),
-    }
-    return render(request, 'map/index.html', context)
 
-
-#TODO: превратить в ajax
 @require_http_methods(["POST"])
 def mapballoon_add_balloon(request):
     if not request.user.is_authenticated():
