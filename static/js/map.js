@@ -7,16 +7,7 @@ function init () {
         }, {
           searchControlProvider: 'yandex#search'
         }),
-        loadingObjectManager = new ymaps.LoadingObjectManager('http://test2.enggeo.ru/map/trg/?bbox=%b', {   
-            // Включаем кластеризацию.
-            clusterize: true,
-            // Опции кластеров задаются с префиксом cluster.
-            clusterHasBalloon: true,
-            // Опции объектов задаются с префиксом geoObject
-            geoObjectOpenBalloonOnClick: true,
-            clusterDisableClickZoom: true
-        }),
-        loadingObjectManager = new ymaps.LoadingObjectManager('http://test2.enggeo.ru/map/material/?bbox=%b', {   
+        loadingObjectManager = new ymaps.LoadingObjectManager('/map/material/?bbox=%b', {
             // Включаем кластеризацию.
             clusterize: true,
             // Опции кластеров задаются с префиксом cluster.
@@ -48,17 +39,50 @@ function init () {
     $(".trgcoordx").attr('value', coords[0].toPrecision(6));
     $(".trgcoordy").attr('value', coords[1].toPrecision(6));
     });
-    var filterYear = new ymaps.control.Button({
-      data: {
-        content: "Отфильтровать по годам",
-      },
-      options: {
-        selectOnClick: false,
-        maxWidth: 200
-      }
+    // TODO: load years from server
+    var yearList = new ymaps.control.ListBox({
+            data: {
+                content: 'Отфильтровать по годам'
+            },
+            items: [
+                new ymaps.control.ListBoxItem('2015'),
+                new ymaps.control.ListBoxItem('2016')
+            ],
+            options: {
+                popupFloat: 'right'
+            }
+        });
+    var years = [];
+    function update_manager() {
+        loadingObjectManager.objects.removeAll();
+        loadingObjectManager.setUrlTemplate('/map/material/?bbox=%b&year=' + years.join("&year="));
+        loadingObjectManager.reloadData();
+    }
+
+    function pop_year(year) {
+        for(var i = years.length - 1; i >= 0; i--) {
+            if(years[i] === year) {
+               years.splice(i, 1);
+            }
+        }
+    }
+    yearList.get(0).events.add('select', function () {
+        years.push(2015);
+        update_manager()
     });
-    filterYear.events.add('click', function() { $("#filteryears_form").modal('show') });
-    myMap.controls.add(filterYear);
+    yearList.get(1).events.add('select', function () {
+        years.push(2016);
+        update_manager()
+    });
+    yearList.get(0).events.add('deselect', function () {
+        pop_year(2015);
+        update_manager()
+    });
+    yearList.get(1).events.add('deselect', function () {
+        pop_year(2016);
+        update_manager()
+    });
+    myMap.controls.add(yearList);
 }
 
 $('.js-submittrgpoint').click(function(){

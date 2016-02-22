@@ -3,11 +3,15 @@
 import datetime
 import json
 
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.template.loader import render_to_string
 from django.contrib.auth import *
 from django.http import HttpResponse, Http404
+from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import redirect, render
+from django.views.generic import ListView
 
 from lib.auth.models import CustomUser, User
 from lib.core.views import JSONResponse
@@ -139,67 +143,6 @@ def mapballoon_add_trgpoint(request):
     return redirect('map')
 
 
-@require_http_methods(["POST"])
-def mapballoon_filter_for_years(request):
-    if request.POST.get('year'):
-        trgstations = TriangulationStation.objects.all()
-        balloons = Balloon.objects.filter(date__year=request.POST.get('year'))
-        if request.user.is_authenticated():
-            frmat = Format.objects.all()
-            tools = Instrument.objects.all()
-            custuser = CustomUser.objects.get(userid=request.user)
-            my_cash = custuser.cash
-            my_rating = custuser.rating            
-            avatar = custuser.avatar
-            context = {		
-                "formats": frmat,
-                "tools": tools,
-                "balloons": balloons,
-                "signin_error": None,
-                "my_cash": my_cash,				
-                "my_rating": my_rating,
-                "user": request.user,			
-                "avatar": avatar,
-                "trgstations": trgstations,
-            }
-            return render(request, 'map/index.html', context)		
-        context = {		
-            "balloons": balloons,
-            "signin_error": None,
-            "signin_form": SigninForm(),
-        }
-        return render(request, 'map/index.html', context)
-    else:
-        return redirect('map')
-
-
-@require_http_methods(["POST"])
-def mapballoon_filter_for_formats(request):
-    if request.POST.get('format'):
-        trgstations = TriangulationStation.objects.all()
-        balloons = Balloon.objects.filter(myFormat=int(request.POST.get('format')))
-        if not request.user.is_authenticated():
-            raise Http404
-        frmat = Format.objects.all()
-        tools = Instrument.objects.all()
-        custuser = CustomUser.objects.get(userid=request.user)
-        my_cash = custuser.cash
-        my_rating = custuser.rating            
-        avatar = custuser.avatar
-        context = {		
-            "formats": frmat,
-            "tools": tools,
-            "balloons": balloons,
-            "signin_error": None,
-            "my_cash": my_cash,				
-            "my_rating": my_rating,
-            "user": request.user,			
-            "avatar": avatar,
-            "trgstations": trgstations,
-        }
-        return render(request, 'map/index.html', context)		
-
-
 def get_trg(request):
     bbox = request.GET['bbox']
     response = {
@@ -209,10 +152,31 @@ def get_trg(request):
     return render(request, 'inc/map_tile_response.json', response, content_type='application/json')
 
 
-def get_materials(request):
-    bbox = request.GET['bbox']
-    response = {
-        'callback': request.GET['callback'],
-        'data': TriangulationStation.objects.all()  # TODO: filter box
-    }
-    return render(request, 'inc/map_tile_response.json', response, content_type='application/json')
+class MaterialsJsonList(ListView):
+    template_name = 'inc/map_tile_response.json'
+    model = TriangulationStation
+    content_type = 'application/json'
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        self.years = request.GET.getlist('year')
+        self.bbox = request.GET.get('bbox')
+        return super(MaterialsJsonList, self).dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        """
+        Список наших объектов будет состоять лишь из приватных и не удаленных статей
+        """
+        q_filter = Q()
+        filters = {}
+        if self.years:
+            for year in self.years:
+                q_filter = q_filter | (Q(date__gte=datetime.date(int(year), 1, 1)) & Q(date__lt=datetime.date(int(year) + 1, 1, 1)))
+        if self.bbox:
+            pass
+        return TriangulationStation.objects.filter(q_filter, **filters)
+
+    def get_context_data(self, **kwargs):
+        data = super(MaterialsJsonList, self).get_context_data()
+        data['callback'] = self.request.GET['callback']
+        return data

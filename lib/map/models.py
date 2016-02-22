@@ -1,13 +1,8 @@
 # encoding=utf-8
 from django.db import models
-from django.utils import timezone
-from django.utils.http import urlquote
-from django.utils.translation import ugettext_lazy as _
-from django.core.mail import send_mail
-from django.contrib.auth.models import User, UserManager
+
 from lib.auth.models import CustomUser
 from lib.photo.models import Photo
-
 
 
 class Format(models.Model):
@@ -44,7 +39,6 @@ class GeoObject(models.Model):
     date = models.DateField(verbose_name="Дата")
     class Meta:
         abstract = True
-
 
 
 class Balloon(GeoObject):
@@ -109,4 +103,4 @@ class TriangulationStation(GeoObject):
     class Meta:
         verbose_name = "Тригопункт"
         verbose_name_plural = "Тригопункты"
-    
+

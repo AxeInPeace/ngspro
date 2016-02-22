@@ -1,2 +1,6 @@
 {% extends 'base.html' %}
-{% block content %}{{ message }}{% endblock %}
+{% block content %}
+    <p style="font-size: 35px; text-align: center; margin-top: 20%;">{{ message }}</p>
+    <p style="font-size: 25px; text-align: center; margin-top: 2px;">Вы будете перенаправлены на главную через 5 секунд...</p>
+    <p style="font-size: 15px; text-align: center; margin-top: 2px;"><i>Кликните <a href="{% url 'main' %}">тут</a>, если ваш браузер не поддерживает переадресацию</i></p>
+{% endblock %}

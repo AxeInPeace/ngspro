@@ -31,6 +31,7 @@ INSTALLED_APPS = (
     'lib.auth',
     'lib.photo',
     'lib.job',
+    'lib.map',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,7 +1,7 @@
 {{ callback }}({
     "type": "FeatureCollection",
     "features": [
-        {% for balloon in data %}
+        {% for balloon in object_list %}
     {
         "type": "Feature", 
         "id": {{ balloon.id }},
