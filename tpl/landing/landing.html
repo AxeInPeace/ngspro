@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <title>ENGGEO</title>
-    {% include "inc/header.html" %}
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-</head>
-
-<body>
-    {% include "inc/menu.html" %}
-
+{% extends "base.html" %}
+{% block content %}
     <div class="body-background">
         <div class="land-block back1 land-block-first">
             <div class="land-text-right left inlineblock">
@@ -121,6 +112,4 @@
             </div>
         </div>
     </div>
-    {% include "inc/footer.html" %}
-</body>
-</html>
+{% endblock %}

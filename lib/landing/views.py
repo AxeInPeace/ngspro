@@ -1,6 +1,8 @@
 # encoding=utf-8
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-def landing(request):
-    context = {}
-    return render(request, "landing/landing.html", context)
+from lib.core.views import Enggeo
+
+
+class LandingView(Enggeo, TemplateView):
+    template_name = "landing/landing.html"

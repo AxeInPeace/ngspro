@@ -1,15 +1,6 @@
 import json
-import uuid
 
-
-from django.conf import settings
 from django.http import HttpResponse
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
-
-from lib.photo.models import Photo
-from lib.core.utils import upload_file
 
 
 class JSONResponse(HttpResponse):
@@ -19,4 +10,10 @@ class JSONResponse(HttpResponse):
 
 
 class Enggeo(object):
-    pass
+    def get_context_data(self, **kwargs):
+        data = super(Enggeo, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated():
+            data.update({
+                'avatar': self.request.usr.avatar
+            })
+        return data

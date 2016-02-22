@@ -3,6 +3,6 @@ from lib.main import views
 
 urlpatterns = patterns('',
     url(r'^$', views.slash),
-    url(r'^main/$', views.main, name="main")
+    url(r'^main/$', views.MainView.as_view(), name="main")
 )
 
