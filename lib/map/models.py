@@ -37,14 +37,15 @@ class GeoObject(models.Model):
     lng = models.FloatField(verbose_name="Долгота")
     publisher = models.ForeignKey(CustomUser, verbose_name="Автор")
     date = models.DateField(verbose_name="Дата")
+
     class Meta:
         abstract = True
 
 
 class Balloon(GeoObject):
-    isugrshoot = models.BooleanField(blank=True) #having underground communication shooting
-    isaltmark = models.BooleanField(blank=True) #having altitude mark
-    isrelelems = models.BooleanField(blank=True) #having relief elements
+    isugrshoot = models.BooleanField(blank=True)  # having underground communication shooting
+    isaltmark = models.BooleanField(blank=True)  # having altitude mark
+    isrelelems = models.BooleanField(blank=True)  # having relief elements
 
     myFormat = models.ForeignKey(Format)
 
@@ -58,9 +59,9 @@ class Balloon(GeoObject):
 
 class Polygon(models.Model):
     date = models.DateField()
-    isugrshoot = models.BooleanField(default=False, blank=True) #having underground communication shooting
-    isaltmark = models.BooleanField(default=False, blank=True) #having altitude mark
-    isrelelems = models.BooleanField(default=False, blank=True) #having relief elements
+    isugrshoot = models.BooleanField(default=False, blank=True)  # having underground communication shooting
+    isaltmark = models.BooleanField(default=False, blank=True)  # having altitude mark
+    isrelelems = models.BooleanField(default=False, blank=True)  # having relief elements
 
     publisher = models.ForeignKey(CustomUser)
     myFormat = models.ForeignKey(Format)

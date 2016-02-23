@@ -53,6 +53,7 @@ def mapballoon_map(request):
 
 @require_http_methods(["POST"])
 def mapballoon_add_balloon(request):
+    print request.FILES
     if not request.user.is_authenticated():
         raise Http404
     fr = Format.objects.filter(id=request.POST.get('frm')).first()
@@ -67,7 +68,8 @@ def mapballoon_add_balloon(request):
 
     if not pub:
         return JSONResponse({'status': 301, 'message': u'Вы не авторизованы?'})
-    
+
+
     material_photo = request.FILES.get("photo")
     if material_photo is not None:
         photo_url = upload_file(material_photo, material_photo.name, ["jpg", "jpeg", "png"])
@@ -79,10 +81,9 @@ def mapballoon_add_balloon(request):
     material = request.FILES.get("material")
     if material is not None:
         material_url = upload_file(material, material.name, ["rar", "zip"])
+        print(material)
     else:
         material_url = None
-
-    material_url = Photo.objects.create(url=material_url, alt=u"Фото центра")
 
     Balloon.objects.create(
         lat=request.POST.get('coord1'),
@@ -100,7 +101,7 @@ def mapballoon_add_balloon(request):
         material_photo=material_photo_url,
         material=material_url,
     )    
-    return JSONResponse({'status': 200, 'message': 'ok'})
+    return redirect('map')
 
 
 @require_http_methods(["POST"])
@@ -186,5 +187,6 @@ class MaterialJsonList(TemplateView):
         data = super(MaterialJsonList, self).get_context_data()
         data['trg_list'] = self.get_trg()
         data['topo_list'] = self.get_topo()
+        data['show_download'] = self.request.usr.is_registered
         data['callback'] = self.request.GET['callback']
         return data

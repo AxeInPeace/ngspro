@@ -87,17 +87,6 @@ function init () {
 }
 
 $('.js-submittrgpoint').click(function(){
-    xValue = $('.trgcoordx').val();
-    yValue = $('.trgcoordy').val();
-    accuracyClass = $('.trgaccuracy').val();
-    trgHeight = $('.trgheight').val();
-    centerHeight = $('.ctrheight').val();
-    console.log(isNumber(xValue)); 
-    console.log(isNumber(yValue));
-    console.log($('.trgaccuracy').val());
-    console.log(isNumber(accuracyClass));
-    console.log(isNumber(trgHeight));
-    console.log(isNumber(centerHeight));
     if(isNumber(xValue) && isNumber(yValue) && isNumber(accuracyClass) && isNumber(trgHeight) && isNumber(centerHeight)){
         $(".errormsg.addtrgpoint").addClass('hide');
         document.forms['trgpoint_form'].submit()
@@ -126,14 +115,6 @@ function isCoord(n) {
 };
 
 $("#mapballoon_send").click( function( event ) {
-  $("#modal_material").find(".alert").hide().remove()
-  $.post('/map/send_balloon/', $("#mapballoon_form").serialize(), function(event) {
-    if (event.status != 200)
-        $("#modal_material").find(".modal-header").append("<div class=\"alert alert-danger\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" + event.message +"</div>")
-    else
-        $("#modal_material").modal("toggle");
-  })
-  .fail(function (event) {
-    $("#modal_material").find(".modal-header").append("<div class=\"alert alert-danger\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Тут что-то не так! Гоблины уже работают!</div>")
-  })
+  $("#modal_material").find(".alert").hide().remove();
+  document.forms['mapballoon_form'].submit();  // TODO: migrate to AJAX
 });
