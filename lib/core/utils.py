@@ -32,7 +32,7 @@ def rewrite_url(url):
     """
     Rewrite gcloud public url to proxy url
     """
-    return settings.HOST + settings.GCS_MEDIA_URL + url.split('/enggeo')[-1]
+    return settings.GCS_MEDIA_URL + url.split('/enggeo')[-1]
 
 
 def upload_file(readable, filename, filter):

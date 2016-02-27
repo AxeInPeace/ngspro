@@ -1,3 +1,4 @@
+{% load photo_extras %}
 {% if not user.is_authenticated %}
   {% include "inc/reg_form.html" %}
   {% include "inc/auth_form.html" %}
@@ -8,7 +9,7 @@
     <div class="myNavbar-nav">
       <div class="navbar__menu-btn navbar__logo">
       <a href = "{% url 'main' %}">
-        <img src="/pic/logo_alfa_black.png" class="navbar__img-logo" alt="ENGGEO">
+        <img src="{{ "/pic/logo_alfa_black.png"|resize:'100x50' }}" class="navbar__img-logo" alt="ENGGEO">
       </a>
       </div>
       <div class="navbar__menu-btn menu-btn">

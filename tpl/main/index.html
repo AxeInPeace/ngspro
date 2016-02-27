@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load photo_extras %}
 {% block meta_description %}ENGGEO - тригопункты, топосъемки, скважины и многое другое{% endblock %}
 {% block content %}
     <!-- Carousel
@@ -52,19 +53,19 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-xs-4">
-          <img class="img-circle" src="http://test2.enggeo.ru/pic/trg.jpg" alt="Generic placeholder image" width="140" height="140">
+          <img class="img-circle" src="{{ "/pic/trg.jpg"|resize:"140x140"}}" alt="Generic placeholder image" width="140" height="140">
           <h2>Легкий поиск</h2>
           <p>Мы предоставляем самые точные координаты и фото местоположения тригопунктов</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-xs-4">
-          <img class="img-circle" src="http://test2.enggeo.ru/pic/geodez_1_big.jpg" alt="Generic placeholder image" width="140" height="140">
+          <img class="img-circle" src="{{ "/pic/geodez_1_big.jpg"|resize:"140x140"}}" alt="Generic placeholder image" width="140" height="140">
           <h2>Сравнивайте работы</h2>
           <p>Выбирайте работы из наших крупнейших архивов и сравнивайте их со своей</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-xs-4">
-          <img class="img-circle" src="http://test2.enggeo.ru/pic/arenda.jpg" alt="Generic placeholder image" width="140" height="140">
+          <img class="img-circle" src="{{ "/pic/arenda.jpg"|resize:"140x140"}}" alt="Generic placeholder image" width="140" height="140">
           <h2>Аренда и лизинг</h2>
           <p>Оборудование на любой вкус от лучших поставщиков по самым низким ценам уже у нас</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>

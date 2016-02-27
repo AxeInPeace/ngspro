@@ -5,6 +5,8 @@ from PIL import Image
 
 from django.conf import settings
 
+from lib.photo.const import RESIZE_SIZES
+
 AVATAR_SIZE = (100, 100)
 
 
@@ -60,3 +62,10 @@ def rewrite_url(url):
     """
     return settings.HOST + settings.GCS_MEDIA_URL + url.split('/enggeo')[-1]
 
+
+def resize_img(url, size):
+    """
+    Only relative urls
+    """
+    crop = RESIZE_SIZES.get(size, None)
+    return '/%s%s' % (crop, url)
