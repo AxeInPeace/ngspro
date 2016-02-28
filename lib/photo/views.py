@@ -38,7 +38,7 @@ def upload_avatar(request):
         return JSONResponse({'status': 400, 'message': 'wrong file'})
 
     if request.user.is_authenticated(): 
-        custUser = CustomUser.objects.get(userid=request.user)
+        custUser = CustomUser.objects.get(user=request.user)
         custUser.avatar = url
         custUser.save()
 #        return JSONResponse({'status': 200, 'message': 'ok', 'url': url})

@@ -7,14 +7,14 @@ from django.db import models
 
 class CustomUser(models.Model):
     def __unicode__(self):
-        return self.userid.username
+        return self.user.username
 
     def __str__(self):
-        return self.userid.username
+        return self.user.username
 
     rating = models.IntegerField(default=0)
     cash = models.PositiveIntegerField(u'Счет кошелька', default=0, blank=False)
-    userid = models.OneToOneField(User)
+    user = models.OneToOneField(User)
     avatar = models.URLField(blank=True)
     is_registered = models.BooleanField(default=False)
 

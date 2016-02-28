@@ -31,7 +31,7 @@ def mapballoon_map(request):
     if request.user.is_authenticated():
         frmat = Format.objects.all()
         tools = Instrument.objects.all()
-        custuser = CustomUser.objects.get(userid=request.user)
+        custuser = CustomUser.objects.get(user=request.user)
         my_cash = custuser.cash
         my_rating = custuser.rating            
         avatar = custuser.avatar
@@ -58,7 +58,7 @@ def mapballoon_add_balloon(request):
         raise Http404
     fr = Format.objects.filter(id=request.POST.get('frm')).first()
     tl = Instrument.objects.filter(id=request.POST.get('tool')).first()
-    pub = CustomUser.objects.filter(userid=request.user).first()
+    pub = CustomUser.objects.filter(user=request.user).first()
 
     if not fr:
         return JSONResponse({'status': 301, 'message': u'Такого формата не существует'})
@@ -108,7 +108,7 @@ def mapballoon_add_balloon(request):
 def mapballoon_add_trgpoint(request):
     if not request.user.is_authenticated():
         raise Http404
-    pub = CustomUser.objects.get(userid=request.user)
+    pub = CustomUser.objects.get(user=request.user)
 
     lat=request.POST.get('trgcoord1')
     lng=request.POST.get('trgcoord2')

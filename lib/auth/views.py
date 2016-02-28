@@ -27,7 +27,7 @@ def auth_login(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            return JSONResponse({'status': "200", "redirect": reverse("map")})  # JSONResponse({"status" : "200", "message": "ok", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
+            return JSONResponse({'status': "200", "redirect": reverse("map")})  # JSONResponse({"status" : "200", "message": "ok", "user": {"username": user.username, "cash": CustomUser.objects.get(user=user).cash }})
         else:
             return JSONResponse({"status" : "201", "message" : u"Ваш аккаунт не активирован. Чтобы активировать ваш аккаунт перейдите по ссылке, указанной в письме.", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
     else:
