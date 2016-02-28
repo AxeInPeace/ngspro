@@ -9,25 +9,6 @@
     <div id="YMapsID" class="YMaps"></div>
     {% include "inc/form_to_add_balloons.html" %}
     {% include "inc/form_to_add_trgpoint.html" %}
-
-    <script>
-    // Instance the tour
-        var tour = new Tour({
-          steps: [
-          {
-            element: "#test_id",
-            title: "Title of my step",
-            content: "Content of my step",
-            onShow: function (tour) {alert(1);}
-          }
-        ]});
-
-        // Initialize the tour
-        tour.init();
-
-        // Start the tour
-        tour.start();
-    </script>
 {% endblock %}
 
 {% block footer %}
