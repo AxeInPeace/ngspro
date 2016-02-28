@@ -97,23 +97,15 @@ $('.js-submittrgpoint').click(function(){
 
 
 function isNumber(n) {
-    if (!isNaN(parseFloat(n)) && isFinite(n)) 
-        return true
-    else
-        return false;
-};
-
+    return !!(!isNaN(parseFloat(n)) && isFinite(n));
+}
 function isCoord(n) {
     if (isNumber(n)) {
-        if (parseFloat(n)>-180 && parseFloat(n)<180)
-            return true
-        else
-            return false;
+        return !!(parseFloat(n) > -180 && parseFloat(n) < 180);
     }
     else
         return false;
-};
-
+}
 $("#mapballoon_send").click( function( event ) {
   $("#modal_material").find(".alert").hide().remove();
   document.forms['mapballoon_form'].submit();  // TODO: migrate to AJAX
