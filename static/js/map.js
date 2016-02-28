@@ -42,7 +42,7 @@ function init () {
     // TODO: load years from server
     var yearList = new ymaps.control.ListBox({
             data: {
-                content: 'Отфильтровать по годам'
+                content: 'Отфильтровать по году добавления материала'
             },
             items: [
                 new ymaps.control.ListBoxItem('2015'),
@@ -87,6 +87,11 @@ function init () {
 }
 
 $('.js-submittrgpoint').click(function(){
+    xValue = $('.trgcoordx').val();
+    yValue = $('.trgcoordy').val();
+    accuracyClass = $('.trgaccuracy').val();
+    trgHeight = $('.trgheight').val();
+    centerHeight = $('.ctrheight').val();
     if(isNumber(xValue) && isNumber(yValue) && isNumber(accuracyClass) && isNumber(trgHeight) && isNumber(centerHeight)){
         $(".errormsg.addtrgpoint").addClass('hide');
         document.forms['trgpoint_form'].submit()
