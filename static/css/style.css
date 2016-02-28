@@ -648,4 +648,8 @@ hr
     right: 20px;
 }
 
-
+a.dropdown-toggle:focus,
+a.dropdown-toggle:hover,
+a.dropdown-toggle:active {
+    text-decoration: none;
+}
