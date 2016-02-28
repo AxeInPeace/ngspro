@@ -12,6 +12,7 @@
 
     <title>{% block title %}ENGGEO - ваш личный архив материалов{% endblock %}</title>
 
+    {% block extra_head %}{% endblock %}
     {% include "inc/header.html" %}
 
     <link href="/css/carousel.css" rel="stylesheet">
@@ -19,8 +20,14 @@
 <!-- NAVBAR
 ================================================== -->
   <body class='back1'>
+  <!-- Menu -->
     {% include "inc/menu.html" %}
+  <!-- END Menu -->
+  <!-- Content -->
     {% block content %}{% endblock %}
+  <!-- END Content -->
+  <!-- Footer -->
     {% block footer %}{% endblock %}
+  <!-- END Footer -->
   </body>
 </html>

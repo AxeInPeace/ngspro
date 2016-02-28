@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <title>ENGGEO</title>
-    {% include "inc/header.html" %}
-    {% include "inc/map_window.html" %}    
-    {% include "inc/add_placemarks.html" %}
-</head>
+{% extends "base.html" %}
+    {% block extra_head %}
+    {% include "inc/map_window.html" %}
+    {% endblock %}
 
-<body> 
-
-    {% include "inc/menu.html" %}
-
+{% block content %}
     <div id="YMapsID" class="YMaps"></div>
 
     {% include "inc/form_to_add_balloons.html" %}
     {% include "inc/form_to_add_trgpoint.html" %}
+{% endblock %}
 
-    {% include "inc/footer.html" %}
-    <script src="/js/map.js"></script>
-</body>
-</html>
+{% block footer %}
+  {% include "inc/footer.html" %}
+  <script src="/js/map.js"></script>
+{% endblock %}
