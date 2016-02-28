@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^', include('lib.photo.urls')),
     url(r'^map/', include('lib.map.urls')),
     url(r'^job/', include('lib.job.urls')),
+    url(r'^mailing/', include('lib.mailing.urls')),
 ]
