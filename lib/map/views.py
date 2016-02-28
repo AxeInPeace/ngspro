@@ -168,7 +168,7 @@ class MaterialJsonList(TemplateView):
         """
         q_filter = self._get_years_filter()
 
-        return Balloon.objects.filter(q_filter)
+        return Balloon.objects.filter(is_published=True).filter(q_filter)
 
     def get_trg(self):
         """
@@ -181,7 +181,7 @@ class MaterialJsonList(TemplateView):
                 q_filter = q_filter | (Q(date__gte=datetime.date(int(year), 1, 1)) & Q(date__lt=datetime.date(int(year) + 1, 1, 1)))
         if self.bbox:
             pass
-        return TriangulationStation.objects.filter(q_filter, **filters)
+        return TriangulationStation.objects.filter(is_published=True).filter(q_filter, **filters)
 
     def get_context_data(self, **kwargs):
         data = super(MaterialJsonList, self).get_context_data()

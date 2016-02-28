@@ -14,6 +14,10 @@ class Format(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Формат материалов"
+        verbose_name_plural = "Форматы материалов"
+
 
 class Instrument(models.Model):
     name = models.CharField(max_length=511)
@@ -24,25 +28,30 @@ class Instrument(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Инструмент"
+        verbose_name_plural = "Инструмены"
 
-class GeoObject(models.Model):
+
+class GeoPoint(models.Model):
     def __unicode__(self):
         return self.__str__()
     
     def __str__(self):
         return self.title + '(' + str(self.lat) + ', ' + str(self.lng) + ')'
 
-    title = models.CharField(max_length=255, verbose_name="Название")
-    lat = models.FloatField(verbose_name="Широта")
-    lng = models.FloatField(verbose_name="Долгота")
-    publisher = models.ForeignKey(CustomUser, verbose_name="Автор")
-    date = models.DateField(verbose_name="Дата")
+    title = models.CharField(max_length=255, verbose_name=u"Название")
+    lat = models.FloatField(verbose_name=u"Широта")
+    lng = models.FloatField(verbose_name=u"Долгота")
+    publisher = models.ForeignKey(CustomUser, verbose_name=u"Автор")
+    date = models.DateField(verbose_name=u"Дата добавления")
+    is_published = models.BooleanField(verbose_name=u"Материал показан на сайте", default=False)
 
     class Meta:
         abstract = True
 
 
-class Balloon(GeoObject):
+class Balloon(GeoPoint):
     isugrshoot = models.BooleanField(blank=True)  # having underground communication shooting
     isaltmark = models.BooleanField(blank=True)  # having altitude mark
     isrelelems = models.BooleanField(blank=True)  # having relief elements
@@ -55,6 +64,10 @@ class Balloon(GeoObject):
     instrument = models.ForeignKey(Instrument)
     material_photo = models.ForeignKey(Photo) 
     material = models.URLField()
+
+    class Meta:
+        verbose_name = "Топосъемка"
+        verbose_name_plural = "Топосъемки"
 
 
 class Polygon(models.Model):
@@ -78,7 +91,7 @@ class PolygonCoord(models.Model):
     coord2 = models.FloatField()
 
 
-class TriangulationStation(GeoObject):
+class TriangulationStation(GeoPoint):
     TYPE_CHOICES = (
         ('trian', 'Пункт триангуляции'),
         ('trial', 'Пункт трилатерации'),

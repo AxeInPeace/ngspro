@@ -18,9 +18,16 @@ class CustomUser(models.Model):
     avatar = models.URLField(blank=True)
     is_registered = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
+
 
 class EmailApprove(models.Model):
     user = models.ForeignKey(CustomUser)
     value = models.CharField(max_length=255)
     date = models.DateTimeField(default=datetime.datetime.now)
 
+    class Meta:
+        verbose_name = "Подтверждение на email"
+        verbose_name_plural = "Подтверждения на email"

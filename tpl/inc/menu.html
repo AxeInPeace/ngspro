@@ -13,11 +13,19 @@
       </a>
       </div>
       <div class="navbar__menu-btn menu-btn">
-      <a href = "{% url 'map' %}">
+      <a href = "{% url 'map' %}" id="nav_map">
           <p>
           карта
           </p>
       </a>
+      {% if not user.is_authenticated %}
+      <script>
+        $('#nav_map').click(function (event) {
+          alert("Требуется авторизация");
+          event.preventDefault();
+        })
+      </script>
+      {% endif %}
       </div>
       <div class="navbar__menu-btn menu-btn">
           <a href = "{% url 'landing' %}"><p>функционал</p></a>
