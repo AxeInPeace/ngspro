@@ -31,7 +31,7 @@ function init () {
          coords[1].toPrecision(6)
          ].join(', ') + '</p>' +
          '<p><a href="#modal_material" role="button" class="btn btn-primary" data-toggle="modal">Добавить материал</a></p>' + 
-         '<p><a href="#trigpoint" role="button" class="btn btn-primary" data-toggle="modal">Добавить тригапункт</a></p>',
+         '<p><a href="#trigpoint" role="button" class="btn btn-primary" data-toggle="modal">Добавить тригопункт</a></p>',
     }); 
 
     $("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(6) + "\">");
