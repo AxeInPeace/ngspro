@@ -8,8 +8,12 @@ class BalloonAdmin(admin.ModelAdmin):
     list_display = ('title', 'lng', 'lat', 'date', 'is_published')
     list_filter = ('is_published',)
 
+class TrgAdmin(admin.ModelAdmin):
+    list_display = ('title', 'lng', 'lat', 'date', 'is_published')
+    list_filter = ('is_published',)
+
 admin.site.register(Balloon, BalloonAdmin)
 admin.site.register(Polygon)
 admin.site.register(Format)
 admin.site.register(Instrument)
-admin.site.register(TriangulationStation)
+admin.site.register(TriangulationStation, TrgAdmin)
