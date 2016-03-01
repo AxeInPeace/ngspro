@@ -10,6 +10,7 @@ from django.contrib.auth import *
 from django.http import HttpResponse, Http404
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_http_methods
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
 from django.views.generic import ListView, TemplateView
 
@@ -53,7 +54,6 @@ def mapballoon_map(request):
 
 @require_http_methods(["POST"])
 def mapballoon_add_balloon(request):
-    print request.FILES
     if not request.user.is_authenticated():
         raise Http404
     fr = Format.objects.filter(id=request.POST.get('frm')).first()
@@ -80,11 +80,12 @@ def mapballoon_add_balloon(request):
 
     material = request.FILES.get("material")
     if material is not None:
-        material_url = upload_file(material, material.name, ["rar", "zip"])
+        material_url = upload_file(material, material.name, ["pdf"])
         print(material)
     else:
         material_url = None
-
+    if not material_url:
+        return JSONResponse({'status': 401, 'message': u'Не загружен материал и/или не совпадает формат'})
     Balloon.objects.create(
         lat=request.POST.get('coord1'),
         lng=request.POST.get('coord2'),
@@ -101,7 +102,7 @@ def mapballoon_add_balloon(request):
         material_photo=material_photo_url,
         material=material_url,
     )    
-    return redirect('map')
+    return JSONResponse({'status': "200", "redirect": reverse("map")});
 
 
 @require_http_methods(["POST"])
@@ -141,7 +142,7 @@ def mapballoon_add_trgpoint(request):
         publisher=pub,
         date=datetime.datetime.now().date(),
     )    
-    return redirect('map')
+    return JSONResponse({'status': "200", "redirect": reverse("map")});
 
 
 class MaterialJsonList(TemplateView):
