@@ -11,7 +11,7 @@
         <div class="modal-body">
             <form class="form-horizontal" method="post" action="{% url 'send_trgpoint' %}" id="trgpoint_form" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label label-align-left">Координаты</label>
+                    <label class="col-sm-3 control-label label-align-left">Координаты*</label>
 
                     <div class="col-sm-4">
                         <input type="number" class="trgcoordx form-control" placeholder="x" name="trgcoord1" value="" min="-180" max="180">
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label label-align-left">Название пункта</label>
+                    <label class="col-sm-3 control-label label-align-left">Название пункта*</label>
 
                     <div class="col-sm-9">
                         <input class="form-control" type="text" id="name" placeholder="" name="trgname" value="" maxlength="128">
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label label-align-left">Тип пункта</label>
+                    <label class="col-sm-3 control-label label-align-left">Тип пункта*</label>
 
                     <div class="col-sm-9">
                         <select name="trgtype" class="form-control">
@@ -128,7 +128,7 @@
                     <label class="col-sm-4">Фото центра</label>
 
                     <div class="controls col-sm-8">
-                      <input class="materialinput" name="photo" required="required" type="file"/>
+                      <input class="materialinput" name="photo" type="file"/>
                     </div>
 
                 </div>
