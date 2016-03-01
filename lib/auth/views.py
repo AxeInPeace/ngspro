@@ -29,7 +29,7 @@ def auth_login(request):
             login(request, user)
             return JSONResponse({'status': "200", "redirect": reverse("map")})  # JSONResponse({"status" : "200", "message": "ok", "user": {"username": user.username, "cash": CustomUser.objects.get(user=user).cash }})
         else:
-            return JSONResponse({"status" : "201", "message" : u"Ваш аккаунт не активирован. Чтобы активировать ваш аккаунт перейдите по ссылке, указанной в письме.", "user": {"username": user.username, "cash": CustomUser.objects.get(userid=user).cash }})
+            return JSONResponse({"status" : "201", "message" : u"Ваш аккаунт не активирован. Чтобы активировать ваш аккаунт перейдите по ссылке, указанной в письме.", "user": {"username": user.username, "cash": CustomUser.objects.get(user=user).cash }})
     else:
         return JSONResponse({"status" : "403", "message" : u"Неправильный логин/пароль."})
 
@@ -57,7 +57,7 @@ def auth_registration(request):
         return JSONResponse({"status": "400", "message": u"Введите адрес вашей электронной почты."})
 
     user = DUser.objects.create_user(username, email, password)
-    cuser = CustomUser.objects.create(userid=user, cash=0, rating=0)
+    cuser = CustomUser.objects.create(user=user, cash=0, rating=0)
 
     approve_value = uuid.uuid4().hex[:255]
     EmailApprove.objects.create(user=cuser, value=approve_value)
