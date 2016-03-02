@@ -104,6 +104,8 @@ def mapballoon_add_trgpoint(request):
 
     lat = request.POST.get('trgcoord1')
     lng = request.POST.get('trgcoord2')
+    if not lng or not lat:
+        return JSONResponse({'status': 401, 'message': u'Не введены координаты'})
 
     material_photo = request.FILES.get("photo")
     if material_photo is not None:
