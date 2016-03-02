@@ -138,7 +138,9 @@ def mapballoon_add_trgpoint(request):
         publisher=pub,
         date=datetime.datetime.now().date(),
     )
-    return JSONResponse({'status': "200", "redirect": reverse("map")});
+
+    return redirect("map")
+    # return JSONResponse({'status': "200", "redirect": reverse("map")});
 
 
 class MaterialJsonList(TemplateView):
@@ -150,7 +152,6 @@ class MaterialJsonList(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         self.years = request.GET.getlist('year')
         self.bbox = request.GET.get('bbox')
-        print self.bbox
         return super(MaterialJsonList, self).dispatch(request, *args, **kwargs)
 
     def _get_years_filter(self):
@@ -186,7 +187,6 @@ class MaterialJsonList(TemplateView):
     def get_context_data(self, **kwargs):
         data = super(MaterialJsonList, self).get_context_data()
         data['trg_list'] = self.get_trg()
-        print data['trg_list']
         data['topo_list'] = self.get_topo()
         data['show_download'] = self.request.usr.is_registered
         data['callback'] = self.request.GET['callback']
