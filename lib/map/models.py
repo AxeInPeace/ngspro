@@ -100,15 +100,15 @@ class TriangulationStation(GeoPoint):
         ('znak',  'Стенной знак'),
     )
 
-    type = models.CharField(max_length=7, choices=TYPE_CHOICES, verbose_name="Тип", null=True)
-    precision = models.IntegerField(verbose_name="Класс точности", null=True)
-    national = models.BooleanField(verbose_name="Государственный?", null=True)
-    height = models.FloatField(verbose_name="Высота над уровнем моря", null=True)
-    backsight = models.BooleanField(verbose_name="Ориентирный знак сохранился?", null=True)
-    outer = models.BooleanField(verbose_name="Наружный знак сохранился?", null=True)
-    center = models.BooleanField(verbose_name="Центр сохранился?", null=True)
-    center_height = models.FloatField(verbose_name="Положение относительно земли, м", null=True)
-    center_photo = models.ForeignKey(Photo, verbose_name="Фото центра", null=True)
+    type = models.CharField(max_length=7, choices=TYPE_CHOICES, verbose_name="Тип", null=True, blank=True)
+    precision = models.IntegerField(verbose_name="Класс точности", null=True, blank=True)
+    national = models.BooleanField(verbose_name="Государственный?", null=True, blank=True)
+    height = models.FloatField(verbose_name="Высота над уровнем моря", null=True, blank=True)
+    backsight = models.BooleanField(verbose_name="Ориентирный знак сохранился?", null=True, blank=True)
+    outer = models.BooleanField(verbose_name="Наружный знак сохранился?", null=True, blank=True)
+    center = models.BooleanField(verbose_name="Центр сохранился?", null=True, blank=True)
+    center_height = models.FloatField(verbose_name="Положение относительно земли, м", null=True, blank=True)
+    center_photo = models.ForeignKey(Photo, verbose_name="Фото центра", null=True, blank=True)
 
     @property
     def images(self):

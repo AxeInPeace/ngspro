@@ -126,6 +126,7 @@ def mapballoon_add_trgpoint(request):
     TriangulationStation.objects.create(
         lat=lat,
         lng=lng,
+        title=request.POST.get('trgname', '%s, %s' % (lat, lng)),
         type=request.POST.get('trgtype'),
         precision=precision,
         height=height,
