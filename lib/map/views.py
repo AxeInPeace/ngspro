@@ -114,7 +114,7 @@ def mapballoon_add_trgpoint(request):
 
     same_station = TriangulationStation.objects.filter(lat=lat, lng=lng)
     if same_station:
-        return JSONResponse({'status': 300, 'message': 'В этом месте уже есть тригопункт', '': same_station})
+        return JSONResponse({'status': 300, 'message': 'В этом месте уже есть тригопункт', '': same_station.title})
 
     precision = request.POST.get('trgaccuracy') if request.POST.get('trgaccuracy') and request.POST.get('trgaccuracy') != 'u' else None
     height = request.POST.get('trgheight') if request.POST.get('trgheight') and request.POST.get('trgheight') != 'u' else None
@@ -140,8 +140,7 @@ def mapballoon_add_trgpoint(request):
         date=datetime.datetime.now().date(),
     )
 
-    return redirect("map")
-    # return JSONResponse({'status': "200", "redirect": reverse("map")});
+    return JSONResponse({'status': "200", "redirect": reverse("map")});
 
 
 class MaterialJsonList(TemplateView):
