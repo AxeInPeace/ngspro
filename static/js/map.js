@@ -86,18 +86,6 @@ function init () {
     myMap.controls.add(yearList);
 }
 
-$('.js-submittrgpoint').click(function(){
-    xValue = $('.trgcoordx').val();
-    yValue = $('.trgcoordy').val();
-    if(isNumber(xValue) && isNumber(yValue)){
-        $(".errormsg.addtrgpoint").addClass('hide');
-        document.forms['trgpoint_form'].submit()
-    }
-    else
-        $(".errormsg.addtrgpoint").removeClass('hide');
-});
-
-
 function isNumber(n) {
     return !!(!isNaN(parseFloat(n)) && isFinite(n));
 }
@@ -108,7 +96,34 @@ function isCoord(n) {
     else
         return false;
 }
-$("#mapballoon_send").click( function( event ) {
-  $("#modal_material").find(".alert").hide().remove();
-  document.forms['mapballoon_form'].submit();  // TODO: migrate to AJAX
+
+$(".js-submittrgpoint").on('click', function( event ) {
+  $("#trigpoint").find(".alert").hide().remove();
+  var formData = new FormData(document.forms['trgpoint_form']);  // TODO: migrate to AJAX
+  $.ajax({
+    type: "POST",
+    contentType: false,
+    processData: false,
+    url: "/map/send_trgpoint/",
+    data:  formData
+  })
+  .success(function( data ) {
+    console.log(data);
+    if (data.status == 200) {
+      window.location.replace(data.redirect);
+    }
+    else {
+      $("#trigpoint").find(".modal-header").append("<div class=\"alert alert-danger\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" + data.message + "</div>")
+    }
+    setTimeout(function() {
+      $("div.alert").remove();
+    }, 5000);
+  })
+  .fail(function () {
+    $("#trigpoint").find(".modal-header").append("<div class=\"alert alert-danger\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Ой! Что-то пошло не так! :(</div>")
+    setTimeout(function() {
+      $("div.alert").remove();
+    }, 5000);
+  });
+  event.preventDefault();
 });
