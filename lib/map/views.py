@@ -163,10 +163,13 @@ class MaterialJsonList(TemplateView):
 
     def _get_years_filter(self):
         q_filter = Q()
-        if self.years:
-            for year in self.years:
-                q_filter = q_filter | (
-                Q(date__gte=datetime.date(int(year), 1, 1)) & Q(date__lt=datetime.date(int(year) + 1, 1, 1)))
+        try:
+            if self.years:
+                for year in self.years:
+                    q_filter = q_filter | (
+                        Q(date__gte=datetime.date(int(year), 1, 1)) & Q(date__lt=datetime.date(int(year) + 1, 1, 1)))
+        except ValueError:
+            pass
         return q_filter
 
     def get_topo(self):
@@ -181,15 +184,10 @@ class MaterialJsonList(TemplateView):
         """
         Список наших объектов будет состоять лишь из приватных и не удаленных статей
         """
-        q_filter = Q()
-        filters = {}
-        if self.years:
-            for year in self.years:
-                q_filter = q_filter | (
-                Q(date__gte=datetime.date(int(year), 1, 1)) & Q(date__lt=datetime.date(int(year) + 1, 1, 1)))
+        q_filter = self._get_years_filter()
         if self.bbox:
             pass
-        return [serialize_trg(trg) for trg in TriangulationStation.objects.filter(is_published=True).filter(q_filter, **filters)]
+        return [serialize_trg(trg) for trg in TriangulationStation.objects.filter(is_published=True).filter(q_filter)]
 
     def get_context_data(self, **kwargs):
         data = super(MaterialJsonList, self).get_context_data()
