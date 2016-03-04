@@ -98,6 +98,7 @@ def mapballoon_add_balloon(request):
 
 @require_http_methods(["POST"])
 def mapballoon_add_trgpoint(request):
+    # Переехать на форму
     if not request.user.is_authenticated():
         raise Http404
     pub = CustomUser.objects.get(user=request.user)
@@ -106,6 +107,10 @@ def mapballoon_add_trgpoint(request):
     lng = request.POST.get('trgcoord2')
     if not lng or not lat:
         return JSONResponse({'status': 401, 'message': u'Не введены координаты'})
+
+    title = request.POST.get('trgname', '%s, %s' % (lat, lng))
+    if not title:
+        return JSONResponse({'status': 401, 'message': u'Не указано название'})
 
     material_photo = request.FILES.get("photo")
     if material_photo is not None:
@@ -128,7 +133,7 @@ def mapballoon_add_trgpoint(request):
     TriangulationStation.objects.create(
         lat=lat,
         lng=lng,
-        title=request.POST.get('trgname', '%s, %s' % (lat, lng)),
+        title=title,
         type=request.POST.get('trgtype'),
         precision=precision,
         height=height,
