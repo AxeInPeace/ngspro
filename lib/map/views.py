@@ -158,7 +158,9 @@ class MaterialJsonList(TemplateView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.years = request.GET.getlist('year')
-        self.bbox = request.GET.get('bbox')
+        self.bbox = request.GET.get('bbox').split(',')
+        print "*" * 16
+        print self.bbox
         return super(MaterialJsonList, self).dispatch(request, *args, **kwargs)
 
     def _get_years_filter(self):
@@ -171,6 +173,9 @@ class MaterialJsonList(TemplateView):
         except ValueError:
             pass
         return q_filter
+    
+    def _get_bbox_filter(self):
+        return {"lat__gte": float(self.bbox[0]), "lng__gte": float(self.bbox[1]), "lat__lte": float(self.bbox[2]), "lng__lte": float(self.bbox[3])}
 
     def get_topo(self):
         """
@@ -185,9 +190,8 @@ class MaterialJsonList(TemplateView):
         Список наших объектов будет состоять лишь из приватных и не удаленных статей
         """
         q_filter = self._get_years_filter()
-        if self.bbox:
-            pass
-        return [serialize_trg(trg) for trg in TriangulationStation.objects.filter(is_published=True).filter(q_filter)]
+        bbox_filter = self._get_bbox_filter()
+        return [serialize_trg(trg) for trg in TriangulationStation.objects.filter(is_published=True).filter(q_filter).filter(**bbox_filter)]
 
     def get_context_data(self, **kwargs):
         data = super(MaterialJsonList, self).get_context_data()
