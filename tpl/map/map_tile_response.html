@@ -10,9 +10,9 @@
                 "type": "Point"
             },
             "properties": {
-                "balloonContentHeader": "<h5 class=\"info__title-center\">{{ balloon.title }}</h5><h5 class=\"map__custom-control__text text-grey\">Широта: {{ balloon.lat|floatformat:2 }} </h5><h5 class=\"map__custom-control__text text-grey\">Долгота: {{ balloon.lng|floatformat:2 }} </h5><h5 class=\"map__custom-control__text text-grey\">Альтитуда: {{ balloon.height }} <h5><hr/>",
-                "balloonContentBody": "<h5>Тип пункта: {{ balloon.type }} </h5><h5>Класс точности: {{ balloon.precision }} </h5><h5>Ориентирный знак: {{ balloon.backsight }}</h5><h5>Наружный знак: {{balloon.outer }}</h5><h5>Центр: {{ balloon.center }}</h5><h5>Положение центра относительно уровня земли: {{ balloon.center_height }}, м</h5>{% if balloon.images %}{% for img in balloon.images %}Фото: <a href=\"{{ img.url }}\" class=\"fancybox\" title=\"Фото центра\"><img src=\"{{ img.url }}\" width=\"160\" height=\"90\" style=\"margin-left:50px\"/></a>{% endfor %}</span>{% endif %}",
-                "clusterCaption": "Метка 2"
+                "balloonContentHeader": "<h5 class=\"info__title-center\">{{ balloon.title }}</h5><h5 class=\"map__custom-control__text text-grey\">Широта: {{ balloon.lat|floatformat:2 }} </h5><h5 class=\"map__custom-control__text text-grey\">Долгота: {{ balloon.lng|floatformat:2 }} </h5><h5 class=\"map__custom-control__text text-grey\">Альтитуда, м: {{ balloon.height }}<h5><hr/>",
+                "balloonContentBody": "<h5>Тип пункта: {{ balloon.type }} </h5><h5>Класс точности: {{ balloon.precision }} </h5><h5>Ориентирный знак: {{ balloon.backsight }}</h5><h5>Наружный знак: {{balloon.outer }}</h5><h5>Центр: {{ balloon.center }}</h5><h5>Центр относительно уровня земли, м: {{ balloon.center_height }}</h5>{% if balloon.images %}{% for img in balloon.images %}Фото: <a href=\"{{ img.url }}\" class=\"fancybox\" title=\"Фото центра\"><img src=\"{{ img.url }}\" width=\"160\" height=\"90\" style=\"margin-left:50px\"/></a>{% endfor %}</span>{% endif %}",
+            "clusterCaption": "{{ balloon.title }}"
             },
             "options": {
                 "iconLayout": 'default#image',
