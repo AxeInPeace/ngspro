@@ -104,6 +104,8 @@ def mapballoon_add_trgpoint(request):
 
     lat = request.POST.get('trgcoord1')
     lng = request.POST.get('trgcoord2')
+    if not lng or not lat:
+        return JSONResponse({'status': 401, 'message': u'Не введены координаты'})
 
     material_photo = request.FILES.get("photo")
     if material_photo is not None:
@@ -114,7 +116,7 @@ def mapballoon_add_trgpoint(request):
 
     same_station = TriangulationStation.objects.filter(lat=lat, lng=lng)
     if same_station:
-        return JSONResponse({'status': 300, 'message': 'В этом месте уже есть тригопункт', '': same_station})
+        return JSONResponse({'status': 300, 'message': 'В этом месте уже есть тригопункт', '': same_station.title})
 
     precision = request.POST.get('trgaccuracy') if request.POST.get('trgaccuracy') and request.POST.get('trgaccuracy') != 'u' else None
     height = request.POST.get('trgheight') if request.POST.get('trgheight') and request.POST.get('trgheight') != 'u' else None
@@ -126,6 +128,7 @@ def mapballoon_add_trgpoint(request):
     TriangulationStation.objects.create(
         lat=lat,
         lng=lng,
+        title=request.POST.get('trgname', '%s, %s' % (lat, lng)),
         type=request.POST.get('trgtype'),
         precision=precision,
         height=height,
@@ -138,6 +141,7 @@ def mapballoon_add_trgpoint(request):
         publisher=pub,
         date=datetime.datetime.now().date(),
     )
+
     return JSONResponse({'status': "200", "redirect": reverse("map")});
 
 
@@ -150,7 +154,6 @@ class MaterialJsonList(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         self.years = request.GET.getlist('year')
         self.bbox = request.GET.get('bbox')
-        print self.bbox
         return super(MaterialJsonList, self).dispatch(request, *args, **kwargs)
 
     def _get_years_filter(self):
@@ -186,7 +189,6 @@ class MaterialJsonList(TemplateView):
     def get_context_data(self, **kwargs):
         data = super(MaterialJsonList, self).get_context_data()
         data['trg_list'] = self.get_trg()
-        print data['trg_list']
         data['topo_list'] = self.get_topo()
         data['show_download'] = self.request.usr.is_registered
         data['callback'] = self.request.GET['callback']

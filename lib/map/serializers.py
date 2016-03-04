@@ -5,6 +5,7 @@ def serialize_trg(trg):
         'lat': trg.lat,
         'lng': trg.lng,
         'title': trg.title,
+        'height': trg.height,
         'type': trg.get_type_display(),
         'precision': trg.precision if trg.precision else 'неизвестно',
         'backsight': "сохранился" if trg.backsight else "нет данных" if trg.backsight is None else "не сохранился",
