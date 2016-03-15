@@ -22,7 +22,7 @@ function init () {
     myMap.geoObjects.add(loadingObjectManager);
 
     myMap.events.add('contextmenu', function (e) {
-    var coords = e.get('coords');  
+    var coords = e.get('coords');
     myMap.balloon.open(coords, {
      contentHeader:'Добавить материал',
      contentBody:
@@ -30,9 +30,10 @@ function init () {
          coords[0].toPrecision(6),
          coords[1].toPrecision(6)
          ].join(', ') + '</p>' +
-         '<p><a href="#modal_material" role="button" class="btn btn-primary" data-toggle="modal">Добавить материал</a></p>' + 
-         '<p><a href="#trigpoint" role="button" class="btn btn-primary" data-toggle="modal">Добавить тригопункт</a></p>',
-    }); 
+         '<p><a href="#modal_material" role="button" class="btn btn-primary" data-toggle="modal">Добавить материал</a></p>' +
+         '<p><a href="#trigpoint" role="button" class="btn btn-primary" data-toggle="modal">Добавить тригопункт</a></p>' +
+         '<p><a role="button" class="btn btn-primary js-add_polygon" onclick="drawPoligon()">Нарисовать полигон</a></p>'
+    });
 
     $("#xcoord").replaceWith("<input type=\"text\" id=\"xcoord\" name=\"coord1\" value=\"" + coords[0].toPrecision(6) + "\">");
     $("#ycoord").replaceWith("<input type=\"text\" id=\"ycoord\" name=\"coord2\" value=\"" + coords[1].toPrecision(6) + "\">");
@@ -83,18 +84,7 @@ function init () {
         pop_year(2016);
         update_manager()
     });
-    myMap.controls.add(yearList);
-}
-
-function isNumber(n) {
-    return !!(!isNaN(parseFloat(n)) && isFinite(n));
-}
-function isCoord(n) {
-    if (isNumber(n)) {
-        return !!(parseFloat(n) > -180 && parseFloat(n) < 180);
-    }
-    else
-        return false;
+    window.ymap = myMap;
 }
 
 $(".js-submittrgpoint").on('click', function( event ) {
@@ -127,3 +117,21 @@ $(".js-submittrgpoint").on('click', function( event ) {
   });
   event.preventDefault();
 });
+
+function drawPoligon() {
+    alert(0);
+    var myPolyline = new ymaps.Polygon([
+            // Указываем координаты вершин ломаной.
+            [],
+    ]
+    );
+
+    window.ymap.geoObjects.add(myPolyline);
+    myPolyline.editor.startDrawing();
+    myPolyline.events.add('click', function() { alert(1)});
+    myPolyline.editor.events.add('drawingstop', function() {
+        console.log(myPolyline.geometry.getCoordinates());
+        myPolyline.editor.stopEditing();
+    })
+
+};

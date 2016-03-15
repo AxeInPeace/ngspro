@@ -1,5 +1,7 @@
 # encoding=utf-8
-from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.gis.db import models
 
 from lib.auth.models import CustomUser
 from lib.photo.models import Photo
@@ -71,24 +73,10 @@ class Balloon(GeoPoint):
 
 
 class Polygon(models.Model):
-    date = models.DateField()
-    isugrshoot = models.BooleanField(default=False, blank=True)  # having underground communication shooting
-    isaltmark = models.BooleanField(default=False, blank=True)  # having altitude mark
-    isrelelems = models.BooleanField(default=False, blank=True)  # having relief elements
-
-    publisher = models.ForeignKey(CustomUser)
-    myFormat = models.ForeignKey(Format)
-
-    syscoord = models.CharField(max_length=255, default='None', blank=True)
-    sysaltit = models.CharField(max_length=255, default='None', blank=True)	
-    
-    instrument = models.ForeignKey(Instrument)
-
-
-class PolygonCoord(models.Model):
-    pgowner = models.ForeignKey(Polygon)
-    coord1 = models.FloatField()
-    coord2 = models.FloatField()
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    coords = models.PolygonField()  # TODO: допиннать
 
 
 class TriangulationStation(GeoPoint):
