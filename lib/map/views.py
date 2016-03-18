@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_http_methods
 from django.views.generic import TemplateView
 
+from lib.auth.decorators import profile_required
 from lib.core.utils import upload_file
 from lib.core.views import JSONResponse
 from lib.map.serializers import serialize_trg
@@ -18,31 +19,24 @@ from .models import *
 
 
 @require_http_methods(["GET"])
+@profile_required
 def mapballoon_map(request):
-    balloons = Balloon.objects.all()
-    trgstations = TriangulationStation.objects.all()
-
-    if request.user.is_authenticated():
-        frmat = Format.objects.all()
-        tools = Instrument.objects.all()
-        custuser = CustomUser.objects.get(user=request.user)
-        my_cash = custuser.cash
-        my_rating = custuser.rating
-        avatar = custuser.avatar
-        context = {
-            "formats": frmat,
-            "tools": tools,
-            "balloons": balloons,
-            "signin_error": None,
-            "my_cash": my_cash,
-            "my_rating": my_rating,
-            "user": request.user,
-            "avatar": avatar,
-            "trgstations": trgstations,
-        }
-        return render(request, 'map/index.html', context)
-    else:
-        return redirect('main')
+    frmat = Format.objects.all()
+    tools = Instrument.objects.all()
+    custuser = CustomUser.objects.get(user=request.user)
+    my_cash = custuser.cash
+    my_rating = custuser.rating
+    avatar = custuser.avatar
+    context = {
+        "formats": frmat,
+        "tools": tools,
+        "signin_error": None,
+        "my_cash": my_cash,
+        "my_rating": my_rating,
+        "user": request.user,
+        "avatar": avatar,
+    }
+    return render(request, 'map/index.html', context)
 
 
 @require_http_methods(["POST"])
@@ -155,7 +149,7 @@ class MaterialJsonList(TemplateView):
     model = TriangulationStation
     content_type = 'application/json'
 
-    @method_decorator(login_required)
+    @method_decorator(profile_required)
     def dispatch(self, request, *args, **kwargs):
         self.years = request.GET.getlist('year')
         self.bbox = request.GET.get('bbox').split(',')

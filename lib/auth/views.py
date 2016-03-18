@@ -8,6 +8,7 @@ from django.contrib.auth.models import User as DUser
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.views.decorators.http import require_http_methods
 
 from lib.auth.forms import *
@@ -29,9 +30,9 @@ def auth_login(request):
             login(request, user)
             return JSONResponse({'status': "200", "redirect": reverse("map")})  # JSONResponse({"status" : "200", "message": "ok", "user": {"username": user.username, "cash": CustomUser.objects.get(user=user).cash }})
         else:
-            return JSONResponse({"status" : "201", "message" : u"Ваш аккаунт не активирован. Чтобы активировать ваш аккаунт перейдите по ссылке, указанной в письме.", "user": {"username": user.username, "cash": CustomUser.objects.get(user=user).cash }})
+            return JSONResponse({"status" : "201", "message": u"Ваш аккаунт не активирован. Чтобы активировать ваш аккаунт перейдите по ссылке, указанной в письме.", "user": {"username": user.username, "cash": CustomUser.objects.get(user=user).cash }})
     else:
-        return JSONResponse({"status" : "403", "message" : u"Неправильный логин/пароль."})
+        return JSONResponse({"status" : "403", "message": u"Неправильный логин/пароль."})
 
 
 @require_http_methods(["POST"])
@@ -61,8 +62,9 @@ def auth_registration(request):
 
     approve_value = uuid.uuid4().hex[:255]
     EmailApprove.objects.create(user=cuser, value=approve_value)
-    send_mail('test email', "%s%s?hash=%s" % (settings.HOST, reverse('auth-approve-email'), approve_value), 'admin@enggeo.ru', [email]) 
-    
+    html = render_to_string('mailing/confirm_email.html', {"base_url": "http://test2.enggeo.ru", "hash": approve_value})
+    send_mail('Подтверждение регистрации', html, 'reg@enggeo.ru', [email], html_message=html)
+
     ruser = authenticate(username=username, password=password)
     login(request, ruser)
     return JSONResponse({'status': "200", "redirect": reverse("map")})
