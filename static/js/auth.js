@@ -46,6 +46,11 @@ $( "#reg_form" ).on('submit', function( event ) {
   }
 });
 
-$(".menu-btn").click(function(){
-  $(".menu").animate({width: 'toggle'});
-})
+$( document ).ready(function(){
+    if (window.location.hash == '#login') {
+      $('#auth_form').modal('show');
+    }
+    if (window.location.hash == '#reg') {
+      $('#reg_form').modal('show');
+    }
+});
