@@ -16,7 +16,7 @@ def profile_required(function=None):
         def _wrapped_view(request, *args, **kwargs):
             if request.usr.is_registered:
                 return view_func(request, *args, **kwargs)
-            return redirect(reverse('main'))
+            return redirect(reverse('main') + "#login")
         return _wrapped_view
     if function:
         return login_required(decorator(function))

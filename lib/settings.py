@@ -89,4 +89,4 @@ EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = 'Robot <no-reply@enggeo.ru>'
 
 
-LOGIN_URL = 'main'
+LOGIN_URL = '/main/#login'
